@@ -5,3 +5,77 @@ body {
   background-attachment: fixed;
   background-size: 100% 100%;
 }
+.playing-table{
+  height: 100vh;
+  width: auto;
+  position: relative;
+}
+.main-title{
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  color: rgb(238, 231, 221);
+}
+.navbar-setting{
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  transition: ease-in 0.5s;
+}
+.navbar-setting.start{
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  transform: translateX(-100%);
+  transition: ease-in 0.5s;
+}
+.setting{
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  transition: ease-in 0.5s;
+}
+.setting.menu{
+  width: 60vw;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 25px;
+  transform: translateX(-150%);
+  transition: ease-in 0.5s;
+}
+.firstPageButton{
+  cursor: pointer;
+  width: 150px;
+  border-radius: 5px;
+  opacity: 70%;
+  height: 35px;
+}
+#first{
+  margin-left: 15px;
+}
+#second{
+  margin-left: 30px;
+
+}
+#third{
+  margin-left: 40px;
+}
+#lets-start{
+  margin-left: 50px;
+}
+#back{
+  margin-left: 60px;
+}
+
+
