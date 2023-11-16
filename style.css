@@ -79,3 +79,20 @@ body {
 }
 
 
+.card {
+    max-width: 50%;
+    background-color: transparent;
+}
+
+.cardDealer {
+    max-width: 50%;
+    background-color: transparent;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.carDealer:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
