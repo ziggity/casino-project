@@ -2,12 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+<!-- JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <title>Casino - Black Jack </title>
+    
   </head>
-  <body class="bg-night">
-    <div id="root"> <img src="imgs/blackjacktable.png" width="75%"></div>
+  <body style = "background-image: url('imgs/blackjacktable.png')"></style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <button id="dealCards" onclick="createCardDeckAndGetID()">Let's deal em</button>
+    <button id="dealCards" onclick="drawCards()">Draw 2 Cards please</button>
+    <button id="dealCards" onclick="drawOneCard()">Draw 1 Card please</button>
+    <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>
+
+
+    <button id="checkCardsLeftInDeck" onclick="checkCardsLeftInDeck()">Cards left in the deck are</button> 
+    <div id="root"> </div>
+
+   
   </body>
+
+  <!-- <iframe src="https://bicyclecards.com/how-to-play/blackjack"></iframe> -->
 </html>
+
+<!-- <img src="imgs/blackjacktable.png" width="75%"> -->
