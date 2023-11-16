@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="main.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
 <!-- JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<!-- better to be right before the closing of bode -->
     <title>Casino - Black Jack </title>
     
   </head>
-  <body style = "background-image: url('imgs/blackjacktable.png')"></style>
+  <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
@@ -36,16 +37,18 @@
           </div>
         </div>
       </nav>
-    <button id="dealCards" onclick="createCardDeckAndGetID()">Let's deal em</button>
-    <button id="dealCards" onclick="drawCards()">Draw 2 Cards please</button>
-    <button id="dealCards" onclick="drawOneCard()">Draw 1 Card please</button>
-    <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>
+      <div class="playing-table" style="background-image: url(./imgs/blackjacktable.png); background-size: cover;">
+        <button id="dealCards" onclick="createCardDeckAndGetID()">Let's deal em</button>;
+        <button id="dealCards" onclick="drawCards()">Draw 2 Cards please</button>;
+        <button id="dealCards" onclick="drawOneCard()">Draw 1 Card please</button>;
+        <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>;
+        <button id="checkCardsLeftInDeck" onclick="checkCardsLeftInDeck()">Cards left in the deck are</button> 
+      </div>
 
 
-    <button id="checkCardsLeftInDeck" onclick="checkCardsLeftInDeck()">Cards left in the deck are</button> 
     <div id="root"> </div>
+    <script src="main.js"></script>
 
-   
   </body>
 
   <!-- <iframe src="https://bicyclecards.com/how-to-play/blackjack"></iframe> -->
