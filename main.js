@@ -10,6 +10,7 @@ async function createCardDeckAndGetID () {
     const data = await res.json();
     deckID = data.deck_id;
     console.log(deckID, data.remaining, data);
+    console.log("deck id: ",deckID);
     drawCards();
 }
 
@@ -17,8 +18,9 @@ async function drawCards() {
     const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=2');
     const data = await res.json();
     cardsRemainingInDeck = data.remaining;
-    for(let i = 0 ; i <= 52; i++) {
-    console.log("drawn card test ", data.cards[i]);
+    for(let card of data.cards) {
+    console.log("drawn card test ", card.image, card.value, card.suit);
+    
     }
 }
 
@@ -27,7 +29,7 @@ async function drawOneCard() {
     const data = await res.json();
     cardsRemainingInDeck = data.remaining;
     for(let i = 0 ; i <= 52; i++) {
-    console.log("drawn card test ", data.cards[i]);
+   // console.log("drawn card test ", cardsRemainingInDeck.cards[i]);
     }
 }
 function openSettingtoStart(){
