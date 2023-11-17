@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">Dealer stops on soft 17</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -38,23 +38,28 @@
         </div>
       </nav>
       <div class="playing-table" style="background-image: url(imgs/blackjacktable.png); background-size: cover;">
-        <button id="dealCards" onclick="createCardDeckAndGetID()">Shuffle deck to start game and deal 2 cards</button>;
-        <button id="dealCards" onclick="drawCards()">Draw 2 Cards for the Player</button>;
-        <button id="dealCards" onclick="drawCardsDealer()">Draw 2 Cards for the Dealer</button>;
-        <button id="dealCards" onclick="drawOneCardDealer()">Draw 1 Card for the Dealer</button>;
-        <button id="dealCards" onclick="drawOneCardPlayer()">Draw 1 Card please</button>;
-        <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>;
+        <!-- <button id="dealCards" onclick="createCardDeckAndGetID()">Shuffle deck to start game and deal 2 cards</button>; -->
+        <button class = "bg-primary" id="dealCards" onclick="gameStart()">Game Start - click here!</button>;
+        <!-- <button id="dealCards" onclick="drawCardsDealer()">Draw 2 Cards for the Dealer</button>; -->
+        <button class = "bg-danger"  id="dealCards" onclick="drawOneCardPlayer()">Hit for player</button>;
+        <button class = "bg-success" id="dealCards" onclick="playerStayOption()">Stay</button>;
+
+        <button class = "bg-warning" id="dealCards" onclick="drawOneCardDealer()">Hit for the Dealer </button>;
+        <button class="bg-secondary" id="dealCards" onclick="insuranceOption()">Insurance</button>;
+
+        <!-- <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>; -->
        <!-- <button id="checkCardsLeftInDeck" onclick="checkCardsLeftInDeck()">Cards left in the deck are</button> -->
         
         
         <div class="container">
             <div class="row">
               <div class="col">
-               <h2>Player's total points:<div class="player1Points">test</div> </h2> 
-               <div class="card"></div>
-               
+               <h2>Player's total points:<span class="player1Points">  0</span></h2>
+                <h2>Player's cards:</h2> 
+                <div class="cardPlayer"></div>
               </div>
               <div class="col">
+                <h2>Dealer's total points:<span class="dealerPoints">  0</span> </h2>
                <h2>Dealer's cards </h2> 
                <div class="cardDealer"></div>
               </div>

@@ -10,6 +10,12 @@ body {
   width: auto;
   position: relative;
 }
+
+h2 {
+    color: rgb(225, 63, 63);
+    border: 1px;
+    box-shadow:  4px 4px 0 rgba(0,0,0,0.2);
+}
 .main-title{
   display: flex;
   justify-content: center;
@@ -79,7 +85,7 @@ body {
 }
 
 
-.card {
+.cardPlayer {
     max-width: 50%;
     background-color: transparent;
 }
