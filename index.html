@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">CasinoNucamp</a>
+          <a class="navbar-brand" href="#">CasinoNucamp - Press the deck of cards to deal! </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -31,86 +31,39 @@
                 <a class="nav-link" href="#">Total number of wins for player <span class="totalWinsPlayer"></span></a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link active disabled">Player's cash on hand:<span class="playerBank" >   $10,000</span></a>
+                <a class="nav-link active disabled well">Player's cash on hand:<span class="playerBank" >   $10,000</span></a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <div class="playing-table" style="background-image: url(imgs/blackjacktable.png); background-size: cover;">
-        <!-- <button id="dealCards" onclick="createCardDeckAndGetID()">Shuffle deck to start game and deal 2 cards</button>; -->
-        <button class = "btn btn-success btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()">Start game!</button>;
-        <!-- <button id="dealCards" onclick="drawCardsDealer()">Draw 2 Cards for the Dealer</button>; -->
-        <button class = "btn btn-danger btn-circle btn-xl btn-circle"  id="dealCards" onclick="drawOneCardPlayer()">Hit for player</button>;
-        <button class = "btn btn-warning btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
+   
+      <div class="playing-table" style="background-image: url(imgs/blackjacktablehirezedited.png); background-size: cover;">
+      <div class="btn-group" role="group" aria-label="Vertical button group">
+            <button class = "bg-success btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()">Start game!</button>;
+            <button class = "bg-warning btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardPlayer()">Player Hit</button>;
+            <button class = "bg-danger btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)">Bet $100</button>;
+            <button class = "bg-light btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
+            <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardFaceUpDealer()">Dealer Hit</button>;
+            <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="consoleLogHands()">see hands</button>;
+           
+      </div>
+      <h2>Player:</h2>
+      <div class="playerCard"></div>
+      <div class="newCardPlayer"></div>
+      <h2>Dealer</h2> 
+      <div class="cardDealer "></div>
+      <div class="newCardDealer"></div> 
+      
+  </div>
 
-        <button class = "btn btn-danger btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardDealer()">Hit for Dealer </button>;
-        <button class="btn btn-circle btn-xl btn-circle" id="dealCards" onclick="insuranceOption()">Insurance</button>;
-        <button class="btn btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBet25()">Bet $25</button>;
-        <button class="btn btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBet50()">Bet $50</button>;
-        <button class="btn btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)">Bet $100</button>;
 
-        <!-- <button id="dealCards" onclick="dealerPlays()">Dealer's turn</button>; -->
-       <!-- <button id="checkCardsLeftInDeck" onclick="checkCardsLeftInDeck()">Cards left in the deck are</button> -->
-        
-        
-        <div class="container">
-                <div class="col-2 pull-left">
-                    <div class="card newCardPlayer  image-fluid"></div>
-                  <div class ="col-2 text-center">
-                    <h2>Dealer </h2> 
-                    <div class="card cardDealer image-fluid"></div>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card newCardDealer image-fluid"></div>
-                        <div class="well">1
-                            <br/>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <h2>Player:</h2> </div>
-                                <div class="well"></div>
-                                <div class="well card playerCard image-fluid"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="well">3</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="well">4</div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="well">5</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="well">6</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="well">7</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="well">8</div>
-                    </div>
-                </div>
-               
-              </div>
+    </div>
+        <!-- need a better way to view cards on the DOm (HTML) it's in columns but it's not aligned correctly-->
+       
+                     
     <div id="root"> </div>
     <script src="main.js"></script>
 
   </body>
-
-  <!-- <iframe src="https://bicyclecards.com/how-to-play/blackjack"></iframe> -->
 </html>
-
-<!-- <img src="imgs/blackjacktable.png" width="75%"> -->
