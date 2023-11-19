@@ -1,5 +1,6 @@
 const backImageOfCard = "https://www.deckofcardsapi.com/static/img/back.png";
 const NEW_DECK_API_URL = 'https://deckofcardsapi.com/api/deck/new/shuffle/?count=1';
+const piles = 'https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/add/?cards=AS,2S';
 const cardQuerySelector = document.querySelector(".playerCard");
 const newCardQuerySelectorPlayer = document.querySelector(".newCardPlayer");
 const cardDealerQuerySelector = document.querySelector(".cardDealer");
@@ -70,7 +71,9 @@ async function drawOneCardPlayer() {
     for(let card of data.cards) {
         currentPlayerHand.push(card.value, card.suit);
         newCardPlayer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+        
         }
+        
         newCardQuerySelectorPlayer.innerHTML = newCardPlayer;
 }
 
@@ -117,7 +120,7 @@ function playerStayOption(){
 }
 
 function playerBetOption(amount){
-    if(playerBank >= amount){
+    if(playerBank <= amount){
     alert("you need more money to bet");
     }else{
         playerBank -= amount;
