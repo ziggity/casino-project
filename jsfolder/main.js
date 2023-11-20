@@ -18,6 +18,8 @@ let playerBank = 10000;
 let newCardPlayer ="";
 let newCardDealer ="";
 
+let cardSizeWidth = (226/2);
+let cardSizeHeight = (314/2);
 async function createCardDeckAndGetID () {
     const res = await fetch(NEW_DECK_API_URL);
     const data = await res.json();
@@ -32,7 +34,7 @@ async function drawTwoCardsPlayer() {
     currentPlayerHand.push(card.value, card.suit);
     console.log("drawn card test ", card.image, card.value, card.suit);
     currentPlayerHand.push(card.value, card.suit);
-    newCard += `<img class="cardPlayer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+    newCard += `<img class="cardPlayer" src="${card.image}" style="width: ${cardSizeWidth}px; height: ${cardSizeHeight}px;" alt="${card.value + " of " + card.suit}"'/>`;
     }
     cardQuerySelector.innerHTML = newCard;
 }
@@ -42,7 +44,7 @@ async function drawOneCardFaceUpDealer(){
     const data = await res.json();
     for(let card of data.cards) {
     currentDealerHand.push(card.value, card.suit);
-    newCardDealer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+    newCardDealer += `<img class="cardDealer" src="${card.image}" style="width: ${cardSizeWidth}px; height: ${cardSizeHeight}px;" alt="${card.value + " of " + card.suit}"'/>`;
     }
     newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
 };
@@ -51,7 +53,7 @@ async function drawCardDealerBackImage() {
     const data = await res.json();
     for(let card of data.cards) {
         currentDealerHand.push(card.value, card.suit);
-        newCardDealer += `<img class="cardDealer" src="https://www.deckofcardsapi.com/static/img/back.png " alt="${card.value + " of " + card.suit}"'/>`;
+        newCardDealer += `<img class="cardDealer" src="https://www.deckofcardsapi.com/static/img/back.png " style="width: ${cardSizeWidth}px; height: ${cardSizeHeight}px;" alt="${card.value + " of " + card.suit}"'/>`;
         }
         newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
 }
@@ -70,7 +72,7 @@ async function drawOneCardPlayer() {
     const data = await res.json();
     for(let card of data.cards) {
         currentPlayerHand.push(card.value, card.suit);
-        newCardPlayer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+        newCardPlayer += `<img class="cardDealer" src="${card.image}" style="width: ${cardSizeWidth}px; height: ${cardSizeHeight}px;" alt="${card.value + " of " + card.suit}"'/>`;
         
         }
         

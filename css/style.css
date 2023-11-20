@@ -1,14 +1,32 @@
 
 .playing-table{
-  height: 100vh;
-  width: auto;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; 
 }
-
+.firstPagePlayingTable{
+  position: relative;
+  height: 100vh;
+}
+.playing-table-content{
+  position: relative; 
+}
+.playing-table-img{
+  z-index: -1;
+  max-width: 900px;
+}
+.btn-group{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
 h2 {
-    color: rgb(216, 227, 253);
-    border: 1px;
-    font-weight: bold;
+  color: rgb(216, 227, 253);
+  border: 1px;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
 }
 .main-title{
   display: flex;
@@ -60,6 +78,7 @@ h2 {
   border-radius: 5px;
   opacity: 70%;
   height: 35px;
+  margin-bottom: 30px;
 }
 #first{
   margin-left: 15px;
@@ -77,8 +96,6 @@ h2 {
 #back{
   margin-left: 60px;
 }
-
-
 .card {
     height: 100px;
     max-width: 200px;
@@ -86,6 +103,22 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.playerPart{
+  position: absolute;
+  top: 20px;
+  left: 20%;
+}
+.playerCard{
+  margin-top: 80px;
+}
+.cardDealer{
+  margin-top: 40px;
+}
+.dealerPart{
+  position: absolute;
+  top: 20px;
+  left: 60%;
 }
 
 /*   Uncomment these to make it invisible so we can use the image on the page to press the button. I know it's weird but it works
