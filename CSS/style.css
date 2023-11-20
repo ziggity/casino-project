@@ -1,9 +1,36 @@
 
 .playing-table{
-  height: 100vh;
-  width: auto;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; 
 }
+.firstPagePlayingTable{
+  position: relative;
+  height: 100vh;
+}
+.playing-table-content{
+  position: relative; 
+}
+.playing-table-img{
+  z-index: -1;
+  max-width: 900px;
+}
+.btn-group{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+<<<<<<<< HEAD:CSS/style.css
+========
+h2 {
+  color: rgb(216, 227, 253);
+  border: 1px;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
+}
+>>>>>>>> 54efc7f4e35e696ad9e5877b1b8d4c5dc94af709:css/style.css
 .main-title{
   display: flex;
   justify-content: center;
@@ -54,6 +81,7 @@
   border-radius: 5px;
   opacity: 70%;
   height: 35px;
+  margin-bottom: 30px;
 }
 #first{
   margin-left: 15px;
@@ -71,12 +99,15 @@
 #back{
   margin-left: 60px;
 }
+<<<<<<<< HEAD:CSS/style.css
 
 h2{
   color:rgb(241, 46, 46);
   font-weight: bold;
   text-shadow: 5px;
 }
+========
+>>>>>>>> 54efc7f4e35e696ad9e5877b1b8d4c5dc94af709:css/style.css
 .card {
     height: 150px;
     width: auto;
@@ -87,6 +118,22 @@ h2{
     transition: transform 0.9s ease-in-out;
     margin-top: auto;
     margin-bottom: auto;
+}
+.playerPart{
+  position: absolute;
+  top: 20px;
+  left: 20%;
+}
+.playerCard{
+  margin-top: 80px;
+}
+.cardDealer{
+  margin-top: 40px;
+}
+.dealerPart{
+  position: absolute;
+  top: 20px;
+  left: 60%;
 }
 
 .container {
