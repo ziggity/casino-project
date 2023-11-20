@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-<!-- JavaScript -->
-<!-- better to be right before the closing of bode -->
+    
+    <!-- For debugging --><!--Adds borders for visualization-->
+    <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/>
+
+
     <title>CasinoNucamp - Black Jack table</title>
     
   </head>
@@ -41,19 +44,32 @@
       <div class="playing-table" style="background-image: url(imgs/blackjacktablehirezedited.png); background-size: cover;">
       <div class="btn-group" role="group" aria-label="Vertical button group">
             <button class = "bg-success btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()">Start game!</button>;
-            <button class = "bg-warning btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardPlayer()">Player Hit</button>;
+            <button class = "bg-warning btn-circle btn-xl btn-circle" id="dealCards" onclick="hitMe()">Player Hit</button>;
             <button class = "bg-danger btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)">Bet $100</button>;
             <button class = "bg-light btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
             <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardFaceUpDealer()">Dealer Hit</button>;
             <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="consoleLogHands()">see hands</button>;
            
       </div>
-      <h2>Player:</h2>
-      <div class="playerCard"></div>
-      <div class="newCardPlayer"></div>
-      <h2>Dealer</h2> 
-      <div class="cardDealer "></div>
-      <div class="newCardDealer"></div> 
+
+      <div class="container-fluid">
+
+        <div class="row" id="dealer-row">
+          <div class="col-10 mx-auto">
+            <h2>Dealer:</h2> 
+            <div id = "dealer" class="cardDealer "></div>
+          </div>
+        </div>
+
+        <div class="row" id="player-row">
+          <div class="col-10 mx-auto" id="playercard1">
+            <h2>Player:</h2>
+            <!-- <div id="playercard1" class="playerCard"></div> -->
+            <!-- <div class="newCardPlayer"></div> -->
+          </div>
+        </div>
+
+      </div>
       
   </div>
 
@@ -63,7 +79,10 @@
        
                      
     <div id="root"> </div>
-    <script src="jsfolder/main.js"></script>
+    <script src="jsfolder/debug.js"></script>
+    <script src="jsfolder/classdef.js"></script>
+    <script src="jsfolder/cardfunctions.js"></script>
+    <script src="jsfolder/blackjack.js"></script>
 
   </body>
 </html>
