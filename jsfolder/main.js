@@ -32,7 +32,7 @@ async function drawTwoCardsPlayer() {
     currentPlayerHand.push(card.value, card.suit);
     console.log("drawn card test ", card.image, card.value, card.suit);
     currentPlayerHand.push(card.value, card.suit);
-    newCard += `<img class="cardPlayer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+    newCard += `<img class="cardPlayer card" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
     }
     cardQuerySelector.innerHTML = newCard;
 }
@@ -42,7 +42,7 @@ async function drawOneCardFaceUpDealer(){
     const data = await res.json();
     for(let card of data.cards) {
     currentDealerHand.push(card.value, card.suit);
-    newCardDealer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+    newCardDealer += `<img class="cardDealer card" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
     }
     newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
 };
@@ -51,26 +51,17 @@ async function drawCardDealerBackImage() {
     const data = await res.json();
     for(let card of data.cards) {
         currentDealerHand.push(card.value, card.suit);
-        newCardDealer += `<img class="cardDealer" src="https://www.deckofcardsapi.com/static/img/back.png " alt="${card.value + " of " + card.suit}"'/>`;
+        newCardDealer += `<img class="cardDealer card" src="https://www.deckofcardsapi.com/static/img/back.png " alt="${card.value + " of " + card.suit}"'/>`;
         }
         newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
 }
-// async function drawOneCardDealer() {
-//     const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
-//     const data = await res.json();
-//     newCardDealer = "";
-//     for(let card of data.cards) {
-//         newCardDealer += `<img class="cardDealer" src="https://www.deckofcardsapi.com/static/img/back.png " alt="${card.value + " of " + card.suit}"'/>`;
-//         }
-//         newCardQuerySelectorDealer.innerHTML = newCardDealer;
-// }
 
 async function drawOneCardPlayer() {
     const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
     const data = await res.json();
     for(let card of data.cards) {
         currentPlayerHand.push(card.value, card.suit);
-        newCardPlayer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
+        newCardPlayer += `<img class="cardPlayer card" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
         
         }
         
