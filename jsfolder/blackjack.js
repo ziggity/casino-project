@@ -46,6 +46,7 @@ for (let i = 0; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
+let deckID;
 let newCardPlayer = "";
 let newCardDealer = "";
 
@@ -64,9 +65,9 @@ async function setTable(numPlayers, numDecks) {
   
   currentPlayer[1].name = "THIS IS YOU!!"; //temporary
   //Start drawing procedures
-  generatePlayerRows(currentTable.numPlayers);
-  generateDealerRow();
-  drawAllPlayerCards(3);
+  // generatePlayerRows(currentTable.numPlayers);
+  // generateDealerRow();
+  drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
   
   //remove this later once all references to deckID are gone: 
@@ -200,7 +201,7 @@ function drawAllPlayerCards(numPlayers){
   //Better code for Big O' Notation
   for (let i = 1; i <= numPlayers; i++) {
     const playerHand = currentPlayer[i].hand.map(card => card.code);
-    drawCardImage(playerHand, `playercard${i}`);
+    drawCardImage(playerHand, `player${i}`);
   }
 }
 
