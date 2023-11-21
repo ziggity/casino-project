@@ -90,6 +90,8 @@ async function givePlayerCards(playerIndex, numCards, deckId) {
 
 function gameStart() {
   setTable(3, 1);
+  console.log(playerBetOptions.playerBank, playerPile.length)
+
 }
 
 

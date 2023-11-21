@@ -28,6 +28,7 @@ async function extractCards(numCards, deckId) {
   //numCards -= Number(data.remaining);
 
   const cardGroup = []
+
   for (let card of data.cards) {
     //.code .suit,.value.image.
     cardGroup.push(card);
@@ -57,6 +58,7 @@ async function shufflePile(pileName, deckId){
   if (data.success !== true){return false}
   return data.remaining;
 
+
 }
 
 async function getPileList(pileName, deckId){
@@ -64,6 +66,48 @@ async function getPileList(pileName, deckId){
   const data = await res.json();
   
   if (data.success !== true){return false}
-  //return data.remaining;
+  return data.remaining;
+
+}
+async function compareHands(pileName, deckId){
+    cardPile = await getPileList(pileName, deckId);
+
+  for(card in cardPile){
+    console.log(card.value);
+  }
+  
+  //   const hasAceInHand = (cardsOnHand) => {
+  //     for (const card of cardsOnHand) {
+  //       if (card.face === "A") {
+  //         return true;
+  //       }
+  //     }
+  //     return false;
+  // }
+  
+  // const countHandValue = (cardsOnHand) => {
+  //     let sum = 0;
+  //     for (const card of cardsOnHand) {
+  //       sum = sum + card.value;
+  //       if (sum > 21 && hasAceInHand(cardsOnHand)) {
+  //         sum -= 10; // - 11 + 1
+  //       }
+  //     }
+  //     return sum;
+  // }
+
+  for(card in data.cards.dealerPile){
+
+    dealerScore += cardValues.indexOf(data.cards[card].value);
+  }
+
+  for(card in data.cards.playerPile){
+    playerScore += cardValues.indexOf(data.cards[card].value);
+  }
+  console.log(data)
+  if(dealerSCore < playerScore) return winners.indexOf()
+playerScore = 15;
+dealerScore = 15;
+  return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
 
 }
