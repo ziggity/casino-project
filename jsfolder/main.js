@@ -1,5 +1,3 @@
-alert("Main.js is loading");
-
 
 const CARD_IMAGE_PATH = "https://www.deckofcardsapi.com/static/img/";
 const CARD_BACK_IMAGE = "back.png";
@@ -97,7 +95,6 @@ async function drawOneCardPlayer() {
 
 
 function gameStart() {
-  alert("TESTING");
   createCardDeckAndGetID();
   setTimeout(() => {
     drawTwoCardsPlayer();
