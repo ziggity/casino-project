@@ -3,6 +3,7 @@ class Player {
     constructor(name, isActive) {
         this.name = name;
         this.money= 0;
+        this.score= 0
         this.isActive = isActive;
         this.hand = []
     }

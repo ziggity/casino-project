@@ -78,16 +78,6 @@ h2 {
   margin-left: 60px;
 }
 
-/* _________________________ */
-/*David added These*/
-#player-row {
-  height: 200px;
-}
-#dealer-row {
-  height: 200px
-}
-/* --------------------------- */
-
 .card {
     height: 100px;
     max-width: 200px;

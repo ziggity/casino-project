@@ -43,6 +43,7 @@ const currentPlayer = []
 //Max players = 5 + Dealer (Player 0)
 for (let i = 0; i < 6; i++) {
   currentPlayer[i] = new Player(`Player ${i}`, false);
+  Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
 let newCardPlayer = "";
@@ -61,6 +62,7 @@ async function setTable(numPlayers, numDecks) {
     await givePlayerCards(i, 2, currentTable.deckId);
   }
   
+  currentPlayer[1].name = "THIS IS YOU!!"; //temporary
   //Start drawing procedures
   generatePlayerRows(currentTable.numPlayers);
   generateDealerRow();
@@ -89,29 +91,85 @@ async function givePlayerCards(playerIndex, numCards, deckId) {
 }
 
 function gameStart() {
-  setTable(3, 1);
-  console.log(playerBetOptions.playerBank, playerPile.length)
+  const numPlayers = 3; //not including dealer
+  const numDecks = 1;
+
+  setTable(numPlayers, numDecks);
+  //console.log(playerBetOption(playerBank), playerPile.length);
 
 }
 
+//Logic Begins here
+async function compareHands(pileName, deckId){
+  cardPile = await getPileList(pileName, deckId);
+
+for(card in cardPile){
+  console.log(card.value);
+}
+
+//   const hasAceInHand = (cardsOnHand) => {
+//     for (const card of cardsOnHand) {
+//       if (card.face === "A") {
+//         return true;
+//       }
+//     }
+//     return false;
+// }
+
+// const countHandValue = (cardsOnHand) => {
+//     let sum = 0;
+//     for (const card of cardsOnHand) {
+//       sum = sum + card.value;
+//       if (sum > 21 && hasAceInHand(cardsOnHand)) {
+//         sum -= 10; // - 11 + 1
+//       }
+//     }
+//     return sum;
+// }
+
+for(card in data.cards.dealerPile){
+
+  dealerScore += cardValues.indexOf(data.cards[card].value);
+}
+
+for(card in data.cards.playerPile){
+  playerScore += cardValues.indexOf(data.cards[card].value);
+}
+console.log(data)
+if(dealerSCore < playerScore) return winners.indexOf()
+playerScore = 15;
+dealerScore = 15;
+return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
+
+}
 
 //Drawing begins here
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
-  let insertText =""
+  let insertText ="<h2>Players:</h2>"
   for (let i = 1; i < numPlayers + 1; i++){
-    insertText += 
-    `<div class="col mx-auto" id="playercard${i}">
-     <h2>Player ${i}:</h2>
-     </div>`
+    insertText += `
+    <div class="col mx-auto">
+      <div class="row">
+        <div class="col">
+          <h2 id="playertitle${i}">${currentPlayer[i].name}:</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" id="playercard${i}">
+        </div>
+      </div>
+    </div>`
   }
   playerRow.innerHTML = insertText;
 }
 function generateDealerRow(){
   const playerRow = document.getElementById("dealer-row")
-  let insertText =
-    `<div class="col" id="dealercard">
-    <h2>Dealer:</h2>
+  let insertText =`
+    <div class="col-1">
+      <h2>Dealer:</h2> 
+    </div>
+    <div class="col" id="dealercard">
     </div>`
 
   playerRow.innerHTML = insertText;
@@ -124,19 +182,25 @@ function drawCardImage(cardCode, targetId) {
   const drawTarget = document.getElementById(targetId)
   drawTarget.innerHTML="";
   for (let code of cardCode){
-    drawTarget.innerHTML += `<img class="cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt=""/>`;
+    drawTarget.innerHTML += `
+      <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
   }
 
 }
 function drawAllPlayerCards(numPlayers){
   //Nested loop... bad practice... fix later (Tired ZZzzz...)
-  const codeArray = [];
-  for (let i = 1; i <= numPlayers; i++){
-    codeArray[i]=[]  
-    for (let card of currentPlayer[i].hand){
-      codeArray[i].push(card.code);
-    }
-    drawCardImage(codeArray[i], `playercard${i}`);
+  // const codeArray = [];
+  // for (let i = 1; i <= numPlayers; i++){
+  //   codeArray[i]=[]  
+  //   for (let card of currentPlayer[i].hand){
+  //     codeArray[i].push(card.code);
+  //   }
+  //   drawCardImage(codeArray[i], `playercard${i}`);
+  // }
+  //Better code for Big O' Notation
+  for (let i = 1; i <= numPlayers; i++) {
+    const playerHand = currentPlayer[i].hand.map(card => card.code);
+    drawCardImage(playerHand, `playercard${i}`);
   }
 }
 
@@ -148,34 +212,11 @@ function drawDealerCards(){
   drawCardImage(codeArray, `dealercard`);
 
 }
-//function gameStart() {
-//console.log("You drew: " + myCards[0].code);
-//   setTimeout(() => {
-//     drawTwoCardsPlayer();
-//   }, "1000");
-//   setTimeout(() => {
-//     drawCardDealerBackImage();
-//   }, "1000");
-//   setTimeout(() => {
-//     drawOneCardFaceUpDealer();
-//   }, "1000");
-//   setTimeout(() => {
-//     consoleLogHands();
-//   }, "1000");
-//}
-//
-//
-//
-//
-//
-//
-//******************************************************************* */
-//******************************************************************* */
 
 //Player Hit... Edit later (Tired ZZzzz...)
 async function hitMe(){
   await givePlayerCards(1, 1, currentTable.deckId)
-  drawAllPlayerCards(3);
+  drawAllPlayerCards(currentTable.numPlayers);
 
 }
 

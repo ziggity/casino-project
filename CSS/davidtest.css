@@ -1,0 +1,17 @@
+
+#player-row {
+    height: 600px;
+    background: rgba(0,0,0,.6);
+}
+#dealer-row {
+    height: 200px;
+    background: rgba(0,0,0,.6);
+}
+
+.playing-card-img {
+    height:150px
+}  
+.playing-table {
+    background-image: url("../imgs/blackjacktablehirezedited.png");
+    background-size: contain;
+}
