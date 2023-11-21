@@ -94,7 +94,7 @@ async function drawOneCardPlayer() {
 }
 
 
-function gameStart() {
+function  () {
   createCardDeckAndGetID();
   setTimeout(() => {
     drawTwoCardsPlayer();
@@ -132,34 +132,9 @@ function backToFirstPage() {
 }
 
 
-  newCardQuerySelectorPlayer.innerHTML = newCardPlayer;
-}
 
 
-function gameStart() {
-  createCardDeckAndGetID();
-  setTimeout(() => {
-    drawTwoCardsPlayer();
-  }, "1000");
-  setTimeout(() => {
-    drawCardDealerBackImage();
-  }, "1000");
-  setTimeout(() => {
-    drawOneCardFaceUpDealer();
-  }, "1000");
-  setTimeout(() => {
-    consoleLogHands();
-  }, "1000");
-}
-
-const mainGame = document.querySelector(".btn-circle.btn-xl.btn-circle");
-}
-mainGame.addEventListener("click", function() {
-  document.querySelector(".startMainGame").classList.toggle("hide");
-  document.querySelector(".playerChoices").classList.toggle("show");
-});
-
-function playerStayOption(){
+function playerStayOption(){}
     //calculate the total score of the player vs the dealer and update the DOM with scores accordingly
 function consoleLogHands() {
 

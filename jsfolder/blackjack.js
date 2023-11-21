@@ -94,7 +94,7 @@ function gameStart() {
   setTable(3, 1);
   console.log(playerBetOptions.playerBank, playerPile.length)
 
-}
+
 
   const numPlayers = 3; //not including dealer
   const numDecks = 1;
