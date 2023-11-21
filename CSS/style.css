@@ -126,7 +126,7 @@ h2 {
 .playerChoices{
   position: absolute;
   position: absolute;
-  z-index: -2;
+  /* z-index: -2; */
   transition: linear 0.5s;
 }
 .playerChoices.show{
