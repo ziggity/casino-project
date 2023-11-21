@@ -129,6 +129,15 @@ function openSettingtoStart() {
 function backToFirstPage() {
   document.querySelector(".navbar-setting").classList.toggle("start");
   document.querySelector(".setting").classList.toggle("menu");
+const mainGame = document.querySelector(".btn-circle.btn-xl.btn-circle");
+}
+mainGame.addEventListener("click", function() {
+  document.querySelector(".startMainGame").classList.toggle("hide");
+  document.querySelector(".playerChoices").classList.toggle("show");
+});
+
+function playerStayOption(){
+    //calculate the total score of the player vs the dealer and update the DOM with scores accordingly
 }
 
 function playerStayOption() {
@@ -147,3 +156,6 @@ function playerBetOption(amount) {
 function insuranceOption() {
   //TBD stretch goal? 
 }
+
+
+
