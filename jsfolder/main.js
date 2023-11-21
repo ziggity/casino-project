@@ -1,4 +1,3 @@
-
 const CARD_IMAGE_PATH = "https://www.deckofcardsapi.com/static/img/";
 const CARD_BACK_IMAGE = "back.png";
 const NEW_DECK_API_URL = 'https://deckofcardsapi.com/api/deck/new/shuffle/?count=';

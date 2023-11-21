@@ -46,6 +46,7 @@ for (let i = 0; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
+let deckID;
 let newCardPlayer = "";
 let newCardDealer = "";
 
@@ -64,9 +65,9 @@ async function setTable(numPlayers, numDecks) {
   
   currentPlayer[1].name = "THIS IS YOU!!"; //temporary
   //Start drawing procedures
-  generatePlayerRows(currentTable.numPlayers);
-  generateDealerRow();
-  drawAllPlayerCards(3);
+  // generatePlayerRows(currentTable.numPlayers);
+  // generateDealerRow();
+  drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
   
   //remove this later once all references to deckID are gone: 
@@ -111,6 +112,13 @@ async function compareHands(pileName, deckId){
 for(card in cardPile){
   console.log(card.value);
 }
+
+//Create function for scoring
+//Store score in player.score
+
+//Compare scores and allocate
+//  - create function that handles money allocation
+//  - call function allocateMoney()
 
 //   const hasAceInHand = (cardsOnHand) => {
 //     for (const card of cardsOnHand) {
@@ -201,30 +209,23 @@ function generatePlayerRows(numPlayers){
 //       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
 //   }
 
-// }
-// function drawAllPlayerCards(numPlayers){
-//   //Nested loop... bad practice... fix later (Tired ZZzzz...)
-//   const codeArray = [];
-//   for (let i = 1; i <= numPlayers; i++){
-//     codeArray[i]=[]  
-//     for (let card of currentPlayer[i].hand){
-//       codeArray[i].push(card.code);
-//     }
-//     drawCardImage(codeArray[i], `playercard${i}`);
-//   // const codeArray = [];
-//   // for (let i = 1; i <= numPlayers; i++){
-//   //   codeArray[i]=[]  
-//   //   for (let card of currentPlayer[i].hand){
-//   //     codeArray[i].push(card.code);
-//   //   }
-//   //   drawCardImage(codeArray[i], `playercard${i}`);
-//   // }
-//   //Better code for Big O' Notation
-//   for (let i = 1; i <= numPlayers; i++) {
-//     const playerHand = currentPlayer[i].hand.map(card => card.code);
-//     drawCardImage(playerHand, `playercard${i}`);
-//   }
-// }
+}
+function drawAllPlayerCards(numPlayers){
+  //Nested loop... bad practice... fix later (Tired ZZzzz...)
+  // const codeArray = [];
+  // for (let i = 1; i <= numPlayers; i++){
+  //   codeArray[i]=[]  
+  //   for (let card of currentPlayer[i].hand){
+  //     codeArray[i].push(card.code);
+  //   }
+  //   drawCardImage(codeArray[i], `playercard${i}`);
+  // }
+  //Better code for Big O' Notation
+  for (let i = 1; i <= numPlayers; i++) {
+    const playerHand = currentPlayer[i].hand.map(card => card.code);
+    drawCardImage(playerHand, `player${i}`);
+  }
+}
 
 // function drawDealerCards(){
 //   const codeArray = [];
