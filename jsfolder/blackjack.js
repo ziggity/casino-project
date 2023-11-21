@@ -107,7 +107,7 @@ async function compareHands(pileName, deckId){
 for(card in cardPile){
   console.log(card.value);
 }
-
+//change...
 //Create function for scoring
 //Store score in player.score
 
