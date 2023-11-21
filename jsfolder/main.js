@@ -129,6 +129,29 @@ function openSettingtoStart() {
 function backToFirstPage() {
   document.querySelector(".navbar-setting").classList.toggle("start");
   document.querySelector(".setting").classList.toggle("menu");
+}
+
+
+  newCardQuerySelectorPlayer.innerHTML = newCardPlayer;
+}
+
+
+function gameStart() {
+  createCardDeckAndGetID();
+  setTimeout(() => {
+    drawTwoCardsPlayer();
+  }, "1000");
+  setTimeout(() => {
+    drawCardDealerBackImage();
+  }, "1000");
+  setTimeout(() => {
+    drawOneCardFaceUpDealer();
+  }, "1000");
+  setTimeout(() => {
+    consoleLogHands();
+  }, "1000");
+}
+
 const mainGame = document.querySelector(".btn-circle.btn-xl.btn-circle");
 }
 mainGame.addEventListener("click", function() {
@@ -170,14 +193,9 @@ function playerBetOption(amount) {
     playerBank -= amount;
   }
 
+
 }
 
-function insuranceOption() {
-  //TBD stretch goal? 
-}
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 5e7eac104d74c76e49caf850d84e4761b66cdbcd

@@ -91,6 +91,11 @@ async function givePlayerCards(playerIndex, numCards, deckId) {
 }
 
 function gameStart() {
+  setTable(3, 1);
+  console.log(playerBetOptions.playerBank, playerPile.length)
+
+}
+
   const numPlayers = 3; //not including dealer
   const numDecks = 1;
 
@@ -146,6 +151,12 @@ return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player w
 //Drawing begins here
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
+  let insertText =""
+  for (let i = 1; i < numPlayers + 1; i++){
+    insertText += 
+    `<div class="col mx-auto" id="playercard${i}">
+     <h2>Player ${i}:</h2>
+     </div>`
   let insertText ="<h2>Players:</h2>"
   for (let i = 1; i < numPlayers + 1; i++){
     insertText += `
@@ -163,79 +174,114 @@ function generatePlayerRows(numPlayers){
   }
   playerRow.innerHTML = insertText;
 }
-function generateDealerRow(){
-  const playerRow = document.getElementById("dealer-row")
-  let insertText =`
-    <div class="col-1">
-      <h2>Dealer:</h2> 
-    </div>
-    <div class="col" id="dealercard">
-    </div>`
+// function generateDealerRow(){
+//   const playerRow = document.getElementById("dealer-row")
+//   let insertText =
+//     `<div class="col" id="dealercard">
+//     <h2>Dealer:</h2>
+//   let insertText =`
+//     <div class="col-1">
+//       <h2>Dealer:</h2> 
+//     </div>
+//     <div class="col" id="dealercard">
+//     </div>`
 
-  playerRow.innerHTML = insertText;
-}
+//   playerRow.innerHTML = insertText;
+// }
 
-//This function will fetch the card image from an object and draw it to the designated element with a given ID.
-function drawCardImage(cardCode, targetId) {
-  //Ensure targetId is not empty
+// //This function will fetch the card image from an object and draw it to the designated element with a given ID.
+// function drawCardImage(cardCode, targetId) {
+//   //Ensure targetId is not empty
   
-  const drawTarget = document.getElementById(targetId)
-  drawTarget.innerHTML="";
-  for (let code of cardCode){
-    drawTarget.innerHTML += `
-      <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
-  }
+//   const drawTarget = document.getElementById(targetId)
+//   drawTarget.innerHTML="";
+//   for (let code of cardCode){
+//     drawTarget.innerHTML += `<img class="cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt=""/>`;
+//     drawTarget.innerHTML += `
+//       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
+//   }
 
-}
-function drawAllPlayerCards(numPlayers){
-  //Nested loop... bad practice... fix later (Tired ZZzzz...)
-  // const codeArray = [];
-  // for (let i = 1; i <= numPlayers; i++){
-  //   codeArray[i]=[]  
-  //   for (let card of currentPlayer[i].hand){
-  //     codeArray[i].push(card.code);
-  //   }
-  //   drawCardImage(codeArray[i], `playercard${i}`);
-  // }
-  //Better code for Big O' Notation
-  for (let i = 1; i <= numPlayers; i++) {
-    const playerHand = currentPlayer[i].hand.map(card => card.code);
-    drawCardImage(playerHand, `playercard${i}`);
-  }
-}
+// }
+// function drawAllPlayerCards(numPlayers){
+//   //Nested loop... bad practice... fix later (Tired ZZzzz...)
+//   const codeArray = [];
+//   for (let i = 1; i <= numPlayers; i++){
+//     codeArray[i]=[]  
+//     for (let card of currentPlayer[i].hand){
+//       codeArray[i].push(card.code);
+//     }
+//     drawCardImage(codeArray[i], `playercard${i}`);
+//   // const codeArray = [];
+//   // for (let i = 1; i <= numPlayers; i++){
+//   //   codeArray[i]=[]  
+//   //   for (let card of currentPlayer[i].hand){
+//   //     codeArray[i].push(card.code);
+//   //   }
+//   //   drawCardImage(codeArray[i], `playercard${i}`);
+//   // }
+//   //Better code for Big O' Notation
+//   for (let i = 1; i <= numPlayers; i++) {
+//     const playerHand = currentPlayer[i].hand.map(card => card.code);
+//     drawCardImage(playerHand, `playercard${i}`);
+//   }
+// }
 
-function drawDealerCards(){
-  const codeArray = [];
-  for (let card of currentPlayer[0].hand){
-    codeArray.push(card.code);
-  }
-  drawCardImage(codeArray, `dealercard`);
+// function drawDealerCards(){
+//   const codeArray = [];
+//   for (let card of currentPlayer[0].hand){
+//     codeArray.push(card.code);
+//   }
+//   drawCardImage(codeArray, `dealercard`);
 
-}
+// }
+// //function gameStart() {
+// //console.log("You drew: " + myCards[0].code);
+// //   setTimeout(() => {
+// //     drawTwoCardsPlayer();
+// //   }, "1000");
+// //   setTimeout(() => {
+// //     drawCardDealerBackImage();
+// //   }, "1000");
+// //   setTimeout(() => {
+// //     drawOneCardFaceUpDealer();
+// //   }, "1000");
+// //   setTimeout(() => {
+// //     consoleLogHands();
+// //   }, "1000");
+// //}
+// //
+// //
+// //
+// //
+// //
+// //
+// //******************************************************************* */
+// //******************************************************************* */
 
-//Player Hit... Edit later (Tired ZZzzz...)
-async function hitMe(){
-  await givePlayerCards(1, 1, currentTable.deckId)
-  drawAllPlayerCards(currentTable.numPlayers);
+// //Player Hit... Edit later (Tired ZZzzz...)
+// async function hitMe(){
+//   await givePlayerCards(1, 1, currentTable.deckId)
+//   drawAllPlayerCards(3);
+//   drawAllPlayerCards(currentTable.numPlayers);
 
-}
+// }
 
-//********************************************************************************* */
-//Everything below this line is not being used but will be integrated.
-//********************************************************************************* */
+// //********************************************************************************* */
+// //Everything below this line is not being used but will be integrated.
+// //********************************************************************************* */
 
-async function drawTwoCardsPlayer() {
-  const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=2');
-  const data = await res.json();
-  let newCard = "";
-  for (let card of data.cards) {
-    currentPlayerHand.push(card.value, card.suit);
-    console.log("drawn card test ", card.image, card.value, card.suit);
-    currentPlayerHand.push(card.value, card.suit);
-    newCard += `<img class="cardPlayer" src="https://deckofcardsapi.com/static/img/6H.png" alt="${card.value + " of " + card.suit}"'/>`;
-  }
-  cardQuerySelector.innerHTML = newCard;
-}
+// async function drawTwoCardsPlayer() {
+//   const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=2');
+//   const data = await res.json();
+//   let newCard = "";
+//   for (let card of data.cards) {
+//     currentPlayerHand.push(card.value, card.suit);
+//     console.log("drawn card test ", card.image, card.value, card.suit);
+//     currentPlayerHand.push(card.value, card.suit);
+//     newCard += `<img class="cardPlayer" src="https://deckofcardsapi.com/static/img/6H.png" alt="${card.value + " of " + card.suit}"'/>`;
+//   }
+//   cardQuerySelector.innerHTML = newCard;
+// }
 
 async function drawOneCardFaceUpDealer() {
   const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
@@ -305,6 +351,3 @@ function playerBetOption(amount) {
 
 }
 
-function insuranceOption() {
-  //TBD stretch goal? 
-}
