@@ -108,6 +108,13 @@ for(card in cardPile){
   console.log(card.value);
 }
 
+//Create function for scoring
+//Store score in player.score
+
+//Compare scores and allocate
+//  - create function that handles money allocation
+//  - call function allocateMoney()
+
 //   const hasAceInHand = (cardsOnHand) => {
 //     for (const card of cardsOnHand) {
 //       if (card.face === "A") {
