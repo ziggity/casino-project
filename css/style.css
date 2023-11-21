@@ -12,14 +12,28 @@
 .playing-table-content{
   position: relative; 
 }
+/* images */
 .playing-table-img{
   z-index: -1;
-  max-width: 900px;
+  max-width: 100vw;
+
 }
-.btn-group{
+.betting{
   position: absolute;
   top: 0px;
+}
+.btn-group{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10px;
   left: 0px;
+}
+#dealCards{
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 50%;
 }
 h2 {
   color: rgb(216, 227, 253);
@@ -28,6 +42,10 @@ h2 {
   position: absolute;
   top: 30px;
 }
+.dealerPart h2{
+  margin-left: 220px;
+}
+
 .main-title{
   display: flex;
   justify-content: center;
@@ -104,21 +122,70 @@ h2 {
     justify-content: center;
     align-items: center;
 }
-.playerPart{
+.startMainGame {
+  transition: ease-in 0.5s;
+}
+.startMainGame.hide{
+  z-index: -2;
+  transition: ease-in 0.5s;
+}
+.playerChoices{
   position: absolute;
-  top: 20px;
-  left: 20%;
+  position: absolute;
+  z-index: -2;
+  transition: linear 0.5s;
 }
-.playerCard{
-  margin-top: 80px;
+.playerChoices.show{
+  z-index: 0;
+  transition: linear 0.5s;
 }
+/* dealer part */
 .cardDealer{
-  margin-top: 40px;
+  margin-top: 80px;
+  margin-bottom: 0px;
 }
 .dealerPart{
+  display: flex;
+  max-width: 600px;
   position: absolute;
-  top: 20px;
-  left: 60%;
+  top: 0px;
+  left: 33.5%;
+}
+/* players part */
+.playerPart{
+  position: absolute;
+  left: 50px;
+  top: 260px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.playersArea{
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  width: 70%;
+  margin-top: 40px;
+}
+.playerCard{
+  margin-top: 20px;
+  position: absolute;
+  top: 60px;
+}
+.newCardPlayer{
+  position: absolute;
+  top: 50px;
+}
+.playerPart h2{
+  margin-top: 0px;
+  position: absolute;
+  top: 0px;
+}
+.playersArea h3{
+  color: brown;
+  font-weight: 800;
 }
 
 /*   Uncomment these to make it invisible so we can use the image on the page to press the button. I know it's weird but it works

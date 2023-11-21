@@ -38,30 +38,43 @@
         </div>
       </nav>
    
-      <div class="playing-table">
+    <div class="playing-table">
         <div class="playing-table-content">
-          <img src="./imgs/blackjacktablehirezedited.png" class="playing-table-img" alt="blackjack table">
-        <div class="btn-group" role="group" aria-label="Vertical button group">
-            <button class = "bg-success btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()">Start game!</button>;
-            <button class = "bg-warning btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardPlayer()">Player Hit</button>;
-            <button class = "bg-danger btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)">Bet $100</button>;
-            <button class = "bg-light btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
-            <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardFaceUpDealer()">Dealer Hit</button>;
-            <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="consoleLogHands()">see hands</button>;
-        
+          <img src="./imgs/simple green table.jpg" class="playing-table-img" alt="blackjack table" style="height: auto; width: 1350px;">
+          
+          <div class="btn-group" role="group" aria-label="Vertical button group">
+            <div class="startMainGame">
+              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()"><img src="./imgs/newgameicon.png" style="height: 90px;"></button>;
+            </div>
+            <div class="playerChoices">
+              <button class = " btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardPlayer()"><img src="./imgs/hitbutton.png" style="height: 90px"></button>;
+              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)"><img src="./imgs/betimg.png" style="height: 90px;"></button>;
+              <button class = " btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
+              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardFaceUpDealer()">Dealer Hit</button>;
+              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="consoleLogHands()">see hands</button>;
+            </div>  
+            </div>
+          <div class="dealerPart">
+            <h2>Dealer</h2> 
+            <div class="cardDealer"></div>
+            <div class="newCardDealer"></div> 
+          </div>
+          <div class="playerPart">
+            <h2>Player</h2>
+            <div class="playersArea">
+              <div id="player1"><h3>Player1</h3></div>
+              <div id="player2"><h3>Player2</h3></div>
+              <div id="player3"><h3>Player3</h3></div>
+              <div id="player4"><h3>Player4</h3></div>
+            </div>
+            <div class="playerCard">
+              <div class="cardWrapper" id="card1"></div>
+              <div class="cardWrapper" id="card2"></div>
+            </div>
+            <div class="newCardPlayer"></div>
+          </div>
+        </div>
       </div>
-      <div class="playerPart">
-      <h2>Player</h2>
-      <div class="playerCard"></div>
-      <div class="newCardPlayer"></div>
-    </div>
-    <div class="dealerPart">
-      <h2>Dealer</h2> 
-      <div class="cardDealer"></div>
-      <div class="newCardDealer"></div> 
-    </div>
-  </div>
-</div>
 
 
     </div>
