@@ -138,6 +138,25 @@ mainGame.addEventListener("click", function() {
 
 function playerStayOption(){
     //calculate the total score of the player vs the dealer and update the DOM with scores accordingly
+function consoleLogHands() {
+
+  for (i = 0; i < currentPlayerHand.length; i++) {
+    console.log(currentPlayerHand[i] + "Player hand");
+  }
+
+  for (i = 0; i < currentDealerHand.length; i++) {
+    console.log(currentDealerHand[i] + "Dealer hand");
+  }
+
+};
+
+function openSettingtoStart() {
+  document.querySelector(".navbar-setting").classList.toggle("start");
+  document.querySelector(".setting").classList.toggle("menu");
+}
+function backToFirstPage() {
+  document.querySelector(".navbar-setting").classList.toggle("start");
+  document.querySelector(".setting").classList.toggle("menu");
 }
 
 function playerStayOption() {
@@ -156,6 +175,9 @@ function playerBetOption(amount) {
 function insuranceOption() {
   //TBD stretch goal? 
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 5e7eac104d74c76e49caf850d84e4761b66cdbcd
