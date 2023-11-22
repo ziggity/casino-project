@@ -1,6 +1,6 @@
 //Class definitions
 class Player {
-    constructor(name, isActive) {
+    constructor(name = "Player", isActive = false) {
         this.name = name;
         this.money= 0;
         this.score= 0
@@ -11,15 +11,14 @@ class Player {
         
     }
 }
-class Dealer{
-    constructor(name, diffLevel){
-        this.name = name;
+class Dealer extends Player{
+    constructor(name = "Dealer", diffLevel = "novice"){
+        super(name);
         this.diffLevel = diffLevel;
-        this.hand = [];
     }
 }
 class GameTable{
-    constructor(gameType, numPlayers, deckId){
+    constructor(gameType, numPlayers = 1, deckId){
         this.gameType = gameType
         this.numPlayers = numPlayers;
         this.deckId = deckId;
