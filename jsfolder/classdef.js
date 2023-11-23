@@ -1,14 +1,24 @@
 //Class definitions
 class Player {
-    constructor(name = "Player", isActive = false) {
+    constructor(name = "Player", isActive = false, money = 1000) {
         this.name = name;
-        this.money= 0;
+        this.money= money;
         this.score= 0
         this.isActive = isActive;
         this.hand = []
     }
     shuffle(){
         
+    }
+    
+    placeBet(amount) {
+        if (amount > 0 && amount <= this.money) {
+          this.money -= amount;
+          return amount;
+        } else {
+          console.log("Invalid bet amount or insufficient funds." + amount + ",", "current balance : " + this.money);
+          return 0; 
+        }
     }
 }
 class Dealer extends Player{
