@@ -70,9 +70,9 @@ async function setTable(numPlayers, numDecks) {
   // generateDealerRow();
   drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
-  
-  //remove this later once all references to deckID are gone: 
   deckID = currentTable.deckId
+
+  //remove this later once all references to deckID are gone: 
   
 }
 
@@ -102,57 +102,57 @@ function gameStart() {
 }
 
 //Logic Begins here
-async function compareHands(pileName, deckId){
-  cardPile = await getPileList(pileName, deckId);
+// async function compareHands(pileName, deckId){
+//   cardPile = await getPileList(pileName, deckId);
 
-for(card in cardPile){
-  console.log(card.value);
-  card.suit
-}
-cardPile[0].value
-//change...
-//Create function for scoring
-//Store score in player.score
+// for(card in cardPile){
+//   console.log(card.value);
+//   card.suit
+// }
+// cardPile[0].value
+// //change...
+// //Create function for scoring
+// //Store score in player.score
 
-//Compare scores and allocate
-//  - create function that handles money allocation
-//  - call function allocateMoney()
+// //Compare scores and allocate
+// //  - create function that handles money allocation
+// //  - call function allocateMoney()
 
-//   const hasAceInHand = (cardsOnHand) => {
-//     for (const card of cardsOnHand) {
-//       if (card.face === "A") {
-//         return true;
-//       }
-//     }
-//     return false;
+// //   const hasAceInHand = (cardsOnHand) => {
+// //     for (const card of cardsOnHand) {
+// //       if (card.face === "A") {
+// //         return true;
+// //       }
+// //     }
+// //     return false;
+// // }
+
+// // const countHandValue = (cardsOnHand) => {
+// //     let sum = 0;
+// //     for (const card of cardsOnHand) {
+// //       sum = sum + card.value;
+// //       if (sum > 21 && hasAceInHand(cardsOnHand)) {
+// //         sum -= 10; // - 11 + 1
+// //       }
+// //     }
+// //     return sum;
+// // }
+
+// for(card in data.cards.dealerPile){
+
+//   dealerScore += cardValues.indexOf(data.cards[card].value);
 // }
 
-// const countHandValue = (cardsOnHand) => {
-//     let sum = 0;
-//     for (const card of cardsOnHand) {
-//       sum = sum + card.value;
-//       if (sum > 21 && hasAceInHand(cardsOnHand)) {
-//         sum -= 10; // - 11 + 1
-//       }
-//     }
-//     return sum;
+// for(card in data.cards.playerPile){
+//   playerScore += cardValues.indexOf(data.cards[card].value);
 // }
+// console.log(data)
+// if(dealerSCore < playerScore) return winners.indexOf()
+// playerScore = 15;
+// dealerScore = 15;
+// return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
 
-for(card in data.cards.dealerPile){
-
-  dealerScore += cardValues.indexOf(data.cards[card].value);
-}
-
-for(card in data.cards.playerPile){
-  playerScore += cardValues.indexOf(data.cards[card].value);
-}
-console.log(data)
-if(dealerSCore < playerScore) return winners.indexOf()
-playerScore = 15;
-dealerScore = 15;
-return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
-
-}
+// }
 
 //Drawing begins here
 function generatePlayerRows(numPlayers){
@@ -192,6 +192,7 @@ function drawCardImage(cardCode, targetId) {
   
   const drawTarget = document.getElementById(targetId)
   drawTarget.innerHTML="";
+  
   for (let code of cardCode){
     drawTarget.innerHTML += `
       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
