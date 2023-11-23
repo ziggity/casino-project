@@ -98,7 +98,7 @@ function gameStart() {
 
   setTable(numPlayers, numDecks);
   //console.log(playerBetOption(playerBank), playerPile.length);
-
+  // getPileList("Player1",currentTable.deckId)
 }
 
 //Logic Begins here
@@ -107,7 +107,9 @@ async function compareHands(pileName, deckId){
 
 for(card in cardPile){
   console.log(card.value);
+  card.suit
 }
+cardPile[0].value
 //change...
 //Create function for scoring
 //Store score in player.score
