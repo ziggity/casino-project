@@ -46,6 +46,7 @@ currentPlayer[0] = new Dealer("Dealer1", "novice");
 for (let i = 1; i < 6; i++) {
   currentPlayer[i] = new Player(`Player ${i}`, false);
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
+
 }
 
 let deckID;
