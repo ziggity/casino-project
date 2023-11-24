@@ -116,7 +116,10 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
+
+
 .startMainGame {
   transition: ease-in 0.5s;
 }

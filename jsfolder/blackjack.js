@@ -37,13 +37,16 @@ const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer"
 
 
 //Created classes for players, dealer and Table
-const currentDealer = new Dealer("Dealer 1", "novice");
 const currentTable = new GameTable("Blackjack", 1, "");
-const currentPlayer = []
+const currentPlayer = [];
+const currentDealer = [];
+
 //Max players = 5 + Dealer (Player 0)
-for (let i = 0; i < 6; i++) {
+currentPlayer[0] = new Dealer("Dealer1", "novice");
+for (let i = 1; i < 6; i++) {
   currentPlayer[i] = new Player(`Player ${i}`, false);
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
+
 }
 
 let deckID;
@@ -69,9 +72,9 @@ async function setTable(numPlayers, numDecks) {
   // generateDealerRow();
   drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
-  
-  //remove this later once all references to deckID are gone: 
   deckID = currentTable.deckId
+
+  //remove this later once all references to deckID are gone: 
   
 }
 
@@ -102,59 +105,11 @@ function gameStart() {
 
   setTable(numPlayers, numDecks);
   //console.log(playerBetOption(playerBank), playerPile.length);
-
+  // getPileList("Player1",currentTable.deckId)
 }
 
 //Logic Begins here
-async function compareHands(pileName, deckId){
-  cardPile = await getPileList(pileName, deckId);
 
-for(card in cardPile){
-  console.log(card.value);
-}
-
-//Create function for scoring
-//Store score in player.score
-
-//Compare scores and allocate
-//  - create function that handles money allocation
-//  - call function allocateMoney()
-
-//   const hasAceInHand = (cardsOnHand) => {
-//     for (const card of cardsOnHand) {
-//       if (card.face === "A") {
-//         return true;
-//       }
-//     }
-//     return false;
-// }
-
-// const countHandValue = (cardsOnHand) => {
-//     let sum = 0;
-//     for (const card of cardsOnHand) {
-//       sum = sum + card.value;
-//       if (sum > 21 && hasAceInHand(cardsOnHand)) {
-//         sum -= 10; // - 11 + 1
-//       }
-//     }
-//     return sum;
-// }
-
-for(card in data.cards.dealerPile){
-
-  dealerScore += cardValues.indexOf(data.cards[card].value);
-}
-
-for(card in data.cards.playerPile){
-  playerScore += cardValues.indexOf(data.cards[card].value);
-}
-console.log(data)
-if(dealerSCore < playerScore) return winners.indexOf()
-playerScore = 15;
-dealerScore = 15;
-return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
-
-}
 
 //Drawing begins here
 function generatePlayerRows(numPlayers){
@@ -201,25 +156,16 @@ function generatePlayerRows(numPlayers){
 // function drawCardImage(cardCode, targetId) {
 //   //Ensure targetId is not empty
   
-//   const drawTarget = document.getElementById(targetId)
-//   drawTarget.innerHTML="";
-//   for (let code of cardCode){
-//     drawTarget.innerHTML += `<img class="cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt=""/>`;
-//     drawTarget.innerHTML += `
-//       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
-//   }
+  const drawTarget = document.getElementById(targetId)
+  drawTarget.innerHTML="";
+  
+  for (let code of cardCode){
+    drawTarget.innerHTML += `
+      <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
+  }
 
 }
 function drawAllPlayerCards(numPlayers){
-  //Nested loop... bad practice... fix later (Tired ZZzzz...)
-  // const codeArray = [];
-  // for (let i = 1; i <= numPlayers; i++){
-  //   codeArray[i]=[]  
-  //   for (let card of currentPlayer[i].hand){
-  //     codeArray[i].push(card.code);
-  //   }
-  //   drawCardImage(codeArray[i], `playercard${i}`);
-  // }
   //Better code for Big O' Notation
   for (let i = 1; i <= numPlayers; i++) {
     const playerHand = currentPlayer[i].hand.map(card => card.code);
@@ -267,88 +213,55 @@ function drawAllPlayerCards(numPlayers){
 
 // }
 
-// //********************************************************************************* */
-// //Everything below this line is not being used but will be integrated.
-// //********************************************************************************* */
 
-// async function drawTwoCardsPlayer() {
-//   const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=2');
-//   const data = await res.json();
-//   let newCard = "";
-//   for (let card of data.cards) {
-//     currentPlayerHand.push(card.value, card.suit);
-//     console.log("drawn card test ", card.image, card.value, card.suit);
-//     currentPlayerHand.push(card.value, card.suit);
-//     newCard += `<img class="cardPlayer" src="https://deckofcardsapi.com/static/img/6H.png" alt="${card.value + " of " + card.suit}"'/>`;
-//   }
-//   cardQuerySelector.innerHTML = newCard;
+// async function compareHands(pileName, deckId){
+//   cardPile = await getPileList(pileName, deckId);
+
+// for(card in cardPile){
+//   console.log(card.value);
+//   card.suit
+// }
+// cardPile[0].value
+// //change...
+// //Create function for scoring
+// //Store score in player.score
+
+// //Compare scores and allocate
+// //  - create function that handles money allocation
+// //  - call function allocateMoney()
+
+// //   const hasAceInHand = (cardsOnHand) => {
+// //     for (const card of cardsOnHand) {
+// //       if (card.face === "A") {
+// //         return true;
+// //       }
+// //     }
+// //     return false;
+// // }
+
+// // const countHandValue = (cardsOnHand) => {
+// //     let sum = 0;
+// //     for (const card of cardsOnHand) {
+// //       sum = sum + card.value;
+// //       if (sum > 21 && hasAceInHand(cardsOnHand)) {
+// //         sum -= 10; // - 11 + 1
+// //       }
+// //     }
+// //     return sum;
+// // }
+
+// for(card in data.cards.dealerPile){
+
+//   dealerScore += cardValues.indexOf(data.cards[card].value);
 // }
 
-async function drawOneCardFaceUpDealer() {
-  const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
-  const data = await res.json();
-  for (let card of data.cards) {
-    currentDealerHand.push(card.value, card.suit);
-    newCardDealer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
-  }
-  newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
-};
-async function drawCardDealerBackImage() {
-  const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
-  const data = await res.json();
-  for (let card of data.cards) {
-    currentDealerHand.push(card.value, card.suit);
-    newCardDealer += `<img class="cardDealer" src="https://www.deckofcardsapi.com/static/img/back.png " alt="${card.value + " of " + card.suit}"'/>`;
-  }
-  newCardDealerQuerySelectorDealer.innerHTML = newCardDealer;
-}
+// for(card in data.cards.playerPile){
+//   playerScore += cardValues.indexOf(data.cards[card].value);
+// }
+// console.log(data)
+// if(dealerSCore < playerScore) return winners.indexOf()
+// playerScore = 15;
+// dealerScore = 15;
+// return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
 
-
-async function drawOneCardPlayer() {
-  const res = await fetch('https://www.deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=1');
-  const data = await res.json();
-  for (let card of data.cards) {
-    currentPlayerHand.push(card.value, card.suit);
-    newCardPlayer += `<img class="cardDealer" src="${card.image}" alt="${card.value + " of " + card.suit}"'/>`;
-
-  }
-
-  newCardQuerySelectorPlayer.innerHTML = newCardPlayer;
-}
-
-
-
-function consoleLogHands() {
-
-  for (i = 0; i < currentPlayerHand.length; i++) {
-    console.log(currentPlayerHand[i] + "Player hand");
-  }
-
-  for (i = 0; i < currentDealerHand.length; i++) {
-    console.log(currentDealerHand[i] + "Dealer hand");
-  }
-
-};
-
-function openSettingtoStart() {
-  document.querySelector(".navbar-setting").classList.toggle("start");
-  document.querySelector(".setting").classList.toggle("menu");
-}
-function backToFirstPage() {
-  document.querySelector(".navbar-setting").classList.toggle("start");
-  document.querySelector(".setting").classList.toggle("menu");
-}
-
-function playerStayOption() {
-  //calculate the total score of the player vs the dealer and update the DOM with scores accordingly
-}
-
-function playerBetOption(amount) {
-  if (playerBank <= amount) {
-    alert("you need more money to bet");
-  } else {
-    playerBank -= amount;
-  }
-
-}
-
+// }

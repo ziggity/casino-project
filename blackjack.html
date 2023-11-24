@@ -40,51 +40,67 @@
           <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Total number of wins for player <span class="totalWinsPlayer"></span></a>
               </li> -->
-              <li class="nav-item">
-                <a class="nav-link active disabled well">Player's cash on hand:<span class="playerBank" >   $10,000</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-   
-    <div class="playing-table">
-        <div class="playing-table-content">
-          <img src="./imgs/simple green table.jpg" class="playing-table-img" alt="blackjack table" style="height: auto; width: 1350px;">
-          
-          <div class="btn-group" role="group" aria-label="Vertical button group">
-            <div class="startMainGame">
-              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()"><img src="./imgs/newgameicon.png" style="height: 90px;"></button>;
-            </div>
-            <div class="playerChoices">
-              <button class = " btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardPlayer()"><img src="./imgs/hitbutton.png" style="height: 90px"></button>;
-              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="playerBetOption(100)"><img src="./imgs/betimg.png" style="height: 90px;"></button>;
-              <button class = " btn-circle btn-xl btn-circle" id="dealCards" onclick="playerStayOption()">Stay</button>;
-              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="drawOneCardFaceUpDealer()">Dealer Hit</button>;
-              <button class = "btn-circle btn-xl btn-circle" id="dealCards" onclick="consoleLogHands()">see hands</button>;
-            </div>  
-            </div>
-          <div class="dealerPart">
-            <h2>Dealer</h2> 
-            <div class="cardDealer"></div>
-            <div class="newCardDealer"></div> 
-          </div>
-          <div class="playerPart">
-            <h2>Player</h2>
-            <div class="playersArea">
-              <div id="player1"><h3>Player1</h3></div>
-              <div id="player2"><h3>Player2</h3></div>
-              <div id="player3"><h3>Player3</h3></div>
-              <div id="player4"><h3>Player4</h3></div>
-            </div>
-            <div class="playerCard">
-              <div class="cardWrapper" id="card1"></div>
-              <div class="cardWrapper" id="card2"></div>
-            </div>
-            <div class="newCardPlayer"></div>
+          <li class="nav-item">
+            <a class="nav-link active disabled well" id="playerBank">Player's cash on hand: $1000</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active disabled well" id="totalPot">Total cash in the Pot:</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="playing-table">
+    <div class="playing-table-content">
+
+      <!-- <img src="./imgs/simple green table.jpg" class="playing-table-img" alt="blackjack table" style="height: auto; width: 1350px;"> -->
+
+      <div class="btn-group" role="group" aria-label="Vertical button group">
+        <div class="startMainGame">
+          <button class="btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()"><img src="./imgs/newgameicon.png" style="height: 90px;"></button>;
+          <div class="playerChoices">
+            <button class=" btn-circle btn-xl btn-circle" id="dealCards1" onclick="hitMe()"><img src="./imgs/hitbutton.png" style="height: 90px"></button>;
+            <button class="btn-circle btn-xl btn-circle" id="dealCards2" onclick="playerPlacedBet()"><img src="./imgs/betimg.png" style="height: 90px;">Bet 50</button>;
+            <button class=" btn-circle btn-xl btn-circle" id="dealCards3" onclick="">Stay</button>;
+            <button class="btn-circle btn-xl btn-circle" id="dealCards4" onclick="">Dealer Hit</button>;
+            <button class="btn-circle btn-xl btn-circle" id="dealCards5" onclick="">see hands</button>;
           </div>
         </div>
       </div>
+
+    </div>
+  </div>
+
+
+  <div class="dealerPart" id="dealercard">
+    <h2>Dealer</h2>
+    <div class="cardDealer"></div>
+    <div class="newCardDealer"></div>
+  </div>
+  <div class="playerPart">
+    <h2>Player</h2>
+    <div class="playersArea">
+      <div id="player1">
+        <h3>Player1</h3>
+      </div>
+      <div id="player2">
+        <h3>Player2</h3>
+      </div>
+      <div id="player3">
+        <h3>Player3</h3>
+      </div>
+      <div id="player4">
+        <h3>Player4</h3>
+      </div>
+    </div>
+    <div class="playerCard">
+      <div class="cardWrapper" id="card1"></div>
+      <div class="cardWrapper" id="card2"></div>
+    </div>
+    <div class="newCardPlayer"></div>
+  </div>
+
 
 
   </div>
@@ -102,6 +118,8 @@
   <script src="jsfolder/classdef.js"></script>
   <script src="jsfolder/cardfunctions.js"></script>
   <script src="jsfolder/blackjack.js"></script>
+  <script src="jsfolder/david.js"></script>
+  <script src="jsfolder/zach.js"></script>
 
 </body>
 
