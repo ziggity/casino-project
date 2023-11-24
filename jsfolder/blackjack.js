@@ -38,15 +38,13 @@ const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer"
 
 //Created classes for players, dealer and Table
 const currentTable = new GameTable("Blackjack", 1, "");
-const currentPlayer = [];
-const currentDealer = [];
+const currentPlayer = []
 
 //Max players = 5 + Dealer (Player 0)
-currentPlayer[0] = new Dealer("Dealer1", "novice");
+currentPlayer[0] = new Dealer("Dealer 1", "novice");
 for (let i = 1; i < 6; i++) {
   currentPlayer[i] = new Player(`Player ${i}`, false);
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
-
 }
 
 let deckID;
@@ -95,11 +93,6 @@ async function givePlayerCards(playerIndex, numCards, deckId) {
 }
 
 function gameStart() {
-  setTable(3, 1);
-  console.log(playerBetOptions.playerBank, playerPile.length)
-
-}
-
   const numPlayers = 3; //not including dealer
   const numDecks = 1;
 
@@ -114,12 +107,6 @@ function gameStart() {
 //Drawing begins here
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
-  let insertText =""
-  for (let i = 1; i < numPlayers + 1; i++){
-    insertText += 
-    `<div class="col mx-auto" id="playercard${i}">
-     <h2>Player ${i}:</h2>
-     </div>`
   let insertText ="<h2>Players:</h2>"
   for (let i = 1; i < numPlayers + 1; i++){
     insertText += `
@@ -137,24 +124,21 @@ function generatePlayerRows(numPlayers){
   }
   playerRow.innerHTML = insertText;
 }
-// function generateDealerRow(){
-//   const playerRow = document.getElementById("dealer-row")
-//   let insertText =
-//     `<div class="col" id="dealercard">
-//     <h2>Dealer:</h2>
-//   let insertText =`
-//     <div class="col-1">
-//       <h2>Dealer:</h2> 
-//     </div>
-//     <div class="col" id="dealercard">
-//     </div>`
+function generateDealerRow(){
+  const playerRow = document.getElementById("dealer-row")
+  let insertText =`
+    <div class="col-1">
+      <h2>Dealer:</h2> 
+    </div>
+    <div class="col" id="dealercard">
+    </div>`
 
-//   playerRow.innerHTML = insertText;
-// }
+  playerRow.innerHTML = insertText;
+}
 
-// //This function will fetch the card image from an object and draw it to the designated element with a given ID.
-// function drawCardImage(cardCode, targetId) {
-//   //Ensure targetId is not empty
+//This function will fetch the card image from an object and draw it to the designated element with a given ID.
+function drawCardImage(cardCode, targetId) {
+  //Ensure targetId is not empty
   
   const drawTarget = document.getElementById(targetId)
   drawTarget.innerHTML="";
@@ -173,45 +157,21 @@ function drawAllPlayerCards(numPlayers){
   }
 }
 
-// function drawDealerCards(){
-//   const codeArray = [];
-//   for (let card of currentPlayer[0].hand){
-//     codeArray.push(card.code);
-//   }
-//   drawCardImage(codeArray, `dealercard`);
+function drawDealerCards(){
+  const codeArray = [];
+  for (let card of currentPlayer[0].hand){
+    codeArray.push(card.code);
+  }
+  drawCardImage(codeArray, `dealercard`);
 
-// }
-// //function gameStart() {
-// //console.log("You drew: " + myCards[0].code);
-// //   setTimeout(() => {
-// //     drawTwoCardsPlayer();
-// //   }, "1000");
-// //   setTimeout(() => {
-// //     drawCardDealerBackImage();
-// //   }, "1000");
-// //   setTimeout(() => {
-// //     drawOneCardFaceUpDealer();
-// //   }, "1000");
-// //   setTimeout(() => {
-// //     consoleLogHands();
-// //   }, "1000");
-// //}
-// //
-// //
-// //
-// //
-// //
-// //
-// //******************************************************************* */
-// //******************************************************************* */
+}
 
-// //Player Hit... Edit later (Tired ZZzzz...)
-// async function hitMe(){
-//   await givePlayerCards(1, 1, currentTable.deckId)
-//   drawAllPlayerCards(3);
-//   drawAllPlayerCards(currentTable.numPlayers);
+//Player Hit... Edit later (Tired ZZzzz...)
+async function hitMe(){
+  await givePlayerCards(1, 1, currentTable.deckId)
+  drawAllPlayerCards(currentTable.numPlayers);
 
-// }
+}
 
 
 // async function compareHands(pileName, deckId){
