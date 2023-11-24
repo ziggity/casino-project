@@ -80,6 +80,8 @@ async function getPlayersHandsJson() {
 
   const player1Scores = calculateScore(player1Score);
   const player0Scores = calculateScore(dealerScore);
+  playerScoreNow.innerHTML = "Player score is: " + player1Scores;
+  dealerScoreNow.innerHTML = "Dealer score is: " + player0Scores;
 
   if (player1Scores > 21 && player0Scores <= 21) {
     declareWinner("dealer");
