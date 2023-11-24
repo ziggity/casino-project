@@ -39,7 +39,7 @@ const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer"
 //Created classes for players, dealer and Table
 const currentTable = new GameTable("Blackjack", 1, "");
 const currentPlayer = []
-
+let deck__id;
 //Max players = 5 + Dealer (Player 0)
 currentPlayer[0] = new Dealer("Dealer 1", "novice");
 for (let i = 1; i < 6; i++) {
@@ -47,7 +47,7 @@ for (let i = 1; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
-let deckID;
+
 let newCardPlayer = "";
 let newCardDealer = "";
 
@@ -90,6 +90,8 @@ async function givePlayerCards(playerIndex, numCards, deckId) {
   }
   //Adds the drawn cards to a "Pile" Server side
   await addCardsToPile(playerPile, `Player${playerIndex}`, deckId);
+  deck__id = currentTable.deckId;
+
 }
 
 function gameStart() {
@@ -98,7 +100,7 @@ function gameStart() {
 
   setTable(numPlayers, numDecks);
   //console.log(playerBetOption(playerBank), playerPile.length);
-  // getPileList("Player1",currentTable.deckId)
+  
 }
 
 //Logic Begins here
@@ -147,7 +149,6 @@ function drawCardImage(cardCode, targetId) {
     drawTarget.innerHTML += `
       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
   }
-
 }
 function drawAllPlayerCards(numPlayers){
   //Better code for Big O' Notation
@@ -156,72 +157,16 @@ function drawAllPlayerCards(numPlayers){
     drawCardImage(playerHand, `player${i}`);
   }
 }
-
+const codeArray = [];
 function drawDealerCards(){
-  const codeArray = [];
   for (let card of currentPlayer[0].hand){
     codeArray.push(card.code);
   }
   drawCardImage(codeArray, `dealercard`);
-
 }
 
 //Player Hit... Edit later (Tired ZZzzz...)
 async function hitMe(){
   await givePlayerCards(1, 1, currentTable.deckId)
   drawAllPlayerCards(currentTable.numPlayers);
-
 }
-
-
-// async function compareHands(pileName, deckId){
-//   cardPile = await getPileList(pileName, deckId);
-
-// for(card in cardPile){
-//   console.log(card.value);
-//   card.suit
-// }
-// cardPile[0].value
-// //change...
-// //Create function for scoring
-// //Store score in player.score
-
-// //Compare scores and allocate
-// //  - create function that handles money allocation
-// //  - call function allocateMoney()
-
-// //   const hasAceInHand = (cardsOnHand) => {
-// //     for (const card of cardsOnHand) {
-// //       if (card.face === "A") {
-// //         return true;
-// //       }
-// //     }
-// //     return false;
-// // }
-
-// // const countHandValue = (cardsOnHand) => {
-// //     let sum = 0;
-// //     for (const card of cardsOnHand) {
-// //       sum = sum + card.value;
-// //       if (sum > 21 && hasAceInHand(cardsOnHand)) {
-// //         sum -= 10; // - 11 + 1
-// //       }
-// //     }
-// //     return sum;
-// // }
-
-// for(card in data.cards.dealerPile){
-
-//   dealerScore += cardValues.indexOf(data.cards[card].value);
-// }
-
-// for(card in data.cards.playerPile){
-//   playerScore += cardValues.indexOf(data.cards[card].value);
-// }
-// console.log(data)
-// if(dealerSCore < playerScore) return winners.indexOf()
-// playerScore = 15;
-// dealerScore = 15;
-// return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
-
-// }

@@ -9,7 +9,6 @@ const EXTRACT_URL = "/draw/?count="
 
 const CARD_IMAGE_PATH = "https://www.deckofcardsapi.com/static/img/";
 const CARD_BACK_IMAGE = "back.png";
-
 //Shuffle a new Deck and return the deck ID
 async function shuffleNewDeck(numDecks) {
   const res = await fetch(NEW_DECK_API_URL + numDecks);
@@ -70,54 +69,7 @@ async function getPileList(pileName, deckId){
   const data = await res.json();
   
   if (data.success !== true){return false}
+  console.log(data.remaining);
   return data.remaining;
 
 }
-// async function compareHands(pileName, deckId){
-//     cardPile = await getPileList(pileName, deckId);
-
-//   for(card in cardPile){
-//     console.log(card.value);
-//   }
-
-  
-  //   const hasAceInHand = (cardsOnHand) => {
-  //     for (const card of cardsOnHand) {
-  //       if (card.face === "A") {
-  //         return true;
-  //       }
-  //     }
-  //     return false;
-  // }
-  
-  // const countHandValue = (cardsOnHand) => {
-  //     let sum = 0;
-  //     for (const card of cardsOnHand) {
-  //       sum = sum + card.value;
-  //       if (sum > 21 && hasAceInHand(cardsOnHand)) {
-  //         sum -= 10; // - 11 + 1
-  //       }
-  //     }
-  //     return sum;
-  // }
-
-//   for(card in data.cards.dealerPile){
-
-//     dealerScore += cardValues.indexOf(data.cards[card].value);
-//   }
-
-//   for(card in data.cards.playerPile){
-//     playerScore += cardValues.indexOf(data.cards[card].value);
-//   }
-//   console.log(data)
-//   if(dealerSCore < playerScore) return winners.indexOf()
-// playerScore = 15;
-// dealerScore = 15;
-//   return ((playerScore > dealerScore) && (playerScore !==dealerScore)) ? "player wins" : "dealer wins";
-
-// }
-//   //if (data.success !== true){return false}
-//   return data.piles[pileName].cards;
-
-// }
-
