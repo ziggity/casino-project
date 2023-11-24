@@ -2,8 +2,8 @@
 class Player {
     constructor(name = "Player", isActive = false, money = 1000) {
         this.name = name;
-        this.money= money;
-        this.score= 0
+        this.money = money;
+        this.wins = 0
         this.isActive = isActive;
         this.hand = []
     }
@@ -22,9 +22,12 @@ class Player {
     }
 }
 class Dealer extends Player{
-    constructor(name = "Dealer", diffLevel = "novice"){
+    constructor(name = "Dealer", diffLevel = "novice", money = 0, wins = 0){
         super(name);
         this.diffLevel = diffLevel;
+        this.money = money;
+        this.wins = wins;
+        this.hand = [];
     }
 }
 class GameTable{

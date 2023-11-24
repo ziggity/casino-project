@@ -38,10 +38,11 @@ const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer"
 
 //Created classes for players, dealer and Table
 const currentTable = new GameTable("Blackjack", 1, "");
-const currentPlayer = []
+const currentPlayer = [];
+const currentDealer = [];
 
 //Max players = 5 + Dealer (Player 0)
-currentPlayer[0] = new Dealer("Dealer 1", "novice");
+currentPlayer[0] = new Dealer("Dealer1", "novice");
 for (let i = 1; i < 6; i++) {
   currentPlayer[i] = new Player(`Player ${i}`, false);
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
