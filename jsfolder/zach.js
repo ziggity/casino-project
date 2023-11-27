@@ -116,3 +116,21 @@ async function getPlayersHandsJson() {
     return console.log("Something broke");
   }
 }
+
+
+// function nukeTable()
+  
+
+
+function reset(){
+  // this code works but won't work after you deal again, it'll duplicate cards for everyone I'm not sure how to fix. 
+  // const tableElements = document.querySelectorAll(".cardDealer");
+  
+  //   tableElements.forEach(tableElements => {
+  //     tableElements.remove();
+  // });
+
+  // using this for now until we find a better way to empty table / players hands / maintain state of pot / cash etc.
+  window.location.reload(); 
+
+}
