@@ -140,3 +140,7 @@ function animateCard(card) {
   const cardDealer = document.querySelector('.cardDealer');
   const cardElement = document.createElement('div');
 }
+
+function dealerAI() {
+  
+}

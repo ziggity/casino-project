@@ -10,12 +10,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
     integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./css/abiecss.css">
+  <link rel="stylesheet" href="./css/style.css">
 
 
   <!-- For debugging --><!--Adds borders for visualization-->
   <!-- <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/> -->
-  <link rel="stylesheet" href="css/davidtest.css">
+  <link rel="stylesheet" href="./css/davidtest.css">
 
 </head>
 
@@ -51,60 +52,33 @@
     </div>
   </nav>
   <body>
-    <button type="button" class="btn btn-primary"
-        data-toggle="modal" data-target="#exampleModal">
-        Cheat sheet on BlackJack hands
-    </button>
-    <!--Bootstrap modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1"
-        role="dialog" aria-labelledby="cheatsheet blackjack"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-             
-<div class="modal-header">   
-                     <button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                           <p style="align-content: right;font-weight: lighter;">x</p>
-                        </span>
-                    </button>
-                </div>
-                 <H5>Best BlackJack strategy:</H5>
-
-                <h7>Each table corresponds to a specific type of hand: hard hands, soft hands, and pairs. The columns on the top of the tables represent the ​dealer's upcard, which influences the ​player's strategy. The tables simplify the strategy by grouping ​Jack, ​Queen, and ​King cards with the ​Ten card, as they all have a value of 10.
-
-
-                  To use the tables, a player needs to determine whether they have a pair, soft hand, or hard hand. Then, they can find the appropriate table and locate the cell that corresponds to their hand holding and the dealer's upcard. The cell will indicate the recommended strategy: "H" for hit, "S" for stand, "D" for double-down, and "P" for split (only in the pairs table).</h7>                 <div class="modal-body" style="display: flex;   width: auto;">
-                    <img src="/jsfolder/21strategy.webp" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src=
-"https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity=
-"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous">
-    </script>
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity=
-"sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous">
-    </script>
-    <script src=
-"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity=
-"sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous">
-    </script>
+    
   <div class="playing-table">
     <div class="playing-table-content">
 
       <!-- <img src="./imgs/simple green table.jpg" class="playing-table-img" alt="blackjack table" style="height: auto; width: 1350px;"> -->
-
       <div class="btn-group" role="group" aria-label="Vertical button group">
+        <div class="startMainGame">
+          <button type="button" class="btn btn-success btn-lg btn3d" id="dealCards" onclick="gameStart()"></span> New Game</button>
+          <!-- <button class="btn-circle btn-xl btn-circle" id="dealCards" onclick="gameStart()"><img src="./imgs/newgameicon.png" style="height: 120px;"></button> -->
+        </div>
+          <div class="playerChoices">
+            <button type="button" class="btn btn-magick btn-lg btn3d" id="dealCards1" onclick="hitMe()"> Hit</button>
+            <!-- <button class=" btn-circle btn-xl btn-circle" id="dealCards1" onclick="hitMe()"><img src="./imgs/hitbutton.png" style="width: 120px"></button> -->
+            <button type="button" class="btn btn-warning btn-lg btn3d" id="dealCards2" onclick="playerPlacedBet()"> Bet 50</button>
+            <!-- <button class="btn-circle btn-xl btn-circle" id="dealCards2" onclick="playerPlacedBet()"><img src="./imgs/betimg.png" style="width: 120px;">Bet 50</button> -->
+            <button type="button" class="btn btn-danger btn-lg btn3d" id="dealCards3" onclick="dealerAI()">Stay</button>
+            <!-- <button class=" btn-circle btn-xl btn-circle" id="dealCards3" onclick="">Stay</button> -->
+            <button type="button" class="btn btn-info btn-lg btn3d" id="dealCards4" onclick=""> Dealer Hit</button>
+            <!-- <button class="btn-circle btn-xl btn-circle" id="dealCards4" onclick="">Dealer Hit</button> -->
+
+            <!-- <button class="btn-circle btn-xl btn-circle" id="dealCards5" onclick="">see hands</button> -->
+            <button type="button" class="btn3d btn btn-default btn-lg" id="dealCards6" onclick="reset()">Start Over</button>
+            <!-- <button class="btn-circle btn-xl btn-circle" id="dealCards6" onclick="restart">Start Over</button> -->
+          </div>
+
+      </div>
+      <!-- <div class="btn-group" role="group" aria-label="Vertical button group">
         <button class="btn-circle btn-xl btn-circle bg-primary"  id="dealCards" onclick="reset()">RESET TABLE</button>;
 
         <div class="startMainGame">
@@ -118,7 +92,7 @@
             <button class="btn-circle btn-xl btn-circle" id="dealCards5" onclick="getPlayersHandsJson()">see hands</button>;
           </div>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
@@ -141,9 +115,6 @@
       <div id="player3">
         <h3>Player3</h3>
       </div>
-      <div id="player4">
-        <h3>Player4</h3>
-      </div>
     </div>
     <div class="playerCard">
       <div class="cardWrapper" id="card1"></div>
@@ -156,7 +127,54 @@
 
   </div>
   <!-- need a better way to view cards on the DOm (HTML) it's in columns but it's not aligned correctly-->
+  <button type="button" class="btn btn-primary"
+  data-toggle="modal" data-target="#exampleModal">
+  Cheat sheet on BlackJack hands
+</button>
+<!--Bootstrap modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+  role="dialog" aria-labelledby="cheatsheet blackjack"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+       
+<div class="modal-header">   
+               <button type="button" class="close"
+                  data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">
+                     <p style="align-content: right;font-weight: lighter;">x</p>
+                  </span>
+              </button>
+          </div>
+           <H5>Best BlackJack strategy:</H5>
 
+          <h7>Each table corresponds to a specific type of hand: hard hands, soft hands, and pairs. The columns on the top of the tables represent the ​dealer's upcard, which influences the ​player's strategy. The tables simplify the strategy by grouping ​Jack, ​Queen, and ​King cards with the ​Ten card, as they all have a value of 10.
+
+
+            To use the tables, a player needs to determine whether they have a pair, soft hand, or hard hand. Then, they can find the appropriate table and locate the cell that corresponds to their hand holding and the dealer's upcard. The cell will indicate the recommended strategy: "H" for hit, "S" for stand, "D" for double-down, and "P" for split (only in the pairs table).</h7>                 <div class="modal-body" style="display: flex;   width: auto;">
+              <img src="/jsfolder/21strategy.webp" />
+          </div>
+      </div>
+  </div>
+</div>
+<script src=
+"https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity=
+"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous">
+</script>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity=
+"sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  crossorigin="anonymous">
+</script>
+<script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity=
+"sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous">
+</script>
 
   <div id="root"> </div>
 
@@ -171,6 +189,7 @@
   <script src="jsfolder/blackjack.js"></script>
   <script src="jsfolder/david.js"></script>
   <script src="jsfolder/zach.js"></script>
+  <script src="jsfolder/abiejs.js"></script>
   
   
 

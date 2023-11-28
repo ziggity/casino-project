@@ -13,5 +13,5 @@
 }  
 .playing-table {
     background-image: url("../imgs/simple\ green\ table.jpg");
-    background-size: contain;
+    background-size: cover;
 }
