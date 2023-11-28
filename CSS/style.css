@@ -116,7 +116,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 
@@ -207,4 +206,19 @@ h2 {
    max-width: 75%;
    height: 75%;
   margin-top: 10px 10px 10px 10px;
+  }
+ 
+  .cardDealer  {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+  }
+  
+  .cardDealer:hover {
+    -webkit-transform: rotate(360deg) scale(2);
+    -moz-transform: rotate(360deg) scale(2);
+    -o-transform: rotate(360deg) scale(2);
+    -ms-transform: rotate(360deg) scale(2);
+    transform: rotate(360deg) scale(2);
   }

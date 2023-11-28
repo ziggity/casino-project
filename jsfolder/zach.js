@@ -134,3 +134,9 @@ function reset(){
   window.location.reload(); 
 
 }
+
+// not sure how to do this. 
+function animateCard(card) {
+  const cardDealer = document.querySelector('.cardDealer');
+  const cardElement = document.createElement('div');
+}
