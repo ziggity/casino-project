@@ -202,6 +202,9 @@ h2 {
     
   } */
 
-
-
-  
+ 
+  .modal-dialog {
+   max-width: 75%;
+   height: 75%;
+  margin-top: 10px 10px 10px 10px;
+  }
