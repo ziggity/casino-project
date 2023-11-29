@@ -35,8 +35,8 @@ function declareWinner(player) {
   );
 }
 
-function calculateScore(player) {
-  const cards = player.cards;
+function calculateScore(player = new Player) {
+  const cards = player.hand;
   let score = 0;
   let numAces = 0;
 
