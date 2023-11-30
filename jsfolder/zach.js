@@ -35,17 +35,17 @@ function declareWinner(player) {
   );
 }
 
-function calculateScore(player) {
-  const cards = player.cards;
+function calculateScore(player = new Player) {
+  const cards = player.hand;
   let score = 0;
   let numAces = 0;
 
   for (const card of cards) {
     const cardValue = card.value;
-    console.log("cardValue: " + cardValue);
+    // console.log("cardValue: " + cardValue);
     if (cardValue === "KING" || cardValue === "QUEEN" || cardValue === "JACK") {
       score += 10;
-      console.log("cardValue: " + cardValue);
+      // console.log("cardValue: " + cardValue);
     } else if (cardValue === "ACE") {
       numAces += 1;
       score += 11; // Assume 11 for now, can be adjusted later if needed
@@ -57,7 +57,7 @@ function calculateScore(player) {
     score -= 10;
     numAces -= 1;
   }
-  console.log("score: " + score);
+  // console.log("score: " + score);
   return score;
 }
 
@@ -141,6 +141,3 @@ function animateCard(card) {
   const cardElement = document.createElement('div');
 }
 
-function dealerAI() {
-  
-}

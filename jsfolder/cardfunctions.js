@@ -26,13 +26,13 @@ async function extractCards(numCards, deckId) {
   //Needs a check for no cards remaining in deck!!!!!!!!!!!!!
   //numCards -= Number(data.remaining);
 
-  const cardGroup = []
+  // const cardGroup = []
 
-  for (let card of data.cards) {
-    //.code .suit,.value.image.
-    cardGroup.push(card);
-  }
-  return cardGroup;
+  // for (let card of data.cards) {
+  //   //.code .suit,.value.image.
+  //   cardGroup.push(card);
+  // }
+  // return cardGroup;
   return data.cards;
 
 }
@@ -68,8 +68,6 @@ async function getPileList(pileName, deckId){
   const res = await fetch(`${DECK_URL}${deckId}/pile/${pileName}/list/`);
   const data = await res.json();
   
-  if (data.success !== true){return false}
-  console.log(data.remaining);
-  return data.remaining;
-
+  //if (data.success !== true){return false}
+  return data.piles[pileName].cards;
 }
