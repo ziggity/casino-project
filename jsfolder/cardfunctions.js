@@ -26,7 +26,7 @@ async function extractCards(numCards, deckId) {
   //Needs a check for no cards remaining in deck!!!!!!!!!!!!!
   //numCards -= Number(data.remaining);
 
-  const cardGroup = []
+  // const cardGroup = []
 
   // for (let card of data.cards) {
   //   //.code .suit,.value.image.
