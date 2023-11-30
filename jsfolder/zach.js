@@ -2,7 +2,6 @@ const playerBank = document.getElementById("playerBank");
 const totalMoneyInPot = document.getElementById("totalPot");
 const dealerScoreNow = document.getElementById("dealerScoreNow");
 const playerScoreNow = document.getElementById("playerScoreNow");
-
 function playerPlacedBet() {
   const betAmountPlayer1 = currentPlayer[1].placeBet(50);
   console.log(betAmountPlayer1);
@@ -84,35 +83,50 @@ async function getPlayersHandsJson() {
   dealerScoreNow.innerHTML = "Dealer score is: " + player0Scores;
 
   if (player1Scores > 21 && player0Scores <= 21) {
-    declareWinner("dealer");
+    // declareWinner("dealer");
+        showWinner.innerHTML = "Dealer wins!";
+
     return console.log("Player: loses" + player1Score);
   }
 
-  if (player0Scores > 21 && player1Scores <= 21) {
-    declareWinner("dealer");
+  else if (player0Scores > 21 && player1Scores <= 21) {
+    // declareWinner("player");
+    showWinner.innerHTML = "Player wins!";
     return console.log("Dealer: loses" + dealerScore);
   }
-  if (
+  else if (
     player0Scores === player1Scores &&
     player1Scores <= 21 &&
     player0Scores >= 17
   ) {
-    declareWinner("TIE - both win");
+    showWinner.innerHTML = "TIE";
+
+    // declareWinner("TIE - both win");
     return console.log("Dealer and Player both tie");
   }
-  if (
+  else if (
     player0Scores >= 17 &&
     player0Scores <= 21 &&
     player1Scores < player0Scores
-  )
+  ){
+    showWinner.innerHTML = "Dealer wins!";
+
     return console.log("Dealer wins");
-  if (
+
+  }
+  
+  else if (
     player1Scores >= 17 &&
     player1Scores <= 21 &&
     player0Scores < player1Scores
-  )
+  )  {
+    showWinner.innerHTML = "Player wins!";
+
     return console.log("Player wins");
+  } 
   else {
+    showWinner.innerHTML = "Bugs in the system";
+
     return console.log("Something broke");
   }
 }

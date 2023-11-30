@@ -1,4 +1,6 @@
 const UNKNOWN_CARD = new Card("back",0,"NONE");
+const showWinner = document.getElementById("showWinner");
+
 // const sleep = (time) => {
 //     return new Promise(resolve => setTimeout(resolve, time))
 // };   
@@ -60,18 +62,26 @@ async function BlackjackDealerAI(autoLose = false) {
     switch (true){
         case (thisDealer.score > 21):
             //Dealer goes over:
+            showWinner.innerHTML = "Player wins!";
+
             console.log ("Dealer went over... you win.");
             break;
         case (thisDealer.score > currentPlayer[1].score):
             //Dealer beats player:
+            showWinner.innerHTML = "Dealer wins!";
+
             console.log("Dealer wins.");
             break;
         case (thisDealer.score === currentPlayer[1].score):
             //It's a tie!!
+            showWinner.innerHTML = "TIE!";
+
             console.log("Push");
             break;
         case (thisDealer.score < currentPlayer[1].score):
             //Player scores higher:
+            showWinner.innerHTML = "Player wins!";
+
             console.log ("Player wins!");
     }
     console.log(`The dealer's score: ${thisDealer.score}`);
