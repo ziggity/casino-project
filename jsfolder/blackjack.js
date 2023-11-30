@@ -104,7 +104,7 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
 }
 
 function gameStart() {
-  const numPlayers = 4; //not including dealer
+  const numPlayers = 1; //not including dealer
   const numDecks = 1;
 
   setTable(numPlayers, numDecks);
@@ -171,16 +171,24 @@ function drawAllPlayerCards(numPlayers){
     drawCardImage(playerHand, `player${i}`);
   }
 }
-const codeArray = [];
 function drawDealerCards(){
-  for (let card of currentPlayer[0].hand){
-    codeArray.push(card.code);
-  }
-  drawCardImage(codeArray, `dealercard`);
+  // const codeArray = [];
+  // for (let card of currentPlayer[0].hand){
+  //   codeArray.push(card.code);
+  // }
+  const dealerHand = currentPlayer[0].hand.map(card => card.code);
+  drawCardImage(dealerHand, `dealercard`);
 }
 
-//Player Hit... Edit later (Tired ZZzzz...)
+//Player Hit...
 async function hitMe(){
-  await givePlayerCards(1, 1, currentTable.deckId)
+  await givePlayerCards(1, 1, currentTable.deckId,22);
   drawAllPlayerCards(currentTable.numPlayers);
+  let yourScore = calculateScore(currentPlayer[1]);
+
+  console.log(`Your score: ${yourScore}`);
+  if (yourScore > 21) {
+    alert ("LOSE");
+    BlackjackDealerAI()
+  }
 }
