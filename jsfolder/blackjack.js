@@ -60,8 +60,11 @@ async function setTable(numPlayers, numDecks) {
 
   //Set all players to active and deal cards
   for (let i = 0; i <= currentTable.numPlayers; i++) {
+    let numToShow = 1;
     currentPlayer[i].isActive = true;
-    await givePlayerCards(i, 2, currentTable.deckId);
+    currentPlayer[i].playerNumber = i;
+    if (i === 1) numToShow = 2;
+    await givePlayerCards(i, 2, currentTable.deckId, numToShow);
   }
   
   currentPlayer[1].name = "THIS IS YOU!!"; //temporary
@@ -78,24 +81,30 @@ async function setTable(numPlayers, numDecks) {
 
 
 //This Will extract a designated number of cards from the deck and add it to player's hand
-async function givePlayerCards(playerIndex, numCards, deckId) {
+async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
   const extractedCards = await extractCards(numCards, deckId);
   const playerPile = [];
   
   if (!extractedCards) { return; }
   
+  //Pushes cards to player object and extracts card codes for API call
   for (let card of extractedCards) {
-    currentPlayer[playerIndex].hand.push(card);
+    //currentPlayer[playerIndex].hand.push(card);
     playerPile.push(card.code);
   }
-  //Adds the drawn cards to a "Pile" Server side
+  //Adds the drawn cards to a "Pile" Server side (API call)
   await addCardsToPile(playerPile, `Player${playerIndex}`, deckId);
-  deck__id = currentTable.deckId;
+  
+  //Only Show relevant cards:
+  await showOrHidePlayerCards(currentPlayer[playerIndex],numToShow);
+
+ 
+  deck__id = currentTable.deckId;  //Purpose of this line??
 
 }
 
 function gameStart() {
-  const numPlayers = 3; //not including dealer
+  const numPlayers = 4; //not including dealer
   const numDecks = 1;
 
   setTable(numPlayers, numDecks);
@@ -141,13 +150,18 @@ function generateDealerRow(){
 //This function will fetch the card image from an object and draw it to the designated element with a given ID.
 function drawCardImage(cardCode, targetId) {
   //Ensure targetId is not empty
-  
-  const drawTarget = document.getElementById(targetId)
-  drawTarget.innerHTML="";
-  
-  for (let code of cardCode){
-    drawTarget.innerHTML += `
-      <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
+  try{
+    const drawTarget = document.getElementById(targetId)
+    drawTarget.innerHTML="";
+    
+    for (let code of cardCode){
+      drawTarget.innerHTML += `
+        <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
+    }
+
+  }
+  catch(e){
+    console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
   }
 }
 function drawAllPlayerCards(numPlayers){

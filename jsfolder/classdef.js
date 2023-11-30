@@ -15,9 +15,9 @@ class Player {
     constructor(name = "Player", isActive = false, money = 1000, playerNumber = 1) {
         this.name = name;
         this.money = money;
-        this.wins = 0
+        this.wins = 0;
         this.isActive = isActive;
-        this.playerNumber = playerNumber;
+        this.playerNumber = playerNumber; //keep track of player index
         this.hand = [];
     }
     shuffle(){
@@ -35,12 +35,12 @@ class Player {
     }
 }
 class Dealer extends Player{
-    constructor(name = "Dealer", diffLevel = "novice", money = 0, wins = 0){
-        super(name);
+    constructor(name = "Dealer", diffLevel = "novice"){
+        super(name, true, 0, 0);
         this.diffLevel = diffLevel;
-        this.money = money;
-        this.wins = wins;
-        this.hand = [];
+        // this.money = money;
+        // this.wins = wins;
+        // this.hand = [];
     }
 }
 class GameTable{
