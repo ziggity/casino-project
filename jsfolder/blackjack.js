@@ -48,34 +48,42 @@ for (let i = 1; i < 6; i++) {
 }
 
 
-let newCardPlayer = "";
-let newCardDealer = "";
+//Execution starts HERE:
+function gameStart() {
+  const numPlayers = 1; //not including dealer
+  const numDecks = 1;
 
+  setTable(numPlayers, numDecks);
+  
+}
+
+//Sets up the table for blackjack
 async function setTable(numPlayers, numDecks) {
-  currentTable.deckId = await shuffleNewDeck(numDecks);
-  currentTable.numPlayers = numPlayers;
+  
+  currentTable.deckId = await shuffleNewDeck(numDecks); //Get new deck
+  currentTable.numPlayers = numPlayers; // Set the number of players
 
-  //Since dealer plays, Player 0 will be set as dealer
+  //Since dealer plays, Player 0 will always be set as dealer
   currentPlayer[0].name = "Dealer";
 
   //Set all players to active and deal cards
   for (let i = 0; i <= currentTable.numPlayers; i++) {
-    let numToShow = 1;
-    currentPlayer[i].isActive = true;
-    currentPlayer[i].playerNumber = i;
-    if (i === 1) numToShow = 2;
-    await givePlayerCards(i, 2, currentTable.deckId, numToShow);
+    currentPlayer[i].isActive = true;   
+    currentPlayer[i].playerNumber = i;  //We save the player index locally to the object
+    let numToShow = 1;    // This variable sets how many cards go face up for each player
+    if (i === 1) numToShow = 2;   //If the player is Player #1 all cards will be face up.
+    await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
   }
   
-  currentPlayer[1].name = "THIS IS YOU!!"; //temporary
-  //Start drawing procedures
-  // generatePlayerRows(currentTable.numPlayers);
+  currentPlayer[1].name = "THIS IS YOU!!"; //temporary Player should set their name
+  
+  //Start drawing procedures (Table can be procedurally generated or static...)
+  // generatePlayerRows(currentTable.numPlayers); 
   // generateDealerRow();
+
+  //Draw cards
   drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
-  deckID = currentTable.deckId
-
-  //remove this later once all references to deckID are gone: 
   
 }
 
@@ -103,19 +111,10 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
 
 }
 
-function gameStart() {
-  const numPlayers = 1; //not including dealer
-  const numDecks = 1;
+//Drawing Functions begins here:
+//---------------------------------
 
-  setTable(numPlayers, numDecks);
-  //console.log(playerBetOption(playerBank), playerPile.length);
-  
-}
-
-//Logic Begins here
-
-
-//Drawing begins here
+//Procedurally generate playing field
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
   let insertText ="<h2>Players:</h2>"
@@ -147,7 +146,10 @@ function generateDealerRow(){
   playerRow.innerHTML = insertText;
 }
 
+
 //This function will fetch the card image from an object and draw it to the designated element with a given ID.
+//This code is not optimal. Image path can be fetched directly from object instead.
+//Return to fix later
 function drawCardImage(cardCode, targetId) {
   //Ensure targetId is not empty
   try{
@@ -164,6 +166,9 @@ function drawCardImage(cardCode, targetId) {
     console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
   }
 }
+
+//Draws cards for number of specified players
+//This makes several calls to the drawCardImage function. Actual drawing occurs there.
 function drawAllPlayerCards(numPlayers){
   //Better code for Big O' Notation
   for (let i = 1; i <= numPlayers; i++) {
@@ -171,24 +176,25 @@ function drawAllPlayerCards(numPlayers){
     drawCardImage(playerHand, `player${i}`);
   }
 }
+//Draws the dealer cards
+//Same as above but for dealer.
 function drawDealerCards(){
-  // const codeArray = [];
-  // for (let card of currentPlayer[0].hand){
-  //   codeArray.push(card.code);
-  // }
   const dealerHand = currentPlayer[0].hand.map(card => card.code);
   drawCardImage(dealerHand, `dealercard`);
 }
+
 
 //Player Hit...
 async function hitMe(){
   await givePlayerCards(1, 1, currentTable.deckId,22);
   drawAllPlayerCards(currentTable.numPlayers);
-  let yourScore = calculateScore(currentPlayer[1]);
 
+  let yourScore = calculateScore(currentPlayer[1]);
+  currentPlayer[1].score = yourScore;
   console.log(`Your score: ${yourScore}`);
+
   if (yourScore > 21) {
-    alert ("LOSE");
-    BlackjackDealerAI()
+    //disableButtons()  //Add code to disable buttons here...
+    await BlackjackDealerAI(true);
   }
 }

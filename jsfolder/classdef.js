@@ -18,6 +18,7 @@ class Player {
         this.wins = 0;
         this.isActive = isActive;
         this.playerNumber = playerNumber; //keep track of player index
+        this.score = 0
         this.hand = [];
     }
     shuffle(){
