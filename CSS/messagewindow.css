@@ -1,0 +1,50 @@
+:root {
+
+    --stop-screen-color: rgba(0,0,0,.6);
+    --message-window-color:  rgba(0,0,0,.8);
+}
+/* From here down is needed for message box */
+@keyframes fly-in-direction{
+    0%{transform: translate(-100vw,33vh);}
+    100%{transform: translate(0vw,33vh);}
+}
+.fly-in-from-direction {
+    animation-duration:.3s ;
+    animation-fill-mode: both;
+    animation-name:fly-in-direction;
+}
+.transparent-box{
+    background-color: rgba(0,0,0,.8);
+    border-radius: 25px;
+    margin: 1vw;
+    padding: 1em;
+}
+
+.message-window{
+    background-color: var(--message-window-color);
+    border-radius: 25px;
+    margin: 1vw;
+    padding: 1em;
+
+    position: absolute;
+    max-height: 80vh;
+    min-width: 150px;
+    width: 30vw;
+    z-index: 101;
+    left:33vw
+}
+.stop-screen{
+    background-color: var(--stop-screen-color);
+
+    position:absolute;
+    width: 100vw;
+    height:100vh;
+    z-index: 100;
+    left: 0;
+    top: 0;
+
+}
+
+#messageToDisplay{
+    color: yellow;
+}
