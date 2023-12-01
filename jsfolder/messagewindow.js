@@ -46,10 +46,6 @@ function resizeMessage(data=null){
     if(document.querySelector(".stop-screen").clientHeight < document.querySelector("body").clientHeight) {
         document.querySelector(".stop-screen").style.height = `${document.querySelector("body").clientHeight}px`;
     }
-    console.clear();
-    console.log(`${document.querySelector("body").clientHeight}px`);
-    console.log(`${document.querySelector(".stop-screen").clientHeight}px`);
-
 }
 
 //User clicks Yes/Okay

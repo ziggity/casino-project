@@ -46,6 +46,7 @@ async function BlackjackDealerAI(autoLose = false) {
     //If player busts or other auto loss conditon, declare dealer winner
     if (autoLose) {
         console.log("You went over... YOU LOSE");
+        showMessage(`Player Bust...\nYou Lose\n\nYour score: ${currentPlayer[1].score}`)
         return;
     } 
 
@@ -68,7 +69,6 @@ async function BlackjackDealerAI(autoLose = false) {
             break;
         case (thisDealer.score > currentPlayer[1].score):
             //Dealer beats player:
-            showWinner.innerHTML = "Dealer wins!";
             showMessage("Dealer wins");
             console.log("Dealer wins.");
             break;
