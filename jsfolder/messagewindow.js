@@ -41,6 +41,7 @@ async function checkModal(){
     }
 }
 
+//Resize the modal background depending on window size
 function resizeMessage(data=null){
     document.querySelector(".stop-screen").style.height = "100vh";
     if(document.querySelector(".stop-screen").clientHeight < document.querySelector("body").clientHeight) {
@@ -50,9 +51,10 @@ function resizeMessage(data=null){
 
 //User clicks Yes/Okay
 function yesClick(data){
-    clearMessage()
+    reset();
+    clearMessage();
 }
 //User clicks No/Cancel
 function noClick(data){
-    clearMessage()
+    clearMessage();
 }

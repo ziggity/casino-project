@@ -46,7 +46,7 @@ async function BlackjackDealerAI(autoLose = false) {
     //If player busts or other auto loss conditon, declare dealer winner
     if (autoLose) {
         console.log("You went over... YOU LOSE");
-        showMessage(`Player Bust...\nYou Lose\n\nYour score: ${currentPlayer[1].score}`)
+        showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
         return;
     } 
 
@@ -59,29 +59,26 @@ async function BlackjackDealerAI(autoLose = false) {
         thisDealer.score = calculateScore(thisDealer);
     }
     //------------------------------------------------------
-
+    let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
     switch (true){
         case (thisDealer.score > 21):
             //Dealer goes over:
-            showWinner.innerHTML = "Player wins!";
-            showMessage("You Win!!");
+            showMessage(`You Win!!${scoreText}`);
             console.log ("Dealer went over... you win.");
             break;
         case (thisDealer.score > currentPlayer[1].score):
             //Dealer beats player:
-            showMessage("Dealer wins");
+            showMessage(`Dealer wins.${scoreText}`);
             console.log("Dealer wins.");
             break;
         case (thisDealer.score === currentPlayer[1].score):
             //It's a tie!!
-            showWinner.innerHTML = "TIE!";
-            showMessage("Push");
+            showMessage(`Push.${scoreText}`);
             console.log("Push");
             break;
         case (thisDealer.score < currentPlayer[1].score):
             //Player scores higher:
-            showWinner.innerHTML = "Player wins!";
-            showMessage("You WIN!!!");
+            showMessage(`You WIN!!${scoreText}`);
             console.log ("Player wins!");
     }
     console.log(`The dealer's score: ${thisDealer.score}`);
