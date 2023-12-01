@@ -1,0 +1,41 @@
+
+/* From here down is needed for message box */
+@keyframes fly-in-direction{
+    0%{transform: translate(-100vw,33vh);}
+    100%{transform: translate(0vw,33vh);}
+}
+.fly-in-from-direction {
+    animation-duration:.3s ;
+    animation-fill-mode: both;
+    animation-name:fly-in-direction;
+}
+.transparent-box{
+    background-color: rgba(0,0,0,.8);
+    border-radius: 25px;
+    margin: 1vw;
+    padding: 1em;
+}
+
+.message-window{
+    background-color: rgba(0,0,0,.8);
+    border-radius: 25px;
+    margin: 1vw;
+    padding: 1em;
+
+    position: absolute;
+    max-height: 80vh;
+    min-width: 150px;
+    width: 30vw;
+    z-index: 11;
+    left:33vw
+}
+.stop-screen{
+    background-color: rgba(0,0,0,.6);
+
+    position:absolute;
+    width: 100vw;
+    height:100vh;
+    z-index: 10;
+    left: 0;
+    top: 0;
+}
