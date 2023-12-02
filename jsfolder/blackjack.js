@@ -82,6 +82,7 @@ async function setTable(numPlayers, numDecks) {
   // generateDealerRow();
 
   //Draw cards
+  updateDisplay();
   drawAllPlayerCards(currentTable.numPlayers);
   drawDealerCards();
   

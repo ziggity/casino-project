@@ -70,19 +70,19 @@
   
           <li class="nav-item px-1">
             <div class="row">
-              <div class="col text-center player-label">Player:</div>
+              <div class="col text-center player-label" id="playerName1">Player:</div>
             </div>
             <div class="row text-nowrap">
-              <div class="col-6" id="player1Score">Score: 0</div><div class="col-6" id="player1Money">$0 </div>
+              <div class="col-6" id="playerScore1">Score: 0</div><div class="col-6" id="playerMoney1">$0 </div>
             </div>
           </li>
 
           <li class="nav-item px-1">
             <div class="row">
-              <div class="col text-center player-label">Dealer:</div>
+              <div class="col text-center player-label" id="playerName0">Dealer:</div>
             </div>
             <div class="row text-nowrap">
-              <div class="col-6" id="dealerScore">Score: 0</div><div class="col-6" id="dealerMoney">$0 </div>
+              <div class="col-6" id="playerScore0">Score: 0</div><div class="col-6" id="playerMoney0">$0 </div>
             </div>
           </li>
   
@@ -91,7 +91,7 @@
               <div class="col text-center player-label">Table:</div>
             </div>
             <div class="row text-nowrap">
-              <div class="col" id="tableInfo">Pot: $0 </div>
+              <div class="col" id="tableMoney">Pot: $0 </div>
             </div>
           </li>
   
@@ -100,7 +100,7 @@
               <div class="col text-center player-label">Game Status:</div>
             </div>
             <div class="row text-nowrap">
-              <div class="col text-center" id="gameStatus">Playing</div>
+              <div class="col text-center" id="gameStatus1">Playing</div>
             </div>
           </li>
 
@@ -163,7 +163,7 @@
       <div class="newCardDealer"></div>
     </div>
     <div class="playerPart">
-      <h2>Player</h2>
+      <h2>Players</h2>
       <div class="playersArea">
         <div id="player1">
           <h3>Player1</h3>

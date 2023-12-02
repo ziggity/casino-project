@@ -1,10 +1,19 @@
 const UNKNOWN_CARD = new Card("back",0,"NONE");
-const showWinner = document.getElementById("showWinner");
 
-// const sleep = (time) => {
-//     return new Promise(resolve => setTimeout(resolve, time))
-// };   
+//Change the player label id's here
+const PLAYER_SCORE_LABEL = [];
+const PLAYER_MONEY_LABEL = [];
+const PLAYER_NAME_LABEL = [];
+const TABLE_LABEL = ['tableMoney'];
+const GAME_STATUS_LABEL = ['gameStatus1']
 
+for (i = 0; i < 6; i++){
+    PLAYER_SCORE_LABEL[i] = `playerScore${i}`;
+    PLAYER_MONEY_LABEL[i] = `playerMoney${i}`;
+    PLAYER_NAME_LABEL[i] = `playerName${i}`;
+}
+
+//timer function
 async function sleep(time){
     return new Promise(resolve => setTimeout(resolve, time))
 };   
@@ -110,3 +119,27 @@ function newDrawCard(cardImage, targetId) {
       console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
     }
   }
+
+function updateLabels() {
+    const scoreLabel = [];
+    const moneyLabel = [];
+    const nameLabel = [];
+
+    for (i = 0; i < (currentTable.numPlayers + 1); i++) {
+        scoreLabel[i] = document.getElementById(PLAYER_SCORE_LABEL[i]);
+        moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
+        nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
+
+        scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
+        moneyLabel[i].textContent = `$${currentPlayer[i].money}`
+        nameLabel[i].textContent = `${currentPlayer[i].name}:`
+    }
+    document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
+}
+
+async function updateDisplay(doUpdate = true) {
+    while (doUpdate) {
+        updateLabels();
+        await sleep(100);
+    }
+}

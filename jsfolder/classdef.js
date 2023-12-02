@@ -49,6 +49,7 @@ class GameTable{
         this.gameType = gameType
         this.numPlayers = numPlayers;
         this.deckId = deckId;
+        this.moneyPot = 0;
     }
 
 }
