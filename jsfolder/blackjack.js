@@ -21,7 +21,7 @@
 // - Give player a new card
 // - Tally player score
 //Player clicks "Stay" =>
-// - Dealer does a smart algoritm
+// - Dealer does a smart algorithm
 // - Draw/Stay
 // - Tally dealer Score
 // - Compare scores
