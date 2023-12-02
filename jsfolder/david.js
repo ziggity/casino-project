@@ -89,3 +89,24 @@ async function BlackjackDealerAI(autoLose = false) {
 async function dealerHit(){
     await givePlayerCards(0,1,currentTable.deckId,22)
 }
+
+
+function newDrawCard(cardImage, targetId) {
+    //Ensure targetId is not empty
+    try{
+      const drawTarget = document.getElementById(targetId)
+      const newCard = document.createElement("img");
+      newCard.src=cardImage;
+
+      drawTarget.appendChild(newCard);
+      
+    //   for (let code of cardCode){
+    //     drawTarget.innerHTML += `
+    //       <img class="playing-card-img cardDealer img-fluid" src="${CARD_IMAGE_PATH}${code}.png" alt="${code}"/>`;
+    //   }
+  
+    }
+    catch(e){
+      console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
+    }
+  }
