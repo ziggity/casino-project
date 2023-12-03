@@ -105,7 +105,7 @@ function generatePlayerRows(numPlayers){
 
       <div class="row">
         <div class="col">
-          <h3>Player ${i}</h3>
+          <h3 class="player-table-label">Player ${i}</h3>
         </div>
       </div>
 
@@ -123,6 +123,29 @@ function generatePlayerRows(numPlayers){
   for (let i = 1; i <= numPlayers; i++){
     clearTable(i);
   }
+
+  const playerTextEl = document.getElementById("playerblock");
+
+
+  document.getElementById("playerscol").classList.remove("col");
+  const colWidth = Math.floor((12 / (numPlayers+3)*numPlayers));
+  document.getElementById("playerscol").classList.add(`col-${colWidth}`);
+  insertText= ""
+  for (let i = 1; i <= numPlayers; i++){
+    insertText +=`
+    <div class="col table-info-section">
+      <div class="row">
+        <div class="col text-center player-label" id="playerName${i}">Player ${i}:</div>
+      </div>
+      <div class="row text-nowrap">
+        <div class="col-sm-6" id="playerScore${i}">Score: 0</div>
+        <div class="col-sm-6 text-end" id="playerMoney${i}">$0 </div>
+      </div>
+    </div>
+    `
+  }
+  playerTextEl.innerHTML=insertText;
+
 }
 function generateDealerRow(){
   const playerRow = document.getElementById("dealer-row")

@@ -62,55 +62,60 @@
   <!-- Score container -->
   
   <div class="container-fluid transparent-bar" id="gameInfo">
-    
-    <div class="row" >
-
-        <div class="col casino-logo d-none d-sm-block">
-          <div class="row justify-content-center">
-            <div class="col-md-7 col-xl-5">
-              <img src="./imgs/Casino-Nucamp-Logo.jfif" class= "img-fluid" alt="">
-              <!-- Generated with AI ∙ December 2, 2023 at 2:51 PM -->
+  
+    <div class="row" id="infoBar">
+  
+      <div class="col casino-logo d-none d-sm-block">
+        <div class="row justify-content-center">
+          <div class="col-md-7 col-xl-5">
+            <img src="./imgs/Casino-Nucamp-Logo.jfif" class="img-fluid" alt="">
+            <!-- Generated with AI ∙ December 2, 2023 at 2:51 PM -->
+          </div>
+        </div>
+      </div>
+  
+      <div class="col" id="playerscol">
+        <div class="row" id="playerblock">
+          <div class="col table-info-section">
+            <div class="row">
+              <div class="col text-center player-label" id="playerName1">Player:</div>
+            </div>
+            <div class="row text-nowrap">
+              <div class="col-sm-6 player-info-bar" id="playerScore1">Score: 0</div>
+              <div class="col-sm-6 player-info-bar text-end" id="playerMoney1">$0 </div>
             </div>
           </div>
         </div>
-
-
-      <div class="col table-info-section">
-        <div class="row">
-          <div class="col text-center player-label" id="playerName1">Player:</div>
-        </div>
-        <div class="row text-nowrap">
-          <div class="col-sm-6" id="playerScore1">Score: 0</div><div class="col-sm-6 text-end" id="playerMoney1">$0 </div>
-        </div>
       </div>
-
+  
       <div class="col table-info-section">
         <div class="row">
           <div class="col text-center player-label" id="playerName0">Dealer:</div>
         </div>
         <div class="row text-nowrap">
-          <div class="col-sm-6" id="playerScore0">Score: 0</div><div class="col-sm-6" id="playerMoney0">$0 </div>
+          <div class="col-sm-6 player-info-bar" id="playerScore0">Score: 0</div>
+          <div class="col-sm-6 player-info-bar" id="playerMoney0">$0 </div>
         </div>
       </div>
-
+  
       <div class="col table-info-section">
         <div class="row">
           <div class="col text-center player-label">Table:</div>
         </div>
         <div class="row text-nowrap">
-          <div class="col" id="tableMoney">Pot: $0 </div>
+          <div class="col player-info-bar" id="tableMoney">Pot: $0 </div>
         </div>
       </div>
-
+  
       <div class="col table-info-section d-none d-sm-block">
         <div class="row">
           <div class="col text-center player-label">Game Status:</div>
         </div>
         <div class="row text-nowrap">
-          <div class="col text-center" id="gameStatus1">Playing</div>
+          <div class="col player-info-bar text-center" id="gameStatus1">Playing</div>
         </div>
       </div>
-        
+  
     </div>
 
     <div class="row justify-content-center text-center">
@@ -176,7 +181,7 @@
   
               <div class="row">
                 <div class="col">
-                  <h2>Dealer</h2>
+                  <h2 class="section-label">Dealer</h2>
                 </div>
               </div>
   
@@ -194,7 +199,7 @@
   
               <div class="row">
                 <div class="col">
-                  <h2>Players</h2>
+                  <h2 class="section-label">Players</h2>
                 </div>
               </div>
   
@@ -206,7 +211,7 @@
   
                   <div class="row">
                     <div class="col">
-                      <h3>Player1</h3>
+                      <h3 class="player-table-label">Player1</h3>
                     </div>
                   </div>
   
@@ -217,25 +222,6 @@
                   </div>
   
                 </div>
-                <!-- End of player block -->
-  
-                <!--Player 2 -->
-                <!-- <div class="col">
-            
-                    <div class="row">
-                      <div class="col">
-                        <h3>Player2</h3>
-                      </div>
-                    </div>
-            
-                    <div class="row">
-                      <div class="col" id="player1">
-                        <img src="./imgs/betimg.png" alt="" class="img-fluid">
-                      </div>
-                    </div>
-            
-                  </div>
-                </div> -->
                 <!-- End of player block -->
   
               </div>

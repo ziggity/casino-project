@@ -22,8 +22,16 @@ body {
 }
 .player-label{
     font-weight: bolder;
-    font-size: large;
+    font-size:large;
 }
+
+.player-table-label{
+  font-size: 2vw;
+}
+.section-label{
+  font-size: 4vw;
+}
+
 .table-info-section{
   /* background: url("../imgs/Casino_Label_1_edit.png"); Generated with AI ∙ December 2, 2023 at 3:31 PM */
   background-size: 100% 100%;
@@ -32,7 +40,7 @@ body {
   /* border: black solid 1px; */
 }
 .player-cards img{
-    height:20vh;
+    width:10vw;
     /* transform: rotateX(6deg); */
 
 }
