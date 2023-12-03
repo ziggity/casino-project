@@ -43,12 +43,12 @@ body {
   background-position: center;
   /* border: black solid 1px; */
 }
-#player1 img, #dealercard img{
+.player-cards img{
     height:150px;
     /* transform: rotateX(6deg); */
 
 }
-#player1 img:nth-of-type(3) {
+.flip-over {
    
     transform-style: preserve-3d;
     animation-name: flipX;

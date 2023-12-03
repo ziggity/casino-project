@@ -47,8 +47,8 @@ async function addCardsToPile(cardArray, pileName, deckId){
   
   if (data.success !== true){return false;}
   //if (data.success !== true){return false;}
-  return data.piles[pileName].remaining;
-
+  // return data.piles[pileName].remaining;
+  return cardArray.length
 }
 
 //Shuffle a pile, return number of cards in pile

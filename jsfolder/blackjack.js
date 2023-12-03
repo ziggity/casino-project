@@ -49,10 +49,13 @@ for (let i = 1; i < 6; i++) {
 
 
 //Execution starts HERE:
-function gameStart() {
+async function gameStart() {
   const numPlayers = 1; //not including dealer
   const numDecks = 1;
-
+  
+  clearTable(0);
+  clearTable(1);
+  // await sleep(500);
   setTable(numPlayers, numDecks);
   
 }
@@ -71,8 +74,13 @@ async function setTable(numPlayers, numDecks) {
     currentPlayer[i].isActive = true;   
     currentPlayer[i].playerNumber = i;  //We save the player index locally to the object
     let numToShow = 1;    // This variable sets how many cards go face up for each player
-    if (i === 1) numToShow = 2;   //If the player is Player #1 all cards will be face up.
-    await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    if (i === 1) numToShow = 5;   //If the player is Player #1 all cards will be face up.
+    if (i > 1) numToShow = 0;
+    if (i===0){
+      await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    }else{
+      await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    }
   }
   
   currentPlayer[1].name = "THIS IS YOU!!"; //temporary Player should set their name
@@ -83,8 +91,8 @@ async function setTable(numPlayers, numDecks) {
 
   //Draw cards
   updateDisplay();
-  drawAllPlayerCards(currentTable.numPlayers);
-  drawDealerCards();
+  //drawAllPlayerCards(currentTable.numPlayers);
+  //drawDealerCards();
   
 }
 
@@ -93,8 +101,9 @@ async function setTable(numPlayers, numDecks) {
 async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
   const extractedCards = await extractCards(numCards, deckId);
   const playerPile = [];
-  
-  if (!extractedCards) { return; }
+  const previousCardCount = currentPlayer[playerIndex].hand.length
+
+  if (!extractedCards) { return 0; }
   
   //Pushes cards to player object and extracts card codes for API call
   for (let card of extractedCards) {
@@ -105,11 +114,17 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
   await addCardsToPile(playerPile, `Player${playerIndex}`, deckId);
   
   //Only Show relevant cards:
-  await showOrHidePlayerCards(currentPlayer[playerIndex],numToShow);
+  //The function returns a value of how many cards to animate flipping over
+  await showPlayerCards(currentPlayer[playerIndex],numToShow);
+  const numCardsToFlip = currentPlayer[playerIndex].hand.length - previousCardCount
+  if (numCardsToFlip>0){
+    for (i = 0; i < numCardsToFlip; i++){
+      drawNewCard(currentPlayer[playerIndex].hand[previousCardCount+i].image,`player${playerIndex}`)
+    }
 
+  }
+  return numCards; 
  
-  deck__id = currentTable.deckId;  //Purpose of this line??
-
 }
 
 //Drawing Functions begins here:
@@ -187,14 +202,14 @@ function drawDealerCards(){
 
 //Player Hit...
 async function hitMe(){
-  await givePlayerCards(1, 1, currentTable.deckId,22);
-  drawAllPlayerCards(currentTable.numPlayers);
+  const numCardsToFlip = await givePlayerCards(1, 1, currentTable.deckId,22);
+  //drawAllPlayerCards(currentTable.numPlayers);
 
   let yourScore = calculateScore(currentPlayer[1]);
   currentPlayer[1].score = yourScore;
   console.log(`Your score: ${yourScore}`);
 
-  if (yourScore > 21) {
+  if (yourScore > MAX_SCORE) {
     //disableButtons()  //Add code to disable buttons here...
     await BlackjackDealerAI(true);
   }
