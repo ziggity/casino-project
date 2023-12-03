@@ -53,6 +53,7 @@ async function gameStart() {
   const numPlayers = 1; //not including dealer
   const numDecks = 1;
   
+  //clear the table to remove whitespace nodes
   clearTable(0);
   clearTable(1);
   // await sleep(500);
@@ -68,6 +69,10 @@ async function setTable(numPlayers, numDecks) {
 
   //Since dealer plays, Player 0 will always be set as dealer
   currentPlayer[0].name = "Dealer";
+  
+  //Before calling remaining fuctions, the table should be procedurally
+  //adjusted if more than one player is intended.
+  generatePlayerRows(numPlayers);
 
   //Set all players to active and deal cards
   for (let i = 0; i <= currentTable.numPlayers; i++) {
@@ -83,27 +88,20 @@ async function setTable(numPlayers, numDecks) {
     }
   }
   
-  currentPlayer[1].name = "THIS IS YOU!!"; //temporary Player should set their name
+  currentPlayer[1].name = "This is you"; //temporary Player should set their name
   
-  //Start drawing procedures (Table can be procedurally generated or static...)
-  // generatePlayerRows(currentTable.numPlayers); 
-  // generateDealerRow();
-
-  //Draw cards
-  updateDisplay();
-  //drawAllPlayerCards(currentTable.numPlayers);
-  //drawDealerCards();
+  updateDisplay(); //This is asyncrounous and will keep running for the entire game.
   
 }
 
 
 //This Will extract a designated number of cards from the deck and add it to player's hand
 async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
-  const extractedCards = await extractCards(numCards, deckId);
+  const extractedCards = await extractCards(numCards, deckId); //Calls the cards from the API
   const playerPile = [];
-  const previousCardCount = currentPlayer[playerIndex].hand.length
+  const previousCardCount = currentPlayer[playerIndex].hand.length //Store how many cards the player had before
 
-  if (!extractedCards) { return 0; }
+  if (!extractedCards) { return 0; } //Exit function if no cards drawn.
   
   //Pushes cards to player object and extracts card codes for API call
   for (let card of extractedCards) {
@@ -114,11 +112,14 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
   await addCardsToPile(playerPile, `Player${playerIndex}`, deckId);
   
   //Only Show relevant cards:
-  //The function returns a value of how many cards to animate flipping over
+  //Will update the players hand arrays with blank cards for hidden values
   await showPlayerCards(currentPlayer[playerIndex],numToShow);
+
+  //Do some simple math to figure out ow many cards to add to the board
   const numCardsToFlip = currentPlayer[playerIndex].hand.length - previousCardCount
   if (numCardsToFlip>0){
-    for (i = 0; i < numCardsToFlip; i++){
+    for (let i = 0; i < numCardsToFlip; i++){
+      //Draw cards by appending them to the parent node for that player
       drawNewCard(currentPlayer[playerIndex].hand[previousCardCount+i].image,`player${playerIndex}`)
     }
 
@@ -133,22 +134,32 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
 //Procedurally generate playing field
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
-  let insertText ="<h2>Players:</h2>"
-  for (let i = 1; i < numPlayers + 1; i++){
+  let insertText =""
+  for (let i = 1; i <= numPlayers; i++){
     insertText += `
-    <div class="col mx-auto">
+    <!--Player ${i} -->
+    <div class="col">
+
       <div class="row">
         <div class="col">
-          <h2 id="playertitle${i}">${currentPlayer[i].name}:</h2>
+          <h3>Player ${i}</h3>
         </div>
       </div>
+
       <div class="row">
-        <div class="col" id="playercard${i}">
+        <div class="col player-cards" id="player${i}">
+          Player cards appear here
         </div>
       </div>
-    </div>`
+
+    </div>
+    <!-- End of player block -->
+`
   }
   playerRow.innerHTML = insertText;
+  for (let i = 1; i <= numPlayers; i++){
+    clearTable(i);
+  }
 }
 function generateDealerRow(){
   const playerRow = document.getElementById("dealer-row")

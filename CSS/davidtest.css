@@ -10,18 +10,6 @@
   z-index: 10;
 }
 
-#player-row {
-    height: 600px;
-    background: rgba(0,0,0,.6);
-}
-#dealer-row {
-    height: 200px;
-    background: rgba(0,0,0,.6);
-}
-
-/* .playing-card-img {
-    height:150px
-} */
 body {
     background-image: url("../imgs/simple\ green\ table.jpg");
     background-size: cover;
@@ -44,7 +32,7 @@ body {
   /* border: black solid 1px; */
 }
 .player-cards img{
-    height:150px;
+    height:20vh;
     /* transform: rotateX(6deg); */
 
 }
@@ -218,187 +206,6 @@ body {
   }
   
 
-/* .playing-table{
-  background-image: url("../imgs/simple\ green\ table.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.playing-table-content{
-  position: relative; 
-} */
-  /* images */
-  /* .playing-table-img{
-    z-index: -1;
-    max-width: 100vw;
-  
-  }
-  .betting{
-    position: absolute;
-    top: 0px;
-  } */
-  /* .btn-group{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 10px;
-  } */
-  
-  
-  /* h2 {
-      color: rgb(216, 227, 253);
-      border: 1px;
-      font-weight: bold;
-  }
-  .dealerPart h2{
-    margin-left: 220px;
-    margin-top: 70px;
-  }
-   */
-  /* .main-title{
-    display: flex;
-    justify-content: center;
-    padding-top: 80px;
-    color: rgb(238, 231, 221);
-  }
-  .navbar-setting{
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 25px;
-    transition: ease-in 0.5s;
-  }
-  .navbar-setting.start{
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 25px;
-    transform: translateX(-100%);
-    transition: ease-in 0.5s;
-  }
-  .setting{
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 25px;
-    transition: ease-in 0.5s;
-  }
-  .setting.menu{
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 25px;
-    transform: translateX(-150%);
-    transition: ease-in 0.5s;
-  }
-  .firstPageButton{
-    cursor: pointer;
-    width: 150px;
-    border-radius: 5px;
-    opacity: 70%;
-    height: 35px;
-  }
-  #first{
-    margin-left: 15px;
-  }
-  #second{
-    margin-left: 30px;
-  
-  }
-  #third{
-    margin-left: 40px;
-  }
-  #lets-start{
-    margin-left: 50px;
-  }
-  #back{
-    margin-left: 60px;
-  } */
-  
-  /* .card {
-      height: 100px;
-      max-width: 200px;
-      color:transparent !important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
-  }
-   */
-
-  /* dealer part */
-  /* .cardDealer{
-    margin-top: 100px;
-    margin-bottom: 0px;
-  }
-  .dealerPart{
-    display: flex;
-    max-width: 600px;
-    position: absolute;
-    top: 0px;
-    left: 33.5%;
-  }
-  /* players part */
-  /* .playerPart{
-    position: absolute;
-    left: 50px;
-    top: 300px;
-    width: 80%;
-    margin-left: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .playersArea{
-    display: flex;
-    justify-content: center;
-    justify-content: space-between;
-    width: 70%;
-    margin-top: 40px;
-  }
-  .playerCard{
-    margin-top: 20px;
-    position: absolute;
-    top: 60px;
-  }
-  .newCardPlayer{
-    position: absolute;
-    top: 50px;
-  }
-  .playerPart h2{
-    margin-top: 0px;
-    position: absolute;
-    top: 0px;
-  }
-  .playersArea h3{
-    color: brown;
-    font-weight: 800;
-  } */ 
-  
-  /*   Uncomment these to make it invisible so we can use the image on the page to press the button. I know it's weird but it works
-  .card:hover {
-      box-shadow: 0 32px 32px 0 rgba(0,0,0,0.2);
-  }
-  .btn-circle.btn-xl {
-      width: 170px;
-      height: 170px;
-      padding: 13px 18px;
-      font-size: 15px;
-      text-align: center;
-      background-color: transparent;
-      font-weight: bold;
-      opacity: 0;
-      
-    } */
   
     
   

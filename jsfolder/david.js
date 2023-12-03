@@ -9,7 +9,7 @@ const PLAYER_NAME_LABEL = [];
 const TABLE_LABEL = ['tableMoney'];
 const GAME_STATUS_LABEL = ['gameStatus1']
 
-for (i = 0; i < 6; i++){
+for (let i = 0; i < 6; i++){
     PLAYER_SCORE_LABEL[i] = `playerScore${i}`;
     PLAYER_MONEY_LABEL[i] = `playerMoney${i}`;
     PLAYER_NAME_LABEL[i] = `playerName${i}`;
@@ -47,7 +47,7 @@ async function showPlayerCards(player = new Player, numToShow = 1){
     let cardDisplay = -1
     try{ //When intializing player.hand will be null... this will catch it...I'm just lazy
 
-        for (i = 0; i < playerHand.length; i++){
+        for (let i = 0; i < playerHand.length; i++){
             if (cardDisplay===-1 && player.hand[i].value === 0) cardDisplay = i; //Tells us how many cards were shown before
             if (i >= numToShow){
                 player.hand[i] = UNKNOWN_CARD;
@@ -57,7 +57,7 @@ async function showPlayerCards(player = new Player, numToShow = 1){
         }
     } catch(e){
         player.hand = playerHand
-        for (i = 0; i < playerHand.length; i++){
+        for (let i = 0; i < playerHand.length; i++){
             if (cardDisplay===-1 && player.hand[i].value === 0) cardDisplay = i; //Tells us how many cards were shown before
             if (i >= numToShow){
                 player.hand[i] = UNKNOWN_CARD;
@@ -84,7 +84,7 @@ async function refreshPlayerHand(playerIndex, numToAnimate = 0){
     while (drawTarget.firstChild){
         drawTarget.removeChild(drawTarget.firstChild)
     }
-    for (i = 0; i < currentPlayer[playerIndex].hand.length; i++){
+    for (let i = 0; i < currentPlayer[playerIndex].hand.length; i++){
         let animateIt = false;
         if (i >= animateIndex) animateIt = true;
         await drawNewCard(currentPlayer[playerIndex].hand[i].image,`player${playerIndex}`, animateIt);
@@ -175,7 +175,7 @@ function updateLabels() {
     const moneyLabel = [];
     const nameLabel = [];
 
-    for (i = 0; i <= currentTable.numPlayers; i++) {
+    for (let i = 0; i <= currentTable.numPlayers; i++) {
         scoreLabel[i] = document.getElementById(PLAYER_SCORE_LABEL[i]);
         moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
         nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
