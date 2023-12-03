@@ -1,3 +1,13 @@
+.casino-logo{
+  /* background: url("../imgs/Casino_Images.jfif");
+  background-size: contain */
+}
+#gameInfo{
+  position: sticky;
+  top:0;
+  left: 0;
+  color: white;
+}
 
 #player-row {
     height: 600px;
@@ -11,15 +21,27 @@
 /* .playing-card-img {
     height:150px
 } */
-.playing-table {
+body {
     background-image: url("../imgs/simple\ green\ table.jpg");
     background-size: cover;
 } 
+.stay-above{
+  position: sticky;
+  top:100;
+  left: 0;
+  color: white;
+}
 .player-label{
     font-weight: bolder;
     font-size: large;
 }
-
+.table-info-section{
+  /* background: url("../imgs/Casino_Label_1_edit.png"); Generated with AI ∙ December 2, 2023 at 3:31 PM */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* border: black solid 1px; */
+}
 #player1 img, #dealercard img{
     height:150px;
     /* transform: rotateX(6deg); */
