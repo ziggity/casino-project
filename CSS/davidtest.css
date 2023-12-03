@@ -77,20 +77,23 @@ body {
   /* style css */
   
   .startMainGame {
-    transition: ease-in 0.5s;
-    transform: translateX(0vw);
+    position: absolute;
+    transition: ease-in 1s;
+    /* transform: translateX(0vw); */
   }
   .startMainGame.hide{
-  
-    transform: translateX(-100vw);
-    transition: ease-in 0.5s;
+    display: none;
+    /* transform: translateX(-100vw); */
+    transition: ease-in 1s;
   }
   .playerChoices{
-    transform: translateX(-100vw);
+    /* display: none; */
+    transform: translateY(-100vh);
     transition: linear 0.5s;
   }
   .playerChoices.show{
-    transform: translateX(0vw);
+    display:block;
+    transform: translateY(0vw);
     transition: linear 0.5s;
   }  
   .playing-table{
@@ -126,6 +129,7 @@ body {
     position: relative;
     border: 0;
     width: 10vw;
+    min-width: 75px ;
   }
 
   .btn3d:active:focus,
