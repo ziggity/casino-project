@@ -1,40 +1,3 @@
-//Things to do:
-// - Move card API functions to separate js file for more versatility
-// - Create classes for player, dealer, and maybe table
-
-//Algorithm:
-//Game Launches:
-//Create Player, get name from intro page
-//Get player $$ and assign
-//Create player objects for all players on table
-//Create dealer object
-//Create table object
-//Get new deck and shuffle.
-//Deal cards to active players (Some cards should not be visible)
-// - Local player objects will contain a "hand" array that stores cards
-// - On client side, non-visible cards will be stored as UNK.
-// - Create a pile using API for each active player + Dealer
-//Draw cards on table using a draw function
-
-//Logic:
-//Player clicks "Hit me" => 
-// - Give player a new card
-// - Tally player score
-//Player clicks "Stay" =>
-// - Dealer does a smart algorithm
-// - Draw/Stay
-// - Tally dealer Score
-// - Compare scores
-// - Determine Winner
-// - Distribute reward
-
-
-//Will change these later...
-const cardQuerySelector = document.querySelector(".playerCard");
-const newCardQuerySelectorPlayer = document.querySelector(".newCardPlayer");
-const cardDealerQuerySelector = document.querySelector(".cardDealer");
-const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer");
-
 
 //Created classes for players, dealer and Table
 const currentTable = new GameTable("Blackjack", 1, "");
@@ -213,6 +176,7 @@ function drawDealerCards(){
 
 //Player Hit...
 async function hitMe(){
+  disableButtons();
   const numCardsToFlip = await givePlayerCards(1, 1, currentTable.deckId,22);
   //drawAllPlayerCards(currentTable.numPlayers);
 
@@ -222,6 +186,7 @@ async function hitMe(){
 
   if (yourScore > MAX_SCORE) {
     //disableButtons()  //Add code to disable buttons here...
-    await BlackjackDealerAI(true);
+    await blackjackDealerAI(numCardsToFlip, true);
   }
+  enableButtons();
 }

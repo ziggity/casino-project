@@ -1,3 +1,12 @@
+const startButton = document.getElementById("dealCards")
+const hitButton = document.getElementById("dealCards1")
+const betButton = document.getElementById("dealCards2")
+const stayButton = document.getElementById("dealCards3")
+const dealerHitButton = document.getElementById("dealCards4")
+const resetButton = document.getElementById("dealCards6")
+
+window.addEventListener("load",enableButtons);
+
 const UNKNOWN_CARD = new Card("back",0,"NONE");
 const DEFAULT_CARD_CLASS = "playing-card-img cardDealer img-fluid"
 const MAX_SCORE = 21;
@@ -114,7 +123,9 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
 
 
 //This function is called when player stays or busts
-async function BlackjackDealerAI(autoLose = false) {
+async function blackjackDealerAI(data, autoLose = false) {
+    disableButtons()
+
     const thisDealer = currentPlayer[0];
     await revealPlayerHand(0);
     thisDealer.score = calculateScore(thisDealer);
@@ -126,6 +137,7 @@ async function BlackjackDealerAI(autoLose = false) {
         await sleep(1000); //wait a sec
         console.log("You went over... YOU LOSE");
         showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
+        enableButtons();
         return;
     } 
 
@@ -161,8 +173,7 @@ async function BlackjackDealerAI(autoLose = false) {
             showMessage(`You WIN!!${scoreText}`);
             console.log ("Player wins!");
     }
-    console.log(`The dealer's score: ${thisDealer.score}`);
-    console.log(`Your score: ${currentPlayer[1].score}`);
+    enableButtons()
 }
 
 //Dealer takes a hit... (Not the 420 type)
@@ -211,4 +222,40 @@ function clearTable(playerIndex){
         drawTarget.removeChild(drawTarget.firstChild)
     }
 
+}
+
+function enableButtons(){
+    startButton.addEventListener("click",gameStart);
+    startButton.addEventListener("click",startListenerFunction); //Abbie.js
+
+    hitButton.addEventListener("click",hitMe); 
+    betButton.addEventListener("click",playerPlacedBet);
+    stayButton.addEventListener("click",blackjackDealerAI); 
+    dealerHitButton.addEventListener("click",testOutThis);
+    resetButton.addEventListener("click",reset);
+    resetButton.addEventListener("click", resetListenerFunction); //Abbie.js
+    console.log("buttons enabled")
+}
+function disableButtons(){
+    startButton.removeEventListener("click",gameStart);
+    startButton.removeEventListener("click", startListenerFunction); //Abbie.js
+      
+    hitButton.removeEventListener("click",hitMe); 
+    betButton.removeEventListener("click",playerPlacedBet);
+    stayButton.removeEventListener("click",blackjackDealerAI); 
+    dealerHitButton.removeEventListener("click",testOutThis);
+    resetButton.removeEventListener("click",reset);
+    resetButton.removeEventListener("click", resetListenerFunction); //Abie.js
+    console.log("buttons disabled")
+}
+
+function resetListenerFunction(){
+    document.querySelector(".startMainGame").classList.toggle("hide");
+    document.querySelector(".playerChoices").classList.toggle("show");
+}
+
+function startListenerFunction(){
+    document.querySelector(".startMainGame").classList.toggle("hide");
+    document.querySelector(".playerChoices").classList.toggle("show");
+ 
 }
