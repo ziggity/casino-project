@@ -1,40 +1,3 @@
-//Things to do:
-// - Move card API functions to separate js file for more versatility
-// - Create classes for player, dealer, and maybe table
-
-//Algorithm:
-//Game Launches:
-//Create Player, get name from intro page
-//Get player $$ and assign
-//Create player objects for all players on table
-//Create dealer object
-//Create table object
-//Get new deck and shuffle.
-//Deal cards to active players (Some cards should not be visible)
-// - Local player objects will contain a "hand" array that stores cards
-// - On client side, non-visible cards will be stored as UNK.
-// - Create a pile using API for each active player + Dealer
-//Draw cards on table using a draw function
-
-//Logic:
-//Player clicks "Hit me" => 
-// - Give player a new card
-// - Tally player score
-//Player clicks "Stay" =>
-// - Dealer does a smart algorithm
-// - Draw/Stay
-// - Tally dealer Score
-// - Compare scores
-// - Determine Winner
-// - Distribute reward
-
-
-//Will change these later...
-const cardQuerySelector = document.querySelector(".playerCard");
-const newCardQuerySelectorPlayer = document.querySelector(".newCardPlayer");
-const cardDealerQuerySelector = document.querySelector(".cardDealer");
-const newCardDealerQuerySelectorDealer = document.querySelector(".newCardDealer");
-
 
 //Created classes for players, dealer and Table
 const currentTable = new GameTable("Blackjack", 1, "");
@@ -49,10 +12,14 @@ for (let i = 1; i < 6; i++) {
 
 
 //Execution starts HERE:
-function gameStart() {
+async function gameStart() {
   const numPlayers = 1; //not including dealer
   const numDecks = 1;
-
+  
+  //clear the table to remove whitespace nodes
+  clearTable(0);
+  clearTable(1);
+  // await sleep(500);
   setTable(numPlayers, numDecks);
   
 }
@@ -65,35 +32,39 @@ async function setTable(numPlayers, numDecks) {
 
   //Since dealer plays, Player 0 will always be set as dealer
   currentPlayer[0].name = "Dealer";
+  
+  //Before calling remaining fuctions, the table should be procedurally
+  //adjusted if more than one player is intended.
+  generatePlayerRows(numPlayers);
 
   //Set all players to active and deal cards
   for (let i = 0; i <= currentTable.numPlayers; i++) {
     currentPlayer[i].isActive = true;   
     currentPlayer[i].playerNumber = i;  //We save the player index locally to the object
     let numToShow = 1;    // This variable sets how many cards go face up for each player
-    if (i === 1) numToShow = 2;   //If the player is Player #1 all cards will be face up.
-    await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    if (i === 1) numToShow = 5;   //If the player is Player #1 all cards will be face up.
+    if (i > 1) numToShow = 0;
+    if (i===0){
+      await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    }else{
+      await givePlayerCards(i, 2, currentTable.deckId, numToShow);  //deals 2 cards for each player
+    }
   }
   
-  currentPlayer[1].name = "THIS IS YOU!!"; //temporary Player should set their name
+  currentPlayer[1].name = "This is you"; //temporary Player should set their name
   
-  //Start drawing procedures (Table can be procedurally generated or static...)
-  // generatePlayerRows(currentTable.numPlayers); 
-  // generateDealerRow();
-
-  //Draw cards
-  drawAllPlayerCards(currentTable.numPlayers);
-  drawDealerCards();
+  updateDisplay(); //This is asyncrounous and will keep running for the entire game.
   
 }
 
 
 //This Will extract a designated number of cards from the deck and add it to player's hand
 async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
-  const extractedCards = await extractCards(numCards, deckId);
+  const extractedCards = await extractCards(numCards, deckId); //Calls the cards from the API
   const playerPile = [];
-  
-  if (!extractedCards) { return; }
+  const previousCardCount = currentPlayer[playerIndex].hand.length //Store how many cards the player had before
+
+  if (!extractedCards) { return 0; } //Exit function if no cards drawn.
   
   //Pushes cards to player object and extracts card codes for API call
   for (let card of extractedCards) {
@@ -104,11 +75,20 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
   await addCardsToPile(playerPile, `Player${playerIndex}`, deckId);
   
   //Only Show relevant cards:
-  await showOrHidePlayerCards(currentPlayer[playerIndex],numToShow);
+  //Will update the players hand arrays with blank cards for hidden values
+  await showPlayerCards(currentPlayer[playerIndex],numToShow);
 
+  //Do some simple math to figure out ow many cards to add to the board
+  const numCardsToFlip = currentPlayer[playerIndex].hand.length - previousCardCount
+  if (numCardsToFlip>0){
+    for (let i = 0; i < numCardsToFlip; i++){
+      //Draw cards by appending them to the parent node for that player
+      drawNewCard(currentPlayer[playerIndex].hand[previousCardCount+i].image,`player${playerIndex}`)
+    }
+
+  }
+  return numCards; 
  
-  deck__id = currentTable.deckId;  //Purpose of this line??
-
 }
 
 //Drawing Functions begins here:
@@ -117,22 +97,55 @@ async function givePlayerCards(playerIndex, numCards, deckId, numToShow = 1) {
 //Procedurally generate playing field
 function generatePlayerRows(numPlayers){
   const playerRow = document.getElementById("player-row")
-  let insertText ="<h2>Players:</h2>"
-  for (let i = 1; i < numPlayers + 1; i++){
+  let insertText =""
+  for (let i = 1; i <= numPlayers; i++){
     insertText += `
-    <div class="col mx-auto">
+    <!--Player ${i} -->
+    <div class="col">
+
       <div class="row">
         <div class="col">
-          <h2 id="playertitle${i}">${currentPlayer[i].name}:</h2>
+          <h3 class="player-table-label">Player ${i}</h3>
         </div>
       </div>
+
       <div class="row">
-        <div class="col" id="playercard${i}">
+        <div class="col player-cards" id="player${i}">
+          Player cards appear here
         </div>
       </div>
-    </div>`
+
+    </div>
+    <!-- End of player block -->
+`
   }
   playerRow.innerHTML = insertText;
+  for (let i = 1; i <= numPlayers; i++){
+    clearTable(i);
+  }
+
+  const playerTextEl = document.getElementById("playerblock");
+
+
+  document.getElementById("playerscol").classList.remove("col");
+  const colWidth = Math.floor((12 / (numPlayers+3)*numPlayers));
+  document.getElementById("playerscol").classList.add(`col-${colWidth}`);
+  insertText= ""
+  for (let i = 1; i <= numPlayers; i++){
+    insertText +=`
+    <div class="col table-info-section">
+      <div class="row">
+        <div class="col text-center player-label" id="playerName${i}">Player ${i}:</div>
+      </div>
+      <div class="row text-nowrap">
+        <div class="col-sm-6" id="playerScore${i}">Score: 0</div>
+        <div class="col-sm-6 text-end" id="playerMoney${i}">$0 </div>
+      </div>
+    </div>
+    `
+  }
+  playerTextEl.innerHTML=insertText;
+
 }
 function generateDealerRow(){
   const playerRow = document.getElementById("dealer-row")
@@ -186,15 +199,17 @@ function drawDealerCards(){
 
 //Player Hit...
 async function hitMe(){
-  await givePlayerCards(1, 1, currentTable.deckId,22);
-  drawAllPlayerCards(currentTable.numPlayers);
+  disableButtons();
+  const numCardsToFlip = await givePlayerCards(1, 1, currentTable.deckId,22);
+  //drawAllPlayerCards(currentTable.numPlayers);
 
   let yourScore = calculateScore(currentPlayer[1]);
   currentPlayer[1].score = yourScore;
   console.log(`Your score: ${yourScore}`);
 
-  if (yourScore > 21) {
+  if (yourScore > MAX_SCORE) {
     //disableButtons()  //Add code to disable buttons here...
-    await BlackjackDealerAI(true);
+    await blackjackDealerAI(numCardsToFlip, true);
   }
+  enableButtons();
 }
