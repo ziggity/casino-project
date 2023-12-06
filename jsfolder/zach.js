@@ -3,12 +3,12 @@ const totalMoneyInPot = document.getElementById("totalPot");
 const dealerScoreNow = document.getElementById("dealerScoreNow");
 const playerScoreNow = document.getElementById("playerScoreNow");
 
-function playerPlacedBet(amount = 50, playerIndex = 1) {
-  const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
+// function playerPlacedBet(amount = 50, playerIndex = 1) {
+//   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
 
-  currentTable.moneyPot += 50;
-  return betAmountPlayer1;
-}
+//   currentTable.moneyPot += 50;
+//   return betAmountPlayer1;
+// }
 
 // not sure where to go on this one. maybe need dealer to have his own money and pot to have its own thing, and clear out pot each round.
 function allocateWinnings(playerMoney, totalMoneyInPot) {
@@ -28,31 +28,31 @@ function declareWinner(player) {
   );
 }
 
-function calculateScore(player) {
-  const cards = player.hand;
-  let score = 0;
-  let numAces = 0;
+// function calculateScore(player) {
+//   const cards = player.hand;
+//   let score = 0;
+//   let numAces = 0;
 
-  for (const card of cards) {
-    const cardValue = card.value;
-    // console.log("cardValue: " + cardValue);
-    if (cardValue === "KING" || cardValue === "QUEEN" || cardValue === "JACK") {
-      score += 10;
-      // console.log("cardValue: " + cardValue);
-    } else if (cardValue === "ACE") {
-      numAces += 1;
-      score += 11; // Assume 11 for now, can be adjusted later if needed
-    } else {
-      score += parseInt(cardValue);
-    }
-  }
-  while (numAces > 0 && score > 21) {
-    score -= 10;
-    numAces -= 1;
-  }
-  // console.log("score: " + score);
-  return score;
-}
+//   for (const card of cards) {
+//     const cardValue = card.value;
+//     // console.log("cardValue: " + cardValue);
+//     if (cardValue === "KING" || cardValue === "QUEEN" || cardValue === "JACK") {
+//       score += 10;
+//       // console.log("cardValue: " + cardValue);
+//     } else if (cardValue === "ACE") {
+//       numAces += 1;
+//       score += 11; // Assume 11 for now, can be adjusted later if needed
+//     } else {
+//       score += parseInt(cardValue);
+//     }
+//   }
+//   while (numAces > 0 && score > 21) {
+//     score -= 10;
+//     numAces -= 1;
+//   }
+//   // console.log("score: " + score);
+//   return score;
+// }
 
 async function getPlayersHandsJson() {
   const dealerJson = await fetch(
@@ -130,18 +130,18 @@ async function getPlayersHandsJson() {
   
 
 
-function reset(){
-  // this code works but won't work after you deal again, it'll duplicate cards for everyone I'm not sure how to fix. 
-  // const tableElements = document.querySelectorAll(".cardDealer");
+// function reset(){
+//   // this code works but won't work after you deal again, it'll duplicate cards for everyone I'm not sure how to fix. 
+//   // const tableElements = document.querySelectorAll(".cardDealer");
   
-  //   tableElements.forEach(tableElements => {
-  //     tableElements.remove();
-  // });
+//   //   tableElements.forEach(tableElements => {
+//   //     tableElements.remove();
+//   // });
 
-  // using this for now until we find a better way to empty table / players hands / maintain state of pot / cash etc.
-  window.location.reload(); 
+//   // using this for now until we find a better way to empty table / players hands / maintain state of pot / cash etc.
+//   window.location.reload(); 
 
-}
+// }
 
 // not sure how to do this. 
 function animateCard(card) {
