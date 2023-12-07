@@ -421,7 +421,7 @@ async function sleep(time) {
 
 //Just a function for testing
 function testOutThis() {
-
+  showOptions(80,80);
   // redrawPlayerHand(0,5);
   // revealPlayerHand(1);
 }

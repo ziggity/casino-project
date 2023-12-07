@@ -28,6 +28,17 @@ function stopSound(itemId = "sound") {
     }
 
 }
+
+function adjustVolume(itemId = "sound", vol = 1){
+    if (!audioOn) return;//Global variable for Sound On/Off
+
+    try {
+        document.querySelector(`#${itemId}`).volume = vol;
+    } catch (e) {
+        console.log("Failed to adjust volume from " + itemId);
+    }
+
+}
 //Using absolute positions, slightly offsets positions of cards
 function positionCard(targetId, cardNumber){
     const playerBox = document.getElementById(targetId)
@@ -58,7 +69,7 @@ function loadSounds(){
 }
 
 function defaultValues(){
-    
+
 }
 
 //OLD CODE BELOW:

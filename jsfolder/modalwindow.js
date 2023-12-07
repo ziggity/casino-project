@@ -1,17 +1,22 @@
 //Code for the message box
 const messageBox = document.querySelector(".message-window");
 const stopScreen = document.querySelector(".stop-screen");
+const optionsWindow = document.querySelector(".options-window");
 
 let modalMode = false;
 let modalWidth = 30;
 let modalHeight = 30;
+let currentModal = "msg";
 
 let yesCallback = doNothing;
 let noCallback = doNothing;
 
 document.querySelector("#messagebtnYes").addEventListener("click", (event) => { yesClick(event, yesCallback) });
 document.querySelector("#messagebtnNo").addEventListener("click", (event) => { noClick(event, noCallback) });
-// document.querySelector("body").addEventListener("resize", resizeMessage);
+document.querySelector("#optionsOk").addEventListener("click", clearMessage);
+document.querySelector("#optionsCancel").addEventListener("click", clearMessage);
+
+
 window.addEventListener("resize", resizeMessage);
 //timer function
 async function sleep(time) {
@@ -21,12 +26,14 @@ async function sleep(time) {
 function clearMessage() {
     messageBox.classList.add("d-none");
     stopScreen.classList.add("d-none");
+    optionsWindow.classList.add("d-none");
     modalMode = false;
 }
 //Show message window and set focus
 function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth = 30, msgHeight = -1, msgType = "Ok") {
     modalWidth = msgWidth;
     modalHeight = msgHeight;
+    currentModal = "msg";
     yesCallback = yesFunc
     noCallback = noFunc
     const yesButton = document.getElementById("messagebtnYes");
@@ -85,11 +92,18 @@ function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth 
 async function checkModal() {
     const yesButton = document.getElementById("messagebtnYes");
     const noButton = document.getElementById("messagebtnNo");
+    
     while (modalMode) {
-        if ((!yesButton.matches(":focus")) && (!noButton.matches(":focus"))) {
-            document.querySelector("#messagebtnYes").focus()
-        }
-        await sleep(100);
+        if (currentModal = "msg"){
+            if ((!yesButton.matches(":focus")) && (!noButton.matches(":focus"))) {
+                document.querySelector("#messagebtnYes").focus()
+            }
+            await sleep(100);
+         } else {
+            if (!optionsWindow.matches(":focus")) {
+                optionsWindow.focus();
+            }
+         }
     }
 }
 
@@ -97,10 +111,15 @@ async function checkModal() {
 function resizeMessage(data = null) {
     messageBox.style.width =  modalWidth + "vw";
     messageBox.style.left = (50-(modalWidth/2)) + "vw"
+    optionsWindow.style.width =  modalWidth + "vw";
+    optionsWindow.style.left = (50-(modalWidth/2)) + "vw"
+    
     if (modalHeight !==-1) {
         messageBox.style.height = modalHeight + "vh";
+        optionsWindow.style.height = modalHeight + "vh";
     }else {
         messageBox.style.height = "auto";
+        optionsWindow.style.height = "auto";
     }
     stopScreen.style.height = "100vh";
     if (stopScreen.clientHeight < document.querySelector("body").clientHeight) {
@@ -120,4 +139,17 @@ function noClick(data, callback = doNothing) {
 }
 function doNothing() {
     return;
+}
+
+function showOptions(optWidth = 30, optHeight = 30){
+    modalWidth = optWidth;
+    modalHeight = optHeight;
+    currentModal = "opt";
+
+    optionsWindow.classList.remove("d-none");
+    stopScreen.classList.remove("d-none");
+
+    resizeMessage()
+    checkModal()
+
 }

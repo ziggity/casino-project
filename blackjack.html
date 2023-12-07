@@ -14,10 +14,10 @@
   <!-- <link rel="stylesheet" href="./css/style.css"> -->
   <link rel="stylesheet" href="./css/davidtest.css">
   <!-- <link rel="stylesheet" href="./css/cardlayout.css"> -->
-  <link rel="stylesheet" href="./css/messagewindow.css">
+  <link rel="stylesheet" href="./css/modalwindow.css">
 
   <!-- For debugging --><!--Adds borders for visualization-->
-  <!-- <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/> -->
+  <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/>
   
 
 </head>
@@ -27,7 +27,7 @@
     <!-- Audio attaches to this element -->
     <div id="audioParent"></div>  
 
-    <!-- Hide the message box in the page header -->
+    <!-- Hide the modal message boxes in the page header -->
     <!-- Note: This code uses bootstrap -->
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -55,11 +55,49 @@
                         </div>
 
                     </div>
+                </div> <!--End of message box-->
+
+                <!-- This is the options window -->
+                <div class="row">
+                  <div class="col align-self-center text-center options-window fly-in-from-direction d-none">
+                    <!-- Option controls go in here -->
+                    <div class="row">
+                      <div class="col">
+                        <div class="row justify-content-end">
+                          <label class = "col-12" for="musicVolSlider">Music:
+                            <input type="range" id="musicVolSlider" min="0" max="1" step="0.01" value="1">
+                          </label>
+
+                          <label class = "col-12" for="musicVolSlider">Background:
+                            <input type="range" id="noiseVolSlider" min="0" max="1" step="0.01" value="1">
+                          </label>
+
+                          <label class = "col-12" for="musicVolSlider">Effects:
+                            <input type="range" id="soundVolSlider" min="0" max="1" step="0.01" value="1">
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Buttons: Ok/Cancel -->
+                    <div class="row justify-content-center pt-3">
+                      <div class="col-sm-6 align-self-center">
+                          <button class="btn btn-success" id="optionsOk">OK</button>
+                      </div>
+                      <div class="col-sm-6 align-self-center">
+                          <button class="btn btn-danger" id="optionsCancel">Cancel</button>
+                      </div>
+                  </div>
+                  
+                  </div>
                 </div>
+
             </div>
         </div>
     </div>
     <!-- End of message box container -->
+
+
   </header>
 
 
@@ -306,7 +344,7 @@
   <script src="jsfolder/david.js"></script>
   <script src="jsfolder/zach.js"></script>
   <script src="jsfolder/abiejs.js"></script>
-  <script src="jsfolder/messagewindow.js"></script>
+  <script src="jsfolder/modalwindow.js"></script>
   <script src="jsfolder/debug.js"></script>
   
   
