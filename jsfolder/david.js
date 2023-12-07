@@ -1,3 +1,32 @@
+function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound"){
+    const theSound = new Audio(url); 
+    theSound.id = idTag;
+    document.querySelector("#audioParent").appendChild(theSound);
+
+}
+function playSound(itemId = "sound", loop = false, seekPoint = 0) {
+    if (!audioOn) return;//Global variable for Sound On/Off
+
+    try {
+        document.querySelector(`#${itemId}`).currentTime = seekPoint;
+        document.querySelector(`#${itemId}`).play();
+        document.querySelector(`#${itemId}`).loop = loop;
+    } catch (e) {
+        console.log("Failed to play sound from " + itemId);
+    }
+
+}
+function stopSound(itemId = "sound") {
+    try {
+        document.querySelector(`#${itemId}`).pause();
+
+    } catch (e) {
+        console.log("Failed to play sound from " + itemId);
+    }
+
+}
+//OLD CODE BELOW:
+
 // const startButton = document.getElementById("dealCards")
 // const hitButton = document.getElementById("dealCards1")
 // const betButton = document.getElementById("dealCards2")

@@ -35,3 +35,16 @@ for (let i = 1; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
+let audioOn = false;
+
+const welcomeMessageHTML = 
+  `<div class="row">
+    <div class = "col">
+      Welcome to Nucamp Casino BlackJack!!
+      <br>
+      <img src="./imgs/Male-Dealer/Conceited2.png" class = "img-fluid"/>
+      <br>
+      I'm the dealer here... Just try and beat me!
+    </div>
+  </div>
+  `

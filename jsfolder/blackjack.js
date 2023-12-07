@@ -2,10 +2,16 @@ window.addEventListener("load", loadAssets);
 
 //Execution starts HERE:
 async function loadAssets() {
-
-
+  
+  addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3","backgroundMusic");
+  showMessage(welcomeMessageHTML,beginInteraction,null,30);
   enableButtons();
 }
+function beginInteraction(){
+  //Start background music
+  playSound("backgroundMusic",true);
+}
+
 
 //This function is called when player stays or busts
 async function blackjackDealerAI(data, autoLose = false) {
@@ -21,7 +27,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     console.log("You went over... YOU LOSE");
-    showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
+    showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`, reset)
     enableButtons();
     return;
   }
@@ -40,22 +46,22 @@ async function blackjackDealerAI(data, autoLose = false) {
   switch (true) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
-      showMessage(`You Win!!${scoreText}`);
+      showMessage(`You Win!!${scoreText}`,reset);
       console.log("Dealer went over... you win.");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
-      showMessage(`Dealer wins.${scoreText}`);
+      showMessage(`Dealer wins.${scoreText}`,reset);
       console.log("Dealer wins.");
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
-      showMessage(`Push.${scoreText}`);
+      showMessage(`Push.${scoreText}`,reset);
       console.log("Push");
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
-      showMessage(`You WIN!!${scoreText}`);
+      showMessage(`You WIN!!${scoreText}`,reset);
       console.log("Player wins!");
   }
   enableButtons()

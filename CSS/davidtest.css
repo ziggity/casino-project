@@ -1,3 +1,8 @@
+:root{
+  --card-width: 12vw;
+
+}
+
 .casino-logo{
   /* background: url("../imgs/Casino_Images.jfif");
   background-size: contain */
@@ -40,7 +45,7 @@ body {
   /* border: black solid 1px; */
 }
 .player-cards img{
-    width:10vw;
+    width:var(--card-width) ;
     /* transform: rotateX(6deg); */
 
 }
