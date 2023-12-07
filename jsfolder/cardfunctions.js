@@ -17,6 +17,16 @@ async function shuffleNewDeck(numDecks) {
   return data.deck_id;
 }
 
+//Shuffle the current deck. Return true/false
+async function shuffleCurrentDeck(deckId, returnCards = true) {
+  let remainString = "";
+  if (!returnCards) remainString = "?remaining=true"
+  const res = await fetch(DECK_URL + deckId + "/shuffle/" + remainString);
+  const data = await res.json();
+  if (data.success !== true){return false}
+  return data.deck_id;
+}
+
 //Returns an array of card objects containing cards dealt:
 async function extractCards(numCards, deckId) {
   if (numCards < 1){return false}

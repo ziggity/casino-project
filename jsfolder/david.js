@@ -56,6 +56,11 @@ function loadSounds(){
     addAudioToDOM("./audio/flipcard.mp3","flipSound");
     addAudioToDOM("./audio/allinpushchips1.mp3","chipsSound1");
 }
+
+function defaultValues(){
+    
+}
+
 //OLD CODE BELOW:
 
 // const startButton = document.getElementById("dealCards")

@@ -24,20 +24,58 @@ function clearMessage() {
     modalMode = false;
 }
 //Show message window and set focus
-function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth = 30, msgHeight = -1, showCancel = false) {
+function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth = 30, msgHeight = -1, msgType = "Ok") {
     modalWidth = msgWidth;
     modalHeight = msgHeight;
     yesCallback = yesFunc
     noCallback = noFunc
+    const yesButton = document.getElementById("messagebtnYes");
+    const noButton = document.getElementById("messagebtnNo");
 
     messageBox.classList.remove("d-none");
     stopScreen.classList.remove("d-none");
-    if (showCancel) {
-        document.querySelector(".noBtnCol").classList.remove("d-none");
-    } else {
-        document.querySelector(".noBtnCol").classList.add("d-none");
+
+    //Nested function to hide/show "No" button
+    function hideNoButton(hide = true){
+        if (hide) {
+            document.querySelector(".noBtnCol").classList.add("d-none");
+        } else{
+            document.querySelector(".noBtnCol").classList.remove("d-none");
+        }
+
     }
+    //Nested function to change type from Yes/No to Ok/Cancel
+    function OkCancelType(isOk =true){
+        if (isOk){
+            yesButton.innerText = "Ok";
+            noButton.innerText = "Cancel";
+        } else {
+            yesButton.innerText = "Yes";
+            noButton.innerText = "No";
+        }
+
+    }
+
+    //Set the message box type
+    switch (msgType){
+        case "OkCancel":
+            OkCancelType();
+            hideNoButton(false);
+            break;
+        case "Yes":
+            OkCancelType(false);
+            hideNoButton();
+        case "YesNo":
+            OkCancelType(false);
+            hideNoButton(false);
+            break;
+        default:
+            OkCancelType();
+            hideNoButton();
+    }
+
     resizeMessage();
+    //Message can contain HTML elements:
     document.querySelector("#messageToDisplay").innerHTML = message;
     modalMode = true;
     checkModal();

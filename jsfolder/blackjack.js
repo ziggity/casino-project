@@ -32,7 +32,8 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     console.log("You went over... YOU LOSE");
-    showMessage(`${dealerWinsMessageHTML}<br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`, reset)
+    showMessage(`${dealerWinsMessageHTML}Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`,
+               playAgain ,reset,80,80,"YesNo");
     enableButtons();
     return;
   }
@@ -277,6 +278,21 @@ async function hitMe() {
   }
   enableButtons();
 }
+
+//New Game
+function playAgain() {
+
+  //window.location.reload();
+  disableButtons()
+  shuffleCurrentDeck(currentTable.deckId,true);
+  for (i = 0; i <= currentTable.numPlayers; i++){
+    clearTable(i);
+    currentPlayer[i].clearLocalHand();
+    // currentPlayer[i].score = calculateScore(currentPlayer[i]);
+  }
+  setTable(currentTable.numPlayers,1,false);
+  enableButtons();
+}
 //Place Bet
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
@@ -300,12 +316,10 @@ async function redrawPlayerHand(playerIndex, numToAnimate = 0) {
   }
 }
 
-
-//New Game
-function reset() {
-
+function reset(){
+  showMessage("Goodbye!");
+  sleep(2000);
   window.location.reload();
-
 }
 
 //Fetch all player cards from pile and place in hand face up
@@ -317,9 +331,13 @@ async function revealPlayerHand(playerIndex = 0) {
 
 
 //Sets up the table for blackjack
-async function setTable(numPlayers, numDecks) {
+async function setTable(numPlayers, numDecks, newDeck = true) {
 
-  currentTable.deckId = await shuffleNewDeck(numDecks); //Get new deck
+  if (newDeck) {
+    currentTable.deckId = await shuffleNewDeck(numDecks); //Get new deck
+  } else{
+    await shuffleCurrentDeck(currentTable.deckId);
+  }
   currentTable.numPlayers = numPlayers; // Set the number of players
 
   //Since dealer plays, Player 0 will always be set as dealer

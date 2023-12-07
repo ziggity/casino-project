@@ -21,8 +21,8 @@ class Player {
         this.score = 0
         this.hand = [];
     }
-    shuffle(){
-        
+    clearLocalHand(){
+        this.hand=[];
     }
     
     placeBet(amount) {
@@ -50,6 +50,7 @@ class GameTable{
         this.numPlayers = numPlayers;
         this.deckId = deckId;
         this.moneyPot = 0;
+        this.currentRound = 0;
     }
 
 }
