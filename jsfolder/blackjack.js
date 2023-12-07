@@ -29,10 +29,11 @@ async function blackjackDealerAI(data, autoLose = false) {
   //drawDealerCards();
 
   //If player busts or other auto loss conditon, declare dealer winner
+  let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
+
   if (autoLose) {
     await sleep(1000); //wait a sec
-    console.log("You went over... YOU LOSE");
-    showMessage(`${dealerWinsMessageHTML}Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`,
+    showMessage(`${dealerWinsMessageHTML}${scoreText}<br>Play again?<br>`,
                playAgain ,reset,80,80,"YesNo");
     enableButtons();
     return;
@@ -47,28 +48,28 @@ async function blackjackDealerAI(data, autoLose = false) {
     thisDealer.score = calculateScore(thisDealer);
   }
   //------------------------------------------------------
-  let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
+  scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
   await sleep(1000); //wait a sec
   switch (true) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
-      showMessage(`${dealerLossMessageHTML}${scoreText}`,reset);
-      console.log("Dealer went over... you win.");
+      showMessage(`${dealerLossMessageHTML}${scoreText}`,
+                playAgain ,reset,80,80,"YesNo");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
-      showMessage(`${dealerWinsMessageHTML}${scoreText}`,reset);
-      console.log("Dealer wins.");
+      showMessage(`${dealerWinsMessageHTML}${scoreText}`,
+                playAgain ,reset,80,80,"YesNo");
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
-      showMessage(`Push.${scoreText}`,reset);
-      console.log("Push");
+      showMessage(`Push.${scoreText}`,
+                playAgain ,reset,80,80,"YesNo");
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
-      showMessage(`${dealerLossMessageHTML}${scoreText}`,reset);
-      console.log("Player wins!");
+      showMessage(`${dealerLossMessageHTML}${scoreText}`,
+                playAgain ,reset,80,80,"YesNo");
   }
   enableButtons()
 }
