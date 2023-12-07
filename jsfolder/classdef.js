@@ -20,6 +20,7 @@ class Player {
         this.playerNumber = playerNumber; //keep track of player index
         this.score = 0
         this.hand = [];
+        //localStorage.setItem("money", amount);
     }
     shuffle(){
         
@@ -28,6 +29,9 @@ class Player {
     placeBet(amount) {
         if (amount > 0 && amount <= this.money) {
           this.money -= amount;
+          //this is a way to update the value in local storage, setItem method.Just keeping score of player money at this time.
+          console.log("betting");
+          localStorage.setItem("money", amount);
           return amount;
         } else {
           console.log("Invalid bet amount or insufficient funds." + amount + ",", "current balance : " + this.money);

@@ -5,7 +5,7 @@ const playerScoreNow = document.getElementById("playerScoreNow");
 
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
-
+  
   currentTable.moneyPot += 50;
   return betAmountPlayer1;
 }
@@ -14,6 +14,7 @@ function playerPlacedBet(amount = 50, playerIndex = 1) {
 function allocateWinnings(playerMoney, totalMoneyInPot) {
   if (playerMoney == player0) {
     totalMoneyInPot.innerHTML = "Total money in the pot has " + 0;
+    localStorage.setItem(`${playerMoney}`, currentTable.moneyPot);
   }
 }
 //I need to work on this one a lot - tired now - brain not working.
@@ -157,4 +158,15 @@ function onSignIn(googleUser) {
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+
+let playerMoney = localStorage.getItem('playerMoney');
+if (playerMoney === null) {
+  Storage.setItem("playerMoney", 1000); 
+}
+
+function updatePlayerMoney(amount) {
+  playerMoney += amount;
+  localStorage.setItem('playerMoney', playerMoney);
 }

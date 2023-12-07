@@ -138,6 +138,7 @@ async function blackjackDealerAI(data, autoLose = false) {
         console.log("You went over... YOU LOSE");
         showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
         enableButtons();
+        updatePlayerMoney(-betAmount);
         return;
     } 
 
@@ -155,21 +156,26 @@ async function blackjackDealerAI(data, autoLose = false) {
     switch (true){
         case (thisDealer.score > MAX_SCORE):
             //Dealer goes over:
+            updatePlayerMoney(setTable.moneyPot);
             showMessage(`You Win!!${scoreText}`);
             console.log ("Dealer went over... you win.");
             break;
         case (thisDealer.score > currentPlayer[1].score):
             //Dealer beats player:
+            updatePlayerMoney(-setTable.moneyPot)
             showMessage(`Dealer wins.${scoreText}`);
             console.log("Dealer wins.");
             break;
         case (thisDealer.score === currentPlayer[1].score):
             //It's a tie!!
+            updatePlayerMoney(setTable.moneyPot);
             showMessage(`Push.${scoreText}`);
             console.log("Push");
             break;
         case (thisDealer.score < currentPlayer[1].score):
             //Player scores higher:
+
+            updatePlayerMoney(setTable.moneyPot);
             showMessage(`You WIN!!${scoreText}`);
             console.log ("Player wins!");
     }
@@ -192,7 +198,7 @@ function updateLabels() {
         nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
 
         scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
-        moneyLabel[i].textContent = `$${currentPlayer[i].money}`
+        moneyLabel[i].textContent = `$${currentPlayer[i].money}` // I need to change this for player to get the value of playerMoney from local storage
         nameLabel[i].textContent = `${currentPlayer[i].name}:`
     }
     document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
