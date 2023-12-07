@@ -1,15 +1,20 @@
 window.addEventListener("load", loadAssets);
 
+
 //Execution starts HERE:
 async function loadAssets() {
   
-  addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3","backgroundMusic");
-  showMessage(welcomeMessageHTML,beginInteraction,null,30);
-  enableButtons();
+  adjustCardSize();
+  loadSounds();
+
+
+  showMessage(welcomeMessageHTML,beginInteraction,null,80);
+  enableButtons() //Need a more precise way to control user clicks to stop breaking from click spamming
 }
 function beginInteraction(){
   //Start background music
-  playSound("backgroundMusic",true);
+  playSound("backgroundMusic",true,0,.3);
+  playSound("backgroundNoise",true);
 }
 
 
@@ -102,7 +107,7 @@ async function dealerHit() {
 //Disable buttons
 function disableButtons() {
   startButton.removeEventListener("click", gameStart);
-  startButton.removeEventListener("click", showPlayerChoices); //Abbie.js
+  // startButton.removeEventListener("click", showPlayerChoices); //Abbie.js
 
   hitButton.removeEventListener("click", hitMe);
   betButton.removeEventListener("click", playerPlacedBet);
@@ -119,7 +124,7 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
   try {
     const drawTarget = document.getElementById(targetId)
     const newCard = await loadImage(cardImage)
-
+    
     if (animateIt) {
       newCard.setAttribute("class", `${DEFAULT_CARD_CLASS}  flip-over`);
     } else {
@@ -127,7 +132,8 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
     }
     //console.log(newCard);
     drawTarget.appendChild(newCard);
-
+    positionCard(targetId,drawTarget.childNodes.length-1);
+    playSound("flipSound",false,.35);
   }
   catch (e) {
     console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
@@ -154,10 +160,12 @@ async function gameStart() {
   const numDecks = 1;
 
   //clear the table to remove whitespace nodes
+  disableButtons();
   clearTable(0);
   clearTable(1);
   // await sleep(500);
   setTable(numPlayers, numDecks);
+  enableButtons();
 
 }
 
@@ -272,7 +280,7 @@ async function hitMe() {
 //Place Bet
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
-
+  playSound("chipsSound1",false,.35)
   currentTable.moneyPot += 50;
   return betAmountPlayer1;
 }

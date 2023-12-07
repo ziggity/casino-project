@@ -1,5 +1,6 @@
 :root{
   --card-width: 12vw;
+  --card-height:17vw;
 
 }
 
@@ -45,15 +46,27 @@ body {
   /* border: black solid 1px; */
 }
 .player-cards img{
+    
     width:var(--card-width) ;
-    /* transform: rotateX(6deg); */
+    position: absolute;
+
 
 }
+.player-cards{
+  height: var(--card-height);
+}
+
+#player1 img:hover {
+  transition: transform .5s;
+  transform: translateY(-40%);
+}
+
 .flip-over {
    
     transform-style: preserve-3d;
     animation-name: flipX;
     animation-duration: .5s;
+    animation-iteration-count: initial;
 }
 
 
@@ -111,9 +124,9 @@ body {
   .btn-circle{
     cursor: pointer;
   }
-  .img-fluid:hover{
+  /* .img-fluid:hover{
     transform: scale(1.2)
-  }
+  } */
   .startMainGame.hide{
     /* z-index: -2; */
     transition: ease-in 0.5s;

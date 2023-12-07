@@ -1,14 +1,17 @@
+window.addEventListener("resize", adjustCardSize);
+
 function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound"){
     const theSound = new Audio(url); 
     theSound.id = idTag;
     document.querySelector("#audioParent").appendChild(theSound);
 
 }
-function playSound(itemId = "sound", loop = false, seekPoint = 0) {
+function playSound(itemId = "sound", loop = false, seekPoint = 0, vol = 1) {
     if (!audioOn) return;//Global variable for Sound On/Off
 
     try {
         document.querySelector(`#${itemId}`).currentTime = seekPoint;
+        document.querySelector(`#${itemId}`).volume = vol;
         document.querySelector(`#${itemId}`).play();
         document.querySelector(`#${itemId}`).loop = loop;
     } catch (e) {
@@ -24,6 +27,34 @@ function stopSound(itemId = "sound") {
         console.log("Failed to play sound from " + itemId);
     }
 
+}
+//Using absolute positions, slightly offsets positions of cards
+function positionCard(targetId, cardNumber){
+    const playerBox = document.getElementById(targetId)
+    playerBox.childNodes[cardNumber].style.left = ((5* cardNumber)+(20/currentTable.numPlayers)) + "vw"
+
+}
+
+function adjustCardSize(data, multiplier = 1){
+    let cardWidth = 12 * multiplier;
+    let cardHeight = 17 * multiplier;
+    let scaleUnit = "vw"
+    cardHeight = 25 * multiplier
+    cardWidth = cardHeight/1.4
+    scaleUnit = "vh"
+
+    if(document.querySelector("body").clientHeight <= document.querySelector("body").clientWidth){
+    }
+    document.documentElement.style.setProperty("--card-width",`${cardWidth}${scaleUnit}`);
+    document.documentElement.style.setProperty("--card-height",`${cardHeight}${scaleUnit}`);
+    
+}
+
+function loadSounds(){
+    addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3","backgroundMusic");
+    addAudioToDOM("./audio/casino-ambiance.mp3","backgroundNoise");
+    addAudioToDOM("./audio/flipcard.mp3","flipSound");
+    addAudioToDOM("./audio/allinpushchips1.mp3","chipsSound1");
 }
 //OLD CODE BELOW:
 

@@ -58,6 +58,7 @@ async function checkModal() {
 //Resize the modal background depending on window size
 function resizeMessage(data = null) {
     messageBox.style.width =  modalWidth + "vw";
+    messageBox.style.left = (50-(modalWidth/2)) + "vw"
     if (modalHeight !==-1) {
         messageBox.style.height = modalHeight + "vh";
     }else {

@@ -35,7 +35,7 @@ for (let i = 1; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
-let audioOn = false;
+let audioOn = true;
 
 const welcomeMessageHTML = 
   `<div class="row">
