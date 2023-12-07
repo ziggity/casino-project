@@ -29,11 +29,11 @@ async function blackjackDealerAI(data, autoLose = false) {
   //drawDealerCards();
 
   //If player busts or other auto loss conditon, declare dealer winner
-  let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
+  let scoreText = `Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`
 
   if (autoLose) {
     await sleep(1000); //wait a sec
-    showMessage(`${dealerWinsMessageHTML}${scoreText}<br>Play again?<br>`,
+    showMessage(`${dealerWinsMessageHTML}${scoreText}`,
                playAgain ,reset,80,80,"YesNo");
     enableButtons();
     return;
@@ -48,7 +48,7 @@ async function blackjackDealerAI(data, autoLose = false) {
     thisDealer.score = calculateScore(thisDealer);
   }
   //------------------------------------------------------
-  scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
+  scoreText = `Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`
   await sleep(1000); //wait a sec
   switch (true) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
@@ -63,7 +63,7 @@ async function blackjackDealerAI(data, autoLose = false) {
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
-      showMessage(`Push.${scoreText}`,
+      showMessage(`Push.${dealerPushMessageHTML}${scoreText}`,
                 playAgain ,reset,80,80,"YesNo");
       break;
     case (thisDealer.score < currentPlayer[1].score):

@@ -72,3 +72,15 @@ const dealerWinsMessageHTML = `
     </div>
   </div>
   `
+
+  const dealerPushMessageHTML = `
+  <div class="row">
+    <div class = "col">
+      Hmmm... Lucky!
+      <br>
+      <img src="./imgs/Male-Dealer/Angry2.png" class = "img-fluid"/>
+      <br>
+      How bout another round?
+    </div>
+  </div>
+  `
