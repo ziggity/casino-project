@@ -24,7 +24,7 @@
     background-color: var(--message-window-color);
     border-radius: 25px;
     margin: 1vw;
-    padding: 1em;
+    padding: 4em;
 
     position: fixed;
     max-height: 80vh;

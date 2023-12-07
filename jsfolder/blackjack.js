@@ -32,7 +32,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     console.log("You went over... YOU LOSE");
-    showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`, reset)
+    showMessage(`${dealerWinsMessageHTML}<br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`, reset)
     enableButtons();
     return;
   }
@@ -51,12 +51,12 @@ async function blackjackDealerAI(data, autoLose = false) {
   switch (true) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
-      showMessage(`You Win!!${scoreText}`,reset);
+      showMessage(`${dealerLossMessageHTML}${scoreText}`,reset);
       console.log("Dealer went over... you win.");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
-      showMessage(`Dealer wins.${scoreText}`,reset);
+      showMessage(`${dealerWinsMessageHTML}${scoreText}`,reset);
       console.log("Dealer wins.");
       break;
     case (thisDealer.score === currentPlayer[1].score):
@@ -66,7 +66,7 @@ async function blackjackDealerAI(data, autoLose = false) {
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
-      showMessage(`You WIN!!${scoreText}`,reset);
+      showMessage(`${dealerLossMessageHTML}${scoreText}`,reset);
       console.log("Player wins!");
   }
   enableButtons()

@@ -48,3 +48,27 @@ const welcomeMessageHTML =
     </div>
   </div>
   `
+
+const dealerWinsMessageHTML = `
+  <div class="row">
+    <div class = "col">
+      Looks like I take this round!!
+      <br>
+      <img src="./imgs/Male-Dealer/Conceited4.png" class = "img-fluid"/>
+      <br>
+      Better luck next round!
+    </div>
+  </div>
+  `
+
+  const dealerLossMessageHTML = `
+  <div class="row">
+    <div class = "col">
+      What? Impossible!!
+      <br>
+      <img src="./imgs/Male-Dealer/Angry1.png" class = "img-fluid"/>
+      <br>
+      I'll get you next time!
+    </div>
+  </div>
+  `
