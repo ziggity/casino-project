@@ -172,7 +172,7 @@ function generatePlayerRows(numPlayers) {
 
       <div class="row">
         <div class="col">
-          <h3 class="player-table-label">Player ${i}</h3>
+          <h3 class="player-table-label" id="player${i}name">Player ${i}</h3>
         </div>
       </div>
 
