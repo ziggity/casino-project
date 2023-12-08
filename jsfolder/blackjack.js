@@ -136,7 +136,7 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
     //console.log(newCard);
     drawTarget.appendChild(newCard);
     positionCard(targetId,drawTarget.childNodes.length-1);
-    playSound("flipSound",false,.35);
+    playSound("flipSound",false,.35,effectsVolume);
   }
   catch (e) {
     console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
@@ -298,7 +298,7 @@ function playAgain() {
 //Place Bet
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
-  playSound("chipsSound1",false,.35)
+  playSound("chipsSound1",false,.35,effectsVolume)
   currentTable.moneyPot += 50;
   return betAmountPlayer1;
 }
