@@ -5,9 +5,11 @@ const betButton = document.getElementById("dealCards2")
 const stayButton = document.getElementById("dealCards3")
 const dealerHitButton = document.getElementById("dealCards4")
 const resetButton = document.getElementById("dealCards6")
+const musicSlider = document.querySelector("#musicVolSlider");
+const noiseSlider = document.querySelector("#noiseVolSlider");
+const effectsSlider = document.querySelector("#soundVolSlider");
 
-
-const UNKNOWN_CARD = new Card("back",0,"NONE");
+const UNKNOWN_CARD = new Card("back", 0, "NONE");
 const DEFAULT_CARD_CLASS = "playing-card-img cardDealer img-fluid"
 const DEFAULT_MAX_SCORE = 21;
 
@@ -19,7 +21,7 @@ const PLAYER_SCORE_LABEL = [];
 const PLAYER_MONEY_LABEL = [];
 const PLAYER_NAME_LABEL = [];
 const TABLE_NAME_LABEL = []
-for (let i = 0; i < 6; i++){
+for (let i = 0; i < 6; i++) {
   PLAYER_SCORE_LABEL[i] = `playerScore${i}`;
   PLAYER_MONEY_LABEL[i] = `playerMoney${i}`;
   PLAYER_NAME_LABEL[i] = `playerName${i}`;
@@ -40,9 +42,9 @@ for (let i = 1; i < 6; i++) {
 let audioOn = true;
 let musicVolume = 1;
 let noiseVolume = 1;
-let effectsVolume =1;
+let effectsVolume = 1;
 
-const welcomeMessageHTML = 
+const welcomeMessageHTML =
   `<div class="row">
     <div class = "col">
       Welcome to Nucamp Casino BlackJack!!
@@ -66,7 +68,7 @@ const dealerWinsMessageHTML = `
   </div>
   `
 
-  const dealerLossMessageHTML = `
+const dealerLossMessageHTML = `
   <div class="row">
     <div class = "col">
       <h2>What? Impossible!!</h2>
@@ -78,7 +80,7 @@ const dealerWinsMessageHTML = `
   </div>
   `
 
-  const dealerPushMessageHTML = `
+const dealerPushMessageHTML = `
   <div class="row">
     <div class = "col">
       Hmmm... Lucky!

@@ -2,17 +2,17 @@ window.addEventListener("load", loadAssets);
 window.addEventListener("resize", adjustCardSize);
 
 //Need to introduce a way to call these through modal functions instead of here
-musicSlider.addEventListener("change",playerAdjustVolume);
-noiseSlider.addEventListener("change",playerAdjustVolume);
-effectsSlider.addEventListener("change",playerAdjustVolume);
+musicSlider.addEventListener("change", playerAdjustVolume);
+noiseSlider.addEventListener("change", playerAdjustVolume);
+effectsSlider.addEventListener("change", playerAdjustVolume);
 
 
 //Execution starts HERE:
 async function loadAssets() {
-  
+
   adjustCardSize();
   loadSounds();
-  showMessage(welcomeMessageHTML,beginInteraction,null,80);
+  showMessage(welcomeMessageHTML, beginInteraction, null, 80);
   enableButtons() //Need a more precise way to control user clicks to stop breaking from click spamming
   musicVolume = .1;
 
@@ -22,8 +22,8 @@ async function loadAssets() {
 //---------------------------------------------------------------//
 
 //Add a sound to the DOM
-function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound"){
-  const theSound = new Audio(url); 
+function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound") {
+  const theSound = new Audio(url);
   theSound.id = idTag;
   document.querySelector("#audioParent").appendChild(theSound);
 
@@ -31,29 +31,29 @@ function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "
 
 //Card size can be adjusted on the fly. Just call this function and pass a 
 //multiplier value. (Default is 1)
-function adjustCardSize(data, multiplier = 1){
+function adjustCardSize(data, multiplier = 1) {
   let cardHeight = 25 * multiplier
-  let cardWidth = cardHeight/1.4
+  let cardWidth = cardHeight / 1.4
   let scaleUnit = "vh"
 
-  if(document.querySelector("body").clientHeight <= document.querySelector("body").clientWidth){
+  if (document.querySelector("body").clientHeight <= document.querySelector("body").clientWidth) {
   }
-  document.documentElement.style.setProperty("--card-width",`${cardWidth}${scaleUnit}`);
-  document.documentElement.style.setProperty("--card-height",`${cardHeight}${scaleUnit}`);
-  
+  document.documentElement.style.setProperty("--card-width", `${cardWidth}${scaleUnit}`);
+  document.documentElement.style.setProperty("--card-height", `${cardHeight}${scaleUnit}`);
+
 }
 
 //set volume for a playing sound
 //Note, this will not affect a sound that is not currently playing since the sound
 //volume will be set when calling the playSound function. The volume will be passed through
 //global variables at time of call.
-function adjustVolume(itemId = "sound", vol = 1){
+function adjustVolume(itemId = "sound", vol = 1) {
   if (!audioOn) return;//Global variable for Sound On/Off
 
   try {
-      document.querySelector(`#${itemId}`).volume = vol;
+    document.querySelector(`#${itemId}`).volume = vol;
   } catch (e) {
-      console.log("Failed to adjust volume from " + itemId);
+    console.log("Failed to adjust volume from " + itemId);
   }
 
 }
@@ -61,11 +61,11 @@ function adjustVolume(itemId = "sound", vol = 1){
 //User has interacted with the window.
 //This is here because some browsers will block  ome functionality unless user
 //interacts with the window.
-function beginInteraction(){
+function beginInteraction() {
   //Start background music
   saveSoundValues(false);
-  playSound("backgroundMusic",true,0,musicVolume);
-  playSound("backgroundNoise",true,0,noiseVolume);
+  playSound("backgroundMusic", true, 0, musicVolume);
+  playSound("backgroundNoise", true, 0, noiseVolume);
 }
 
 //This function is called when player stays or busts
@@ -84,7 +84,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-               playAgain ,reset,80,-1,"YesNo");
+      playAgain, reset, 80, -1, "YesNo");
     enableButtons();
     return;
   }
@@ -104,22 +104,22 @@ async function blackjackDealerAI(data, autoLose = false) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-                playAgain ,reset,80,-1,"YesNo");
+        playAgain, reset, 80, -1, "YesNo");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
       showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-                playAgain ,reset,80,-1,"YesNo");
+        playAgain, reset, 80, -1, "YesNo");
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
       showMessage(`Push.${dealerPushMessageHTML}${scoreText}`,
-                playAgain ,reset,80,-1,"YesNo");
+        playAgain, reset, 80, -1, "YesNo");
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-                playAgain ,reset,80,-1,"YesNo");
+        playAgain, reset, 80, -1, "YesNo");
   }
   enableButtons()
 }
@@ -186,7 +186,7 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
   try {
     const drawTarget = document.getElementById(targetId)
     const newCard = await loadImage(cardImage)
-    
+
     if (animateIt) {
       newCard.setAttribute("class", `${DEFAULT_CARD_CLASS}  flip-over`);
     } else {
@@ -194,8 +194,8 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
     }
     //console.log(newCard);
     drawTarget.appendChild(newCard);
-    positionCard(targetId,drawTarget.childNodes.length-1);
-    playSound("flipSound",false,.35,effectsVolume);
+    positionCard(targetId, drawTarget.childNodes.length - 1);
+    playSound("flipSound", false, .35, effectsVolume);
   }
   catch (e) {
     console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
@@ -351,11 +351,11 @@ async function loadImage(src) {
 }
 
 //Load all sounds to the DOM
-function loadSounds(){
-  addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3","backgroundMusic");
-  addAudioToDOM("./audio/casino-ambiance.mp3","backgroundNoise");
-  addAudioToDOM("./audio/flipcard.mp3","flipSound");
-  addAudioToDOM("./audio/allinpushchips1.mp3","chipsSound1");
+function loadSounds() {
+  addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3", "backgroundMusic");
+  addAudioToDOM("./audio/casino-ambiance.mp3", "backgroundNoise");
+  addAudioToDOM("./audio/flipcard.mp3", "flipSound");
+  addAudioToDOM("./audio/allinpushchips1.mp3", "chipsSound1");
 }
 
 //For later functionality
@@ -372,28 +372,28 @@ function playAgain() {
 
   //window.location.reload();
   disableButtons()
-  shuffleCurrentDeck(currentTable.deckId,true);
-  for (i = 0; i <= currentTable.numPlayers; i++){
+  shuffleCurrentDeck(currentTable.deckId, true);
+  for (i = 0; i <= currentTable.numPlayers; i++) {
     clearTable(i);
     currentPlayer[i].clearLocalHand();
     // currentPlayer[i].score = calculateScore(currentPlayer[i]);
   }
-  setTable(currentTable.numPlayers,1,false);
+  setTable(currentTable.numPlayers, 1, false);
   enableButtons();
 }
 
 //Called when player adjusts volume options
-function playerAdjustVolume(){
-  adjustVolume("backgroundMusic",musicSlider.value);
-  adjustVolume("backgroundNoise",noiseSlider.value);
-  adjustVolume("flipSound",effectsSlider.value);
-  adjustVolume("chipsSound1",effectsSlider.value);
+function playerAdjustVolume() {
+  adjustVolume("backgroundMusic", musicSlider.value);
+  adjustVolume("backgroundNoise", noiseSlider.value);
+  adjustVolume("flipSound", effectsSlider.value);
+  adjustVolume("chipsSound1", effectsSlider.value);
 }
 
 //Place Bet
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
-  playSound("chipsSound1",false,.35,effectsVolume)
+  playSound("chipsSound1", false, .35, effectsVolume)
   currentTable.moneyPot += 50;
   return betAmountPlayer1;
 }
@@ -403,20 +403,20 @@ function playSound(itemId = "sound", loop = false, seekPoint = 0, vol = 1) {
   if (!audioOn) return;//Global variable for Sound On/Off
 
   try {
-      document.querySelector(`#${itemId}`).currentTime = seekPoint;
-      document.querySelector(`#${itemId}`).volume = vol;
-      document.querySelector(`#${itemId}`).play();
-      document.querySelector(`#${itemId}`).loop = loop;
+    document.querySelector(`#${itemId}`).currentTime = seekPoint;
+    document.querySelector(`#${itemId}`).volume = vol;
+    document.querySelector(`#${itemId}`).play();
+    document.querySelector(`#${itemId}`).loop = loop;
   } catch (e) {
-      console.log("Failed to play sound from " + itemId);
+    console.log("Failed to play sound from " + itemId);
   }
 
 }
 
 //Using absolute positions, slightly offsets positions of cards
-function positionCard(targetId, cardNumber){
+function positionCard(targetId, cardNumber) {
   const playerBox = document.getElementById(targetId)
-  playerBox.childNodes[cardNumber].style.left = ((5* cardNumber)+(20/currentTable.numPlayers)) + "vw"
+  playerBox.childNodes[cardNumber].style.left = ((5 * cardNumber) + (20 / currentTable.numPlayers)) + "vw"
 
 }
 
@@ -435,7 +435,7 @@ async function redrawPlayerHand(playerIndex, numToAnimate = 0) {
   }
 }
 
-function reset(){
+function reset() {
   showMessage("Goodbye!");
   sleep(2000);
   window.location.reload();
@@ -449,20 +449,20 @@ async function revealPlayerHand(playerIndex = 0) {
 }
 
 //Called when user clicks OK on options window
-function saveSoundValues(toSave = true){
-  if (toSave){
-      musicVolume = musicSlider.value;
-      noiseVolume = noiseSlider.value;
-      effectsVolume = effectsSlider.value;
+function saveSoundValues(toSave = true) {
+  if (toSave) {
+    musicVolume = musicSlider.value;
+    noiseVolume = noiseSlider.value;
+    effectsVolume = effectsSlider.value;
   } else {
-      musicSlider.value = musicVolume;
-      noiseSlider.value = noiseVolume;
-      effectsSlider.value=effectsVolume;
-      adjustVolume("backgroundMusic",musicVolume);
-      adjustVolume("backgroundNoise",noiseVolume);
-      adjustVolume("flipSound",effectsVolume);
-      adjustVolume("chipsSound1",effectsVolume);
-  
+    musicSlider.value = musicVolume;
+    noiseSlider.value = noiseVolume;
+    effectsSlider.value = effectsVolume;
+    adjustVolume("backgroundMusic", musicVolume);
+    adjustVolume("backgroundNoise", noiseVolume);
+    adjustVolume("flipSound", effectsVolume);
+    adjustVolume("chipsSound1", effectsVolume);
+
   }
 }
 
@@ -471,7 +471,7 @@ async function setTable(numPlayers, numDecks, newDeck = true) {
 
   if (newDeck) {
     currentTable.deckId = await shuffleNewDeck(numDecks); //Get new deck
-  } else{
+  } else {
     await shuffleCurrentDeck(currentTable.deckId);
   }
   currentTable.numPlayers = numPlayers; // Set the number of players
@@ -557,10 +557,10 @@ async function sleep(time) {
 //Stop playing sound
 function stopSound(itemId = "sound") {
   try {
-      document.querySelector(`#${itemId}`).pause();
+    document.querySelector(`#${itemId}`).pause();
 
   } catch (e) {
-      console.log("Failed to play sound from " + itemId);
+    console.log("Failed to play sound from " + itemId);
   }
 
 }
@@ -588,18 +588,18 @@ function updateLabels() {
   const tableNameLabel = [];
 
   for (let i = 0; i <= currentTable.numPlayers; i++) {
-    try{
+    try {
       scoreLabel[i] = document.getElementById(PLAYER_SCORE_LABEL[i]);
       moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
       nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
       tableNameLabel[i] = document.getElementById(TABLE_NAME_LABEL[i]);
-  
+
       scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
       moneyLabel[i].textContent = `$${currentPlayer[i].money}`
       nameLabel[i].textContent = `${currentPlayer[i].name}:`
       tableNameLabel[i].textContent = `${currentPlayer[i].name}:`
 
-    } catch(e){
+    } catch (e) {
 
     }
 
@@ -613,10 +613,10 @@ function updateLabels() {
 //----------------------//
 //**Under Construction**//
 //----------------------//
-function loadUserData(){
+function loadUserData() {
   let playerMoney = localStorage.getItem('playerMoney');
   if (playerMoney === null) {
-    Storage.setItem("playerMoney", 1000); 
+    Storage.setItem("playerMoney", 1000);
   }
 }
 
