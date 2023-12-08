@@ -4,10 +4,6 @@
 
 }
 
-.casino-logo{
-  /* background: url("../imgs/Casino_Images.jfif");
-  background-size: contain */
-}
 #gameInfo{
   position: sticky;
   top:0;
@@ -40,11 +36,9 @@ body {
 }
 
 .table-info-section{
-  /* background: url("../imgs/Casino_Label_1_edit.png"); Generated with AI ∙ December 2, 2023 at 3:31 PM */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-  /* border: black solid 1px; */
 }
 .player-cards img{
     
@@ -125,9 +119,6 @@ body {
   .btn-circle{
     cursor: pointer;
   }
-  /* .img-fluid:hover{
-    transform: scale(1.2)
-  } */
   .startMainGame.hide{
     /* z-index: -2; */
     transition: ease-in 0.5s;

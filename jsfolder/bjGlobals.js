@@ -12,7 +12,7 @@ const DEFAULT_CARD_CLASS = "playing-card-img cardDealer img-fluid"
 const DEFAULT_MAX_SCORE = 21;
 
 //These 'Labels' refer to the DOM elements where drawing occurs.
-//Set default values here:
+//These values are used by the draw functions to identify the draw target:
 const TABLE_LABEL = ['tableMoney'];
 const GAME_STATUS_LABEL = ['gameStatus1']
 const PLAYER_SCORE_LABEL = [];

@@ -1,4 +1,10 @@
 window.addEventListener("load", loadAssets);
+window.addEventListener("resize", adjustCardSize);
+
+//Need to introduce a way to call these through modal functions instead of here
+musicSlider.addEventListener("change",playerAdjustVolume);
+noiseSlider.addEventListener("change",playerAdjustVolume);
+effectsSlider.addEventListener("change",playerAdjustVolume);
 
 
 //Execution starts HERE:
@@ -11,13 +17,56 @@ async function loadAssets() {
   musicVolume = .1;
 
 }
+//---------------------------------------------------------------//
+//**FUNCTIONS BELOW THIS POINT ARE LISTED IN ALPHABETICAL ORDER**//
+//---------------------------------------------------------------//
+
+//Add a sound to the DOM
+function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound"){
+  const theSound = new Audio(url); 
+  theSound.id = idTag;
+  document.querySelector("#audioParent").appendChild(theSound);
+
+}
+
+//Card size can be adjusted on the fly. Just call this function and pass a 
+//multiplier value. (Default is 1)
+function adjustCardSize(data, multiplier = 1){
+  let cardHeight = 25 * multiplier
+  let cardWidth = cardHeight/1.4
+  let scaleUnit = "vh"
+
+  if(document.querySelector("body").clientHeight <= document.querySelector("body").clientWidth){
+  }
+  document.documentElement.style.setProperty("--card-width",`${cardWidth}${scaleUnit}`);
+  document.documentElement.style.setProperty("--card-height",`${cardHeight}${scaleUnit}`);
+  
+}
+
+//set volume for a playing sound
+//Note, this will not affect a sound that is not currently playing since the sound
+//volume will be set when calling the playSound function. The volume will be passed through
+//global variables at time of call.
+function adjustVolume(itemId = "sound", vol = 1){
+  if (!audioOn) return;//Global variable for Sound On/Off
+
+  try {
+      document.querySelector(`#${itemId}`).volume = vol;
+  } catch (e) {
+      console.log("Failed to adjust volume from " + itemId);
+  }
+
+}
+
+//User has interacted with the window.
+//This is here because some browsers will block  ome functionality unless user
+//interacts with the window.
 function beginInteraction(){
   //Start background music
   saveSoundValues(false);
   playSound("backgroundMusic",true,0,musicVolume);
   playSound("backgroundNoise",true,0,noiseVolume);
 }
-
 
 //This function is called when player stays or busts
 async function blackjackDealerAI(data, autoLose = false) {
@@ -100,6 +149,16 @@ function calculateScore(player = new Player) {
   }
 
   return score;
+}
+
+//Remove all card images from table, but does not clear players hands
+function clearTable(playerIndex) {
+
+  const drawTarget = document.getElementById(`player${playerIndex}`)
+  while (drawTarget.firstChild) {
+    drawTarget.removeChild(drawTarget.firstChild)
+  }
+
 }
 
 //Dealer takes a hit... (Not the 420 type)
@@ -281,6 +340,33 @@ async function hitMe() {
   enableButtons();
 }
 
+//Load any given image into the DOM and wait for response
+async function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  })
+}
+
+//Load all sounds to the DOM
+function loadSounds(){
+  addAudioToDOM("./audio/jazzy-band-Monument_Music.mp3","backgroundMusic");
+  addAudioToDOM("./audio/casino-ambiance.mp3","backgroundNoise");
+  addAudioToDOM("./audio/flipcard.mp3","flipSound");
+  addAudioToDOM("./audio/allinpushchips1.mp3","chipsSound1");
+}
+
+//For later functionality
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
 //New Game
 function playAgain() {
 
@@ -295,12 +381,43 @@ function playAgain() {
   setTable(currentTable.numPlayers,1,false);
   enableButtons();
 }
+
+//Called when player adjusts volume options
+function playerAdjustVolume(){
+  adjustVolume("backgroundMusic",musicSlider.value);
+  adjustVolume("backgroundNoise",noiseSlider.value);
+  adjustVolume("flipSound",effectsSlider.value);
+  adjustVolume("chipsSound1",effectsSlider.value);
+}
+
 //Place Bet
 function playerPlacedBet(amount = 50, playerIndex = 1) {
   const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
   playSound("chipsSound1",false,.35,effectsVolume)
   currentTable.moneyPot += 50;
   return betAmountPlayer1;
+}
+
+//Play a sound that has been attached to the DOM
+function playSound(itemId = "sound", loop = false, seekPoint = 0, vol = 1) {
+  if (!audioOn) return;//Global variable for Sound On/Off
+
+  try {
+      document.querySelector(`#${itemId}`).currentTime = seekPoint;
+      document.querySelector(`#${itemId}`).volume = vol;
+      document.querySelector(`#${itemId}`).play();
+      document.querySelector(`#${itemId}`).loop = loop;
+  } catch (e) {
+      console.log("Failed to play sound from " + itemId);
+  }
+
+}
+
+//Using absolute positions, slightly offsets positions of cards
+function positionCard(targetId, cardNumber){
+  const playerBox = document.getElementById(targetId)
+  playerBox.childNodes[cardNumber].style.left = ((5* cardNumber)+(20/currentTable.numPlayers)) + "vw"
+
 }
 
 //Redraws the cards and place a flip animation on a specific number of cards
@@ -331,6 +448,23 @@ async function revealPlayerHand(playerIndex = 0) {
   await redrawPlayerHand(playerIndex, numToAnimate);
 }
 
+//Called when user clicks OK on options window
+function saveSoundValues(toSave = true){
+  if (toSave){
+      musicVolume = musicSlider.value;
+      noiseVolume = noiseSlider.value;
+      effectsVolume = effectsSlider.value;
+  } else {
+      musicSlider.value = musicVolume;
+      noiseSlider.value = noiseVolume;
+      effectsSlider.value=effectsVolume;
+      adjustVolume("backgroundMusic",musicVolume);
+      adjustVolume("backgroundNoise",noiseVolume);
+      adjustVolume("flipSound",effectsVolume);
+      adjustVolume("chipsSound1",effectsVolume);
+  
+  }
+}
 
 //Sets up the table for blackjack
 async function setTable(numPlayers, numDecks, newDeck = true) {
@@ -420,6 +554,17 @@ async function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time))
 };
 
+//Stop playing sound
+function stopSound(itemId = "sound") {
+  try {
+      document.querySelector(`#${itemId}`).pause();
+
+  } catch (e) {
+      console.log("Failed to play sound from " + itemId);
+  }
+
+}
+
 //Just a function for testing
 function testOutThis() {
   showOptions(80);
@@ -462,23 +607,20 @@ function updateLabels() {
   document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
 }
 
-//Load any given image into the DOM and wait for response
-async function loadImage(src) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  })
-}
 
-//Remove all card images from table, but does not clear players hands
-function clearTable(playerIndex) {
 
-  const drawTarget = document.getElementById(`player${playerIndex}`)
-  while (drawTarget.firstChild) {
-    drawTarget.removeChild(drawTarget.firstChild)
+
+//----------------------//
+//**Under Construction**//
+//----------------------//
+function loadUserData(){
+  let playerMoney = localStorage.getItem('playerMoney');
+  if (playerMoney === null) {
+    Storage.setItem("playerMoney", 1000); 
   }
-
 }
 
+function updatePlayerMoney(amount) {
+  playerMoney += amount;
+  localStorage.setItem('playerMoney', playerMoney);
+}

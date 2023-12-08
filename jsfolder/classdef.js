@@ -43,11 +43,9 @@ class Dealer extends Player{
     constructor(name = "Dealer", diffLevel = "novice"){
         super(name, true, 0, 0);
         this.diffLevel = diffLevel;
-        // this.money = money;
-        // this.wins = wins;
-        // this.hand = [];
     }
 }
+
 class GameTable{
     constructor(gameType, numPlayers = 1, deckId){
         this.gameType = gameType
