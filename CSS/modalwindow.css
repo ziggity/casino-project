@@ -2,6 +2,7 @@
 
     --stop-screen-color: rgba(0,0,0,.6);
     --message-window-color:  rgba(0,0,0,.8);
+    --options-window-font-color: yellow;
 }
 /* From here down is needed for message box */
 @keyframes fly-in-direction{
@@ -35,6 +36,7 @@
 }
 .options-window{
     background-color: var(--message-window-color);
+    color: var(--options-window-font-color);
     border-radius: 25px;
     margin: 1vw;
     padding: 4em;
@@ -58,8 +60,13 @@
     top: 0;
 }
 
+#optionsOk, #optionsCancel{
+    min-width: 70px
+}
 
-
+#messagebtnYes, #messagebtnNo{
+    min-width: 70px
+}
 #messageToDisplay{
     color: yellow;
     object-fit: contain;

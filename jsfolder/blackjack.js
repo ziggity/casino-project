@@ -6,15 +6,16 @@ async function loadAssets() {
   
   adjustCardSize();
   loadSounds();
-
-
   showMessage(welcomeMessageHTML,beginInteraction,null,80);
   enableButtons() //Need a more precise way to control user clicks to stop breaking from click spamming
+  musicVolume = .1;
+
 }
 function beginInteraction(){
   //Start background music
-  playSound("backgroundMusic",true,0,.3);
-  playSound("backgroundNoise",true);
+  saveSoundValues(false);
+  playSound("backgroundMusic",true,0,musicVolume);
+  playSound("backgroundNoise",true,0,noiseVolume);
 }
 
 
@@ -34,7 +35,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-               playAgain ,reset,80,80,"YesNo");
+               playAgain ,reset,80,-1,"YesNo");
     enableButtons();
     return;
   }
@@ -54,22 +55,22 @@ async function blackjackDealerAI(data, autoLose = false) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-                playAgain ,reset,80,80,"YesNo");
+                playAgain ,reset,80,-1,"YesNo");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
       showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-                playAgain ,reset,80,80,"YesNo");
+                playAgain ,reset,80,-1,"YesNo");
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
       showMessage(`Push.${dealerPushMessageHTML}${scoreText}`,
-                playAgain ,reset,80,80,"YesNo");
+                playAgain ,reset,80,-1,"YesNo");
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-                playAgain ,reset,80,80,"YesNo");
+                playAgain ,reset,80,-1,"YesNo");
   }
   enableButtons()
 }
@@ -421,7 +422,7 @@ async function sleep(time) {
 
 //Just a function for testing
 function testOutThis() {
-  showOptions(80,80);
+  showOptions(80);
   // redrawPlayerHand(0,5);
   // revealPlayerHand(1);
 }
@@ -439,15 +440,24 @@ function updateLabels() {
   const scoreLabel = [];
   const moneyLabel = [];
   const nameLabel = [];
+  const tableNameLabel = [];
 
   for (let i = 0; i <= currentTable.numPlayers; i++) {
-    scoreLabel[i] = document.getElementById(PLAYER_SCORE_LABEL[i]);
-    moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
-    nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
+    try{
+      scoreLabel[i] = document.getElementById(PLAYER_SCORE_LABEL[i]);
+      moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
+      nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
+      tableNameLabel[i] = document.getElementById(TABLE_NAME_LABEL[i]);
+  
+      scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
+      moneyLabel[i].textContent = `$${currentPlayer[i].money}`
+      nameLabel[i].textContent = `${currentPlayer[i].name}:`
+      tableNameLabel[i].textContent = `${currentPlayer[i].name}:`
 
-    scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
-    moneyLabel[i].textContent = `$${currentPlayer[i].money}`
-    nameLabel[i].textContent = `${currentPlayer[i].name}:`
+    } catch(e){
+
+    }
+
   }
   document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
 }

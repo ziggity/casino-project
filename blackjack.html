@@ -8,16 +8,19 @@
 
   <!-- Bootstrap stylesheet CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
 
-  <!-- <link rel="stylesheet" href="./css/abiecss.css"> -->
-  <!-- <link rel="stylesheet" href="./css/style.css"> -->
+  <!--Font Awesome CDN library-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
   <link rel="stylesheet" href="./css/davidtest.css">
-  <!-- <link rel="stylesheet" href="./css/cardlayout.css"> -->
   <link rel="stylesheet" href="./css/modalwindow.css">
 
   <!-- For debugging --><!--Adds borders for visualization-->
-  <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/>
+  <!-- <link rel="stylesheet" href="./css/bootstrap-borders-styles.css"/> -->
   
 
 </head>
@@ -46,10 +49,10 @@
                         </div>
                         <!-- Buttons: "No/Cancel button is hidden by default" -->
                         <div class="row justify-content-center pt-3">
-                            <div class="col-sm-6 align-self-center yesBtnCol">
+                            <div class="col-sm-4 align-self-center yesBtnCol">
                                 <button class="btn btn-success" id="messagebtnYes">OK</button>
                             </div>
-                            <div class="col-sm-6 align-self-center noBtnCol">
+                            <div class="col-sm-4 align-self-center noBtnCol">
                                 <button class="btn btn-danger" id="messagebtnNo">Cancel</button>
                             </div>
                         </div>
@@ -60,31 +63,52 @@
                 <!-- This is the options window -->
                 <div class="row">
                   <div class="col align-self-center text-center options-window fly-in-from-direction d-none">
+                    <div class="row">
+                      <div class="col text-center py-4">
+                        <h2><i class="fa-solid fa-gears"></i> Options</h2>
+                      </div>
+                    </div>
+                    
                     <!-- Option controls go in here -->
                     <div class="row">
-                      <div class="col">
+                      <div class="col" id="optControlBox">
                         <div class="row justify-content-end">
-                          <label class = "col-12" for="musicVolSlider">Music:
-                            <input type="range" id="musicVolSlider" min="0" max="1" step="0.01" value="1">
-                          </label>
-
-                          <label class = "col-12" for="musicVolSlider">Background:
-                            <input type="range" id="noiseVolSlider" min="0" max="1" step="0.01" value="1">
-                          </label>
-
-                          <label class = "col-12" for="musicVolSlider">Effects:
-                            <input type="range" id="soundVolSlider" min="0" max="1" step="0.01" value="1">
-                          </label>
+                          <label class = "col-12" for="musicVolSlider"><i class="fa-solid fa-music"></i> Music</label>
                         </div>
+                        <div class="row">
+                          <div class="col">
+                            <input type="range" id="musicVolSlider" min="0" max="1" step="0.01" value="1">
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <label class = "col-12" for="musicVolSlider"><i class="fa-solid fa-music"></i> Background</label>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <input type="range" id="noiseVolSlider" min="0" max="1" step="0.01" value="1">
+                          </div>
+                        </div>
+                        
+                        
+                        <div class="row">
+                          <label class = "col-12" for="musicVolSlider"><i class="fa-solid fa-volume-high"></i> Effects</label>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <input type="range" id="soundVolSlider" min="0" max="1" step="0.01" value="1">
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 
                     <!-- Buttons: Ok/Cancel -->
                     <div class="row justify-content-center pt-3">
-                      <div class="col-sm-6 align-self-center">
+                      <div class="col-sm-2 align-self-center">
                           <button class="btn btn-success" id="optionsOk">OK</button>
                       </div>
-                      <div class="col-sm-6 align-self-center">
+                      <div class="col-sm-2 align-self-center">
                           <button class="btn btn-danger" id="optionsCancel">Cancel</button>
                       </div>
                   </div>
@@ -175,7 +199,7 @@
             <button type="button" class="btn btn-danger btn-sm btn3d" id="dealCards3"
              >Stay</button>
             <button type="button" class="btn btn-info btn-sm btn3d" id="dealCards4"
-              > Dealer Hit</button>
+              > <i class="fa-solid fa-gear"></i> </button>
             <button type="button" class="btn3d btn btn-default btn-sm" id="dealCards6">Start
               Over</button>
   
@@ -253,7 +277,7 @@
   
                   <div class="row">
                     <div class="col">
-                      <h3 class="player-table-label">Player1</h3>
+                      <h3 class="player-table-label" id="player1name">Player1</h3>
                     </div>
                   </div>
   
@@ -340,11 +364,11 @@
   <script src="jsfolder/classdef.js"></script>
   <script src="jsfolder/cardfunctions.js"></script>
   <script src="jsfolder/blackjackglobaldefs.js"></script>
+  <script src="jsfolder/modalwindow.js"></script>
   <script src="jsfolder/blackjack.js"></script>
   <script src="jsfolder/david.js"></script>
   <script src="jsfolder/zach.js"></script>
   <script src="jsfolder/abiejs.js"></script>
-  <script src="jsfolder/modalwindow.js"></script>
   <script src="jsfolder/debug.js"></script>
   
   

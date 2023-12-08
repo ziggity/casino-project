@@ -1,7 +1,18 @@
-//Code for the message box
+//Code for the modal boxes
 const messageBox = document.querySelector(".message-window");
 const stopScreen = document.querySelector(".stop-screen");
+const msgYesButton = document.querySelector("#messagebtnYes");
+const msgNoButton = document.querySelector("#messagebtnNo");
+
+
 const optionsWindow = document.querySelector(".options-window");
+const optOkButton = document.querySelector("#optionsOk");
+const optCancelButton = document.querySelector("#optionsCancel");
+const musicSlider = document.querySelector("#musicVolSlider");
+const noiseSlider = document.querySelector("#noiseVolSlider");
+const effectsSlider = document.querySelector("#soundVolSlider");
+
+
 
 let modalMode = false;
 let modalWidth = 30;
@@ -11,10 +22,10 @@ let currentModal = "msg";
 let yesCallback = doNothing;
 let noCallback = doNothing;
 
-document.querySelector("#messagebtnYes").addEventListener("click", (event) => { yesClick(event, yesCallback) });
-document.querySelector("#messagebtnNo").addEventListener("click", (event) => { noClick(event, noCallback) });
-document.querySelector("#optionsOk").addEventListener("click", clearMessage);
-document.querySelector("#optionsCancel").addEventListener("click", clearMessage);
+msgYesButton.addEventListener("click", (event) => { msgYesClick(event, yesCallback) });
+msgNoButton.addEventListener("click", (event) => { msgNoClick(event, noCallback) });
+optOkButton.addEventListener("click", optOkClick);
+optCancelButton.addEventListener("click", optCancelClick);
 
 
 window.addEventListener("resize", resizeMessage);
@@ -36,8 +47,6 @@ function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth 
     currentModal = "msg";
     yesCallback = yesFunc
     noCallback = noFunc
-    const yesButton = document.getElementById("messagebtnYes");
-    const noButton = document.getElementById("messagebtnNo");
 
     messageBox.classList.remove("d-none");
     stopScreen.classList.remove("d-none");
@@ -54,11 +63,11 @@ function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth 
     //Nested function to change type from Yes/No to Ok/Cancel
     function OkCancelType(isOk =true){
         if (isOk){
-            yesButton.innerText = "Ok";
-            noButton.innerText = "Cancel";
+            msgYesButton.innerText = "Ok";
+            msgNoButton.innerText = "Cancel";
         } else {
-            yesButton.innerText = "Yes";
-            noButton.innerText = "No";
+            msgYesButton.innerText = "Yes";
+            msgNoButton.innerText = "No";
         }
 
     }
@@ -88,15 +97,26 @@ function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth 
     checkModal();
 }
 
+function showOptions(optWidth = 30, optHeight = -1){
+    modalWidth = optWidth;
+    modalHeight = optHeight;
+    currentModal = "opt";
+
+    optionsWindow.classList.remove("d-none");
+    stopScreen.classList.remove("d-none");
+
+    resizeMessage();
+    checkModal();
+
+}
+
 //Ensure focus stays on window
 async function checkModal() {
-    const yesButton = document.getElementById("messagebtnYes");
-    const noButton = document.getElementById("messagebtnNo");
     
     while (modalMode) {
         if (currentModal = "msg"){
-            if ((!yesButton.matches(":focus")) && (!noButton.matches(":focus"))) {
-                document.querySelector("#messagebtnYes").focus()
+            if ((!msgYesButton.matches(":focus")) && (!msgNoButton.matches(":focus"))) {
+                msgYesButton.focus()
             }
             await sleep(100);
          } else {
@@ -128,12 +148,12 @@ function resizeMessage(data = null) {
 }
 
 //User clicks Yes/Okay
-function yesClick(data, callback = doNothing) {
+function msgYesClick(data, callback = doNothing) {
     callback();
     clearMessage();
 }
 //User clicks No/Cancel
-function noClick(data, callback = doNothing) {
+function msgNoClick(data, callback = doNothing) {
     callback();
     clearMessage();
 }
@@ -141,15 +161,12 @@ function doNothing() {
     return;
 }
 
-function showOptions(optWidth = 30, optHeight = 30){
-    modalWidth = optWidth;
-    modalHeight = optHeight;
-    currentModal = "opt";
+function optOkClick(data){
+    saveSoundValues(true);
+    clearMessage();
+}
 
-    optionsWindow.classList.remove("d-none");
-    stopScreen.classList.remove("d-none");
-
-    resizeMessage()
-    checkModal()
-
+function optCancelClick(data){
+    saveSoundValues(false);
+    clearMessage();
 }

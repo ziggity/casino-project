@@ -1,4 +1,8 @@
 window.addEventListener("resize", adjustCardSize);
+musicSlider.addEventListener("change",playerAdjustVolume);
+noiseSlider.addEventListener("change",playerAdjustVolume);
+effectsSlider.addEventListener("change",playerAdjustVolume);
+
 
 function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "sound"){
     const theSound = new Audio(url); 
@@ -29,6 +33,30 @@ function stopSound(itemId = "sound") {
 
 }
 
+function playerAdjustVolume(){
+    adjustVolume("backgroundMusic",musicSlider.value);
+    adjustVolume("backgroundNoise",noiseSlider.value);
+    adjustVolume("flipSound",effectsSlider.value);
+    adjustVolume("chipsSound1",effectsSlider.value);
+}
+
+function saveSoundValues(toSave = true){
+    if (toSave){
+        musicVolume = musicSlider.value;
+        noiseVolume = noiseSlider.value;
+        effectsVolume = effectsSlider.value;
+    } else {
+        musicSlider.value = musicVolume;
+        noiseSlider.value = noiseVolume;
+        effectsSlider.value=effectsVolume;
+        adjustVolume("backgroundMusic",musicVolume);
+        adjustVolume("backgroundNoise",noiseVolume);
+        adjustVolume("flipSound",effectsVolume);
+        adjustVolume("chipsSound1",effectsVolume);
+    
+    }
+}
+
 function adjustVolume(itemId = "sound", vol = 1){
     if (!audioOn) return;//Global variable for Sound On/Off
 
@@ -47,12 +75,9 @@ function positionCard(targetId, cardNumber){
 }
 
 function adjustCardSize(data, multiplier = 1){
-    let cardWidth = 12 * multiplier;
-    let cardHeight = 17 * multiplier;
-    let scaleUnit = "vw"
-    cardHeight = 25 * multiplier
-    cardWidth = cardHeight/1.4
-    scaleUnit = "vh"
+    let cardHeight = 25 * multiplier
+    let cardWidth = cardHeight/1.4
+    let scaleUnit = "vh"
 
     if(document.querySelector("body").clientHeight <= document.querySelector("body").clientWidth){
     }

@@ -18,10 +18,12 @@ const GAME_STATUS_LABEL = ['gameStatus1']
 const PLAYER_SCORE_LABEL = [];
 const PLAYER_MONEY_LABEL = [];
 const PLAYER_NAME_LABEL = [];
+const TABLE_NAME_LABEL = []
 for (let i = 0; i < 6; i++){
   PLAYER_SCORE_LABEL[i] = `playerScore${i}`;
   PLAYER_MONEY_LABEL[i] = `playerMoney${i}`;
   PLAYER_NAME_LABEL[i] = `playerName${i}`;
+  TABLE_NAME_LABEL[i] = `player${i}name`
 }
 
 //Create classes for players, dealer and Table
@@ -36,6 +38,9 @@ for (let i = 1; i < 6; i++) {
 }
 
 let audioOn = true;
+let musicVolume = 1;
+let noiseVolume = 1;
+let effectsVolume =1;
 
 const welcomeMessageHTML = 
   `<div class="row">
@@ -52,7 +57,7 @@ const welcomeMessageHTML =
 const dealerWinsMessageHTML = `
   <div class="row">
     <div class = "col">
-      Looks like I take this round!!
+      <h2>Looks like I take this round!!</h2>
       <br>
       <img src="./imgs/Male-Dealer/Conceited4.png" class = "img-fluid"/>
       <br>
@@ -64,7 +69,7 @@ const dealerWinsMessageHTML = `
   const dealerLossMessageHTML = `
   <div class="row">
     <div class = "col">
-      What? Impossible!!
+      <h2>What? Impossible!!</h2>
       <br>
       <img src="./imgs/Male-Dealer/Angry1.png" class = "img-fluid"/>
       <br>
