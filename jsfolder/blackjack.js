@@ -1,7 +1,7 @@
+//Note: The rest of the event listners are listed inside enableButtons()/disableButtons()//
 window.addEventListener("load", loadAssets);
 window.addEventListener("resize", adjustCardSize);
 
-//Need to introduce a way to call these through modal functions instead of here
 musicSlider.addEventListener("change", playerAdjustVolume);
 noiseSlider.addEventListener("change", playerAdjustVolume);
 effectsSlider.addEventListener("change", playerAdjustVolume);
@@ -66,6 +66,7 @@ function beginInteraction() {
   saveSoundValues(false);
   playSound("backgroundMusic", true, 0, musicVolume);
   playSound("backgroundNoise", true, 0, noiseVolume);
+  
 }
 
 //This function is called when player stays or busts
