@@ -233,49 +233,49 @@ function defaultValues(){
 //     currentPlayer[1].score = calculateScore(currentPlayer[1]);
 //     //drawDealerCards();
 
-    //If player busts or other auto loss conditon, declare dealer winner
-    if (autoLose) {
-        await sleep(1000); //wait a sec
-        console.log("You went over... YOU LOSE");
-        showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
-        enableButtons();
-        return;
-    } 
+//     //If player busts or other auto loss conditon, declare dealer winner
+//     if (autoLose) {
+//         await sleep(1000); //wait a sec
+//         console.log("You went over... YOU LOSE");
+//         showMessage(`Player Bust...<br>You Lose<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`)
+//         enableButtons();
+//         return;
+//     } 
 
-    //THIS IS WHERE ALL OF THE DEALER LOGIC WILL GO...
-    //-----------------------------------------------------
-    while (thisDealer.score < currentPlayer[1].score){
-        await sleep(500); //include a timer to slow down tasks
-        await dealerHit();
-        //drawDealerCards();
-        thisDealer.score = calculateScore(thisDealer);
-    }
-    //------------------------------------------------------
-    let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
-    await sleep(1000); //wait a sec
-    switch (true){
-        case (thisDealer.score > MAX_SCORE):
-            //Dealer goes over:
-            showMessage(`You Win!!${scoreText}`);
-            console.log ("Dealer went over... you win.");
-            break;
-        case (thisDealer.score > currentPlayer[1].score):
-            //Dealer beats player:
-            showMessage(`Dealer wins.${scoreText}`);
-            console.log("Dealer wins.");
-            break;
-        case (thisDealer.score === currentPlayer[1].score):
-            //It's a tie!!
-            showMessage(`Push.${scoreText}`);
-            console.log("Push");
-            break;
-        case (thisDealer.score < currentPlayer[1].score):
-            //Player scores higher:
-            showMessage(`You WIN!!${scoreText}`);
-            console.log ("Player wins!");
-    }
-    enableButtons()
-}
+//     //THIS IS WHERE ALL OF THE DEALER LOGIC WILL GO...
+//     //-----------------------------------------------------
+//     while (thisDealer.score < currentPlayer[1].score){
+//         await sleep(500); //include a timer to slow down tasks
+//         await dealerHit();
+//         //drawDealerCards();
+//         thisDealer.score = calculateScore(thisDealer);
+//     }
+//     //------------------------------------------------------
+//     let scoreText = `<br><br>Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}`
+//     await sleep(1000); //wait a sec
+//     switch (true){
+//         case (thisDealer.score > MAX_SCORE):
+//             //Dealer goes over:
+//             showMessage(`You Win!!${scoreText}`);
+//             console.log ("Dealer went over... you win.");
+//             break;
+//         case (thisDealer.score > currentPlayer[1].score):
+//             //Dealer beats player:
+//             showMessage(`Dealer wins.${scoreText}`);
+//             console.log("Dealer wins.");
+//             break;
+//         case (thisDealer.score === currentPlayer[1].score):
+//             //It's a tie!!
+//             showMessage(`Push.${scoreText}`);
+//             console.log("Push");
+//             break;
+//         case (thisDealer.score < currentPlayer[1].score):
+//             //Player scores higher:
+//             showMessage(`You WIN!!${scoreText}`);
+//             console.log ("Player wins!");
+//     }
+//     enableButtons()
+// }
 
 // //Dealer takes a hit... (Not the 420 type)
 // async function dealerHit(){
@@ -292,12 +292,12 @@ function defaultValues(){
 //         moneyLabel[i] = document.getElementById(PLAYER_MONEY_LABEL[i]);
 //         nameLabel[i] = document.getElementById(PLAYER_NAME_LABEL[i]);
 
-        scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
-        moneyLabel[i].textContent = `$${currentPlayer[i].money}`
-        nameLabel[i].textContent = `${currentPlayer[i].name}:`
-    }
-    document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
-}
+//         scoreLabel[i].textContent = `Score: ${calculateScore(currentPlayer[i])}`
+//         moneyLabel[i].textContent = `$${currentPlayer[i].money}`
+//         nameLabel[i].textContent = `${currentPlayer[i].name}:`
+//     }
+//     document.getElementById(TABLE_LABEL[0]).textContent = `Pot: $${currentTable.moneyPot}`;
+// }
 
 // async function updateDisplay(doUpdate = true) {
 //     while (doUpdate) {
