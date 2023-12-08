@@ -151,6 +151,8 @@ function resizeMessage(data = null) {
 function msgYesClick(data, callback = doNothing) {
     callback();
     clearMessage();
+    document.getElementById('dealCards').click();
+    // enableButtons();
 }
 //User clicks No/Cancel
 function msgNoClick(data, callback = doNothing) {

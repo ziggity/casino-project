@@ -166,7 +166,9 @@ if (playerMoney === null) {
   Storage.setItem("playerMoney", 1000); 
 }
 
-function updatePlayerMoney(amount) {
+function updatePlayerMoney(amount, tablePot) {
   playerMoney += amount;
   localStorage.setItem('playerMoney', playerMoney);
+  localStorage.setItem("tablePot", tablePot);
+  console.log("player1 money: ", playerMoney, "table pot: ", tablePot);
 }
