@@ -154,13 +154,13 @@ function resizeMessage(data = null) {
 
 //Message box Yes/Ok
 function msgYesClick(data, callback = doNothing) {
-    callback();
     clearMessage();
+    callback();
 }
 //Message box No/Cancel
 function msgNoClick(data, callback = doNothing) {
-    callback();
     clearMessage();
+    callback();
 }
 
 //Options Ok

@@ -87,7 +87,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   if (autoLose) {
     await sleep(1000); //wait a sec
     showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-      playAgain, reset, 80, -1, "YesNo");
+      playAgain, returnToHomeScreen, 80, -1, "YesNo");
     enableButtons();
     return;
   }
@@ -107,22 +107,22 @@ async function blackjackDealerAI(data, autoLose = false) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
       //Dealer goes over:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-        playAgain, reset, 80, -1, "YesNo");
+        playAgain, returnToHomeScreen, 80, -1, "YesNo");
       break;
     case (thisDealer.score > currentPlayer[1].score):
       //Dealer beats player:
       showMessage(`${dealerWinsMessageHTML}${scoreText}`,
-        playAgain, reset, 80, -1, "YesNo");
+        playAgain, returnToHomeScreen, 80, -1, "YesNo");
       break;
     case (thisDealer.score === currentPlayer[1].score):
       //It's a tie!!
       showMessage(`Push.${dealerPushMessageHTML}${scoreText}`,
-        playAgain, reset, 80, -1, "YesNo");
+        playAgain, returnToHomeScreen, 80, -1, "YesNo");
       break;
     case (thisDealer.score < currentPlayer[1].score):
       //Player scores higher:
       showMessage(`${dealerLossMessageHTML}${scoreText}`,
-        playAgain, reset, 80, -1, "YesNo");
+        playAgain, returnToHomeScreen, 80, -1, "YesNo");
   }
   enableButtons()
 }
@@ -178,9 +178,9 @@ function disableButtons() {
   betButton.removeEventListener("click", playerPlacedBet);
   stayButton.removeEventListener("click", blackjackDealerAI);
   dealerHitButton.removeEventListener("click", testOutThis);
-  resetButton.removeEventListener("click", reset);
-  resetButton.removeEventListener("click", hidePlayerChoices); //Abie.js
-  console.log("buttons disabled")
+  quitButton.removeEventListener("click", leaveGame);
+  //resetButton.removeEventListener("click", hidePlayerChoices); //Abie.js
+  //console.log("buttons disabled")
 }
 
 //Animate a new card that is gained 
@@ -214,9 +214,9 @@ function enableButtons() {
   betButton.addEventListener("click", playerPlacedBet);
   stayButton.addEventListener("click", blackjackDealerAI);
   dealerHitButton.addEventListener("click", testOutThis);
-  resetButton.addEventListener("click", reset);
-  resetButton.addEventListener("click", hidePlayerChoices); //Abbie.js
-  console.log("buttons enabled")
+  quitButton.addEventListener("click", leaveGame);
+  //resetButton.addEventListener("click", hidePlayerChoices); //Abbie.js
+  //console.log("buttons enabled")
 }
 
 //Start the game
@@ -343,6 +343,10 @@ async function hitMe() {
   enableButtons();
 }
 
+//User attempts to leave the game:
+function leaveGame(){
+  showMessage("Are you sure you want to quit?",returnToHomeScreen,doNothing,60,-1,"YesNo");
+}
 //Load any given image into the DOM and wait for response
 async function loadImage(src) {
   return new Promise((resolve, reject) => {
@@ -436,6 +440,11 @@ async function redrawPlayerHand(playerIndex, numToAnimate = 0) {
     if (i >= animateIndex) animateIt = true;
     await drawNewCard(currentPlayer[playerIndex].hand[i].image, `player${playerIndex}`, animateIt);
   }
+}
+
+//go back to main page
+function returnToHomeScreen(){
+  showMessage("Thank you for playing Blackjack!",() =>window.location.href = "./index.html",doNothing,60);
 }
 
 function reset() {
