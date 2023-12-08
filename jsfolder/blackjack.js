@@ -67,6 +67,8 @@ function beginInteraction() {
   playSound("backgroundMusic", true, 0, musicVolume);
   playSound("backgroundNoise", true, 0, noiseVolume);
   
+  //Immediately start game:
+  startButton.click();
 }
 
 //This function is called when player stays or busts
