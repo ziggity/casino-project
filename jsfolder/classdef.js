@@ -22,8 +22,8 @@ class Player {
         this.hand = [];
         //localStorage.setItem("money", amount);
     }
-    shuffle(){
-        
+    clearLocalHand(){
+        this.hand=[];
     }
     
     placeBet(amount) {
@@ -54,6 +54,7 @@ class GameTable{
         this.numPlayers = numPlayers;
         this.deckId = deckId;
         this.moneyPot = 0;
+        this.currentRound = 0;
     }
 
 }
