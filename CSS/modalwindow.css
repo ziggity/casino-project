@@ -28,11 +28,18 @@
     padding: 4em;
 
     position: fixed;
-    max-height: 80vh;
+    max-height: 95vh;
     min-width: 150px;
+    top: -250px;
     width: 30vw;
     z-index: 101;
-    left:33vw
+    left:33vw;
+    & h2{
+        font-size:large;
+    }
+    & .subtext{
+        color:darkgoldenrod;
+    }
 }
 .options-window{
     background-color: var(--message-window-color);

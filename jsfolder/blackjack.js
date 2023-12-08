@@ -31,8 +31,8 @@ function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "
 
 //Card size can be adjusted on the fly. Just call this function and pass a 
 //multiplier value. (Default is 1)
-function adjustCardSize(data, multiplier = 1) {
-  let cardHeight = 25 * multiplier
+function adjustCardSize(data) {
+  let cardHeight = 25 * cardScale;
   let cardWidth = cardHeight / 1.4
   let scaleUnit = "vh"
 
@@ -82,7 +82,7 @@ async function blackjackDealerAI(data, autoLose = false) {
   //drawDealerCards();
 
   //If player busts or other auto loss conditon, declare dealer winner
-  let scoreText = `Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`
+  let scoreText = `<span class="subtext">Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}</span><br>Play again?<br>`
 
   if (autoLose) {
     await sleep(1000); //wait a sec
@@ -101,7 +101,7 @@ async function blackjackDealerAI(data, autoLose = false) {
     thisDealer.score = calculateScore(thisDealer);
   }
   //------------------------------------------------------
-  scoreText = `Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}<br>Play again?<br>`
+  scoreText = `<span class="subtext">Your score: ${currentPlayer[1].score}<br>Dealer score: ${thisDealer.score}</span><br>Play again?<br>`
   await sleep(1000); //wait a sec
   switch (true) {
     case (thisDealer.score > DEFAULT_MAX_SCORE):
@@ -419,7 +419,7 @@ function playSound(itemId = "sound", loop = false, seekPoint = 0, vol = 1) {
 //Using absolute positions, slightly offsets positions of cards
 function positionCard(targetId, cardNumber) {
   const playerBox = document.getElementById(targetId)
-  playerBox.childNodes[cardNumber].style.left = ((5 * cardNumber) + (20 / currentTable.numPlayers)) + "vw"
+  playerBox.childNodes[cardNumber].style.left = (((6.25*cardScale) * cardNumber) + (20 / currentTable.numPlayers)) + "vw"
 
 }
 

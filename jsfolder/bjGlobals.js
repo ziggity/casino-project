@@ -39,6 +39,7 @@ for (let i = 1; i < 6; i++) {
   Object.seal(currentPlayer[i]);//prevents mutation of object properties but allows value changes
 }
 
+let cardScale = .8;
 let audioOn = true;
 let musicVolume = 1;
 let noiseVolume = 1;
@@ -47,7 +48,7 @@ let effectsVolume = 1;
 const welcomeMessageHTML =
   `<div class="row">
     <div class = "col">
-      Welcome to Nucamp Casino BlackJack!!
+      <h2>Welcome to Nucamp Casino BlackJack!!</h2>
       <br>
       <img src="./imgs/Male-Dealer/Conceited2.png" class = "img-fluid"/>
       <br>
@@ -71,11 +72,11 @@ const dealerWinsMessageHTML = `
 const dealerLossMessageHTML = `
   <div class="row">
     <div class = "col">
-      <h2>What? Impossible!!</h2>
+      <h2>What? How did you beat me? Impossible!!</h2>
       <br>
       <img src="./imgs/Male-Dealer/Angry1.png" class = "img-fluid"/>
       <br>
-      I'll get you next time!
+      I'll get you next time!</span>
     </div>
   </div>
   `
