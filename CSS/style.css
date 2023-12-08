@@ -1,31 +1,40 @@
-
-.playing-table{
-  height: 100vh;
-  width: auto;
-  position: relative;
+body {
+  background-image: url(../imgs/Casino-Nucamp-Logo.jfif) ;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: red;
+  min-width: 200px;
+  min-height: 200px;
+  
 }
 
-.playing-table-content{
-  position: relative; 
+.transparent-box{
+  /* display: inline-block; */
+  background-color: rgba(0,0,0,.5);
+  border-radius: 25px;
+  margin: 1vw;
+  padding: 1em;
+  
 }
-/* images */
-.playing-table-img{
-  z-index: -1;
-  max-width: 100vw;
-
-}
-.betting{
-  position: absolute;
-  top: 0px;
-}
-.btn-group{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 10px;
+.transparent-bar {
+  background:linear-gradient(to bottom,rgba(0,0,0,.8),rgba(0,0,0,0)); 
+  margin:0px;
+  border: 1px;
+  padding: 1px;
 }
 
+.transparent-bar-nav {
+  background: linear-gradient(to bottom,rgba(0,0,0,1),rgba(0,0,0,.8),rgba(0,0,0,.1)); 
+  margin:0px;
+  border: 1px;
+  padding: 1px;
+}
+.firstPagePlayingTable {
+  height: 80vw;
+}
 
+/* --------- */
 h2 {
     color: rgb(216, 227, 253);
     border: 1px;
