@@ -120,7 +120,7 @@ function setDisplayMessages() {
   dealerPushMessageHTML = `
   <div class="row">
     <div class = "col">
-      Hmmm... Lucky!
+      <h2>Hmmm... Lucky!</h2>
       <br>
       <img src="./imgs/${dealerIdentity}/Angry2.png" class = "img-fluid"/>
       <br>
