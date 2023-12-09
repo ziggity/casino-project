@@ -404,11 +404,11 @@ function playerAdjustVolume() {
 }
 
 //Place Bet
-function playerPlacedBet(amount = 50, playerIndex = 1) {
-  const betAmountPlayer1 = currentPlayer[playerIndex].placeBet(amount);
-  playSound("chipsSound1", false, .35, effectsVolume)
-  currentTable.moneyPot += 50;
-  return betAmountPlayer1;
+function playerPlacedBet(event, amount = 50, playerIndex = 1) {
+  const betAmount = currentPlayer[playerIndex].placeBet(amount);
+  playSound("chipsSound1", false, .35, effectsVolume);
+  currentTable.moneyPot += betAmount;
+  return betAmount;
 }
 
 //Play a sound that has been attached to the DOM
