@@ -9,7 +9,7 @@ effectsSlider.addEventListener("change", playerAdjustVolume);
 
 //Execution starts HERE:
 async function loadAssets() {
-
+  loadUserData();
   adjustCardSize();
   loadSounds();
   showMessage(welcomeMessageHTML, beginInteraction, null, 80);
@@ -539,7 +539,7 @@ async function setTable(numPlayers, numDecks, newDeck = true) {
     }
   }
 
-  currentPlayer[1].name = "This is you"; //temporary Player should set their name
+  //currentPlayer[1].name = "This is you"; //temporary Player should set their name
 
   updateDisplay(); //This is asyncrounous and will keep running for the entire game.
 
@@ -655,14 +655,29 @@ function updateLabels() {
 //----------------------//
 //**Under Construction**//
 //----------------------//
+//Using sessionStorage for now, which temporary 
+//compared to localStorage which is permanent
 function loadUserData() {
-  let playerMoney = localStorage.getItem('playerMoney');
-  if (playerMoney === null) {
-    Storage.setItem("playerMoney", 1000);
+  try{
+    const loadedName = sessionStorage.getItem("userName");
+    if (loadedName) {
+      currentPlayer[1].name = loadedName;
+      console.log("load: " + loadedName);
+    }
+    
+  }catch(e){
+    console.log("Error fetching user data: " + e)
   }
 }
 
-function updatePlayerMoney(amount) {
-  playerMoney += amount;
-  localStorage.setItem('playerMoney', playerMoney);
+function saveUserData() {
+  try{
+    const saveName = currentPlayer[1].name
+    if (saveName) {
+      sessionStorage.setItem("userName",saveName)
+    }
+    
+  }catch(e){
+    console.log("Error saving user data: " + e)
+  }
 }

@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="google-signin-client_id"
-    content="210160089616-hnsdtul6tuin6199t3qpjkpe0tnheftn.apps.googleusercontent.com">
+  <!-- <meta name="google-signin-client_id"
+    content="210160089616-hnsdtul6tuin6199t3qpjkpe0tnheftn.apps.googleusercontent.com"> -->
 
-  <title>Casino - Black Jack -Homepage </title>
+  <title>Casino - Homepage </title>
 
   <!-- Bootstrap stylesheet CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -69,6 +69,20 @@
       </div>
 
       <div class="row">
+        <div class="col-md-4 align-self-center mx-auto transparent-box">
+          <div class="text-center" id="saveName">
+            <label class="form-label" for="userName">What should we call you?<br>(Enter up to 10 characters)</label>
+            <input class="form-control" type="text" id="userName">
+            <button onclick="saveMyName()" class="btn btn-info py-1">Enter</button>
+          </div>
+          <div class="text-center d-none" id="changeName">
+            <label class=" col form-label" for="renameButton" id="welcomeText">Welcome</label>
+            <button onclick="reEnter()" class="form-control btn btn-info py-1" id="renameButton">Change Name</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
         <div class="col text-center">
           <h2 class="main-title">Select a game to play</h2>
 
@@ -97,8 +111,8 @@
     
   </main>
   
-  <div id="root"> </div>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <!-- <div id="root"> </div>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 
 
   <!-- Bootstrap javascript CDN -->
@@ -107,7 +121,7 @@
     crossorigin="anonymous"></script>
 
   <script src="./jsfolder/main.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 </body>
 </html>
 

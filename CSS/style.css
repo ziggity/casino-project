@@ -1,20 +1,27 @@
-body {
+body{
+  background-color: black;
+}
+main{
   background-image: url(../imgs/Casino-Nucamp-Logo.jfif) ;
-  background-size: cover;
+  background-color: black;
   background-position: center;
   background-repeat: no-repeat;
   color: red;
   min-width: 200px;
   min-height: 200px;
+  height:100vh;
   
 }
 
+.form-label{
+  font-weight: medium;
+}
 .transparent-box{
   /* display: inline-block; */
   background-color: rgba(0,0,0,.5);
   border-radius: 25px;
   margin: 1vw;
-  padding: 1em;
+  padding: 1vw;
   
 }
 .transparent-bar {
