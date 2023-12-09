@@ -475,7 +475,7 @@ async function redrawPlayerHand(playerIndex, numToAnimate = 0) {
 
 //go back to main page
 function returnToHomeScreen() {
-  showMessage("Thank you for playing Blackjack!", () => window.location.href = "./index.html", doNothing, 60);
+  showMessage("Thank you for playing Blackjack!", () =>{window.location.href = "./index.html";saveUserData() }, doNothing, 60);
 }
 
 function reset() {
@@ -520,7 +520,7 @@ async function setTable(numPlayers, numDecks, newDeck = true) {
 
   //Since dealer plays, Player 0 will always be set as dealer
   currentPlayer[0].name = "Dealer";
-
+  currentPlayer[1].name = loadedName;
   //Before calling remaining fuctions, the table should be procedurally
   //adjusted if more than one player is intended.
   generatePlayerRows(numPlayers);
@@ -652,32 +652,3 @@ function updateLabels() {
 
 
 
-//----------------------//
-//**Under Construction**//
-//----------------------//
-//Using sessionStorage for now, which temporary 
-//compared to localStorage which is permanent
-function loadUserData() {
-  try{
-    const loadedName = sessionStorage.getItem("userName");
-    if (loadedName) {
-      currentPlayer[1].name = loadedName;
-      console.log("load: " + loadedName);
-    }
-    
-  }catch(e){
-    console.log("Error fetching user data: " + e)
-  }
-}
-
-function saveUserData() {
-  try{
-    const saveName = currentPlayer[1].name
-    if (saveName) {
-      sessionStorage.setItem("userName",saveName)
-    }
-    
-  }catch(e){
-    console.log("Error saving user data: " + e)
-  }
-}
