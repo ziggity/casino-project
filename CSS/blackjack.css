@@ -4,7 +4,7 @@
 
 }
 
-#gameInfo{
+#infoBar{
   position: sticky;
   top:0;
   left: 0;
@@ -15,7 +15,12 @@
 body {
     background-image: url("../imgs/simple\ green\ table.jpg");
     background-size: cover;
-} 
+}
+
+.playerHand{
+  min-width: 125px;
+}
+
 .stay-above{
   position: sticky;
   top:100;
@@ -44,6 +49,7 @@ body {
     
     width:var(--card-width) ;
     position: absolute;
+    transition: left .5s ease-out;
 
 
 }
@@ -52,7 +58,7 @@ body {
 }
 
 #player1 img:hover {
-  transition: transform .5s;
+  transition: transform .5s ease-out;
   transform: translateY(-40%);
 }
 

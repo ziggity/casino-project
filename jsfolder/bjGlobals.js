@@ -40,6 +40,7 @@ for (let i = 1; i < 6; i++) {
 }
 
 let cardScale = .8;
+let timeToRedraw = true;
 let audioOn = true;
 let musicVolume = 1;
 let noiseVolume = 1;

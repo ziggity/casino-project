@@ -32,7 +32,7 @@ function addAudioToDOM(url = "../audio/jazzy-band-Monument_Music.mp3", idTag = "
 //Card size can be adjusted on the fly. Just call this function and pass a 
 //multiplier value. (Default is 1)
 function adjustCardSize(data) {
-  let cardHeight = 25 * cardScale;
+  let cardHeight = (25 * cardScale)//currentTable.numPlayers;
   let cardWidth = cardHeight / 1.4
   let scaleUnit = "vh"
 
@@ -41,6 +41,14 @@ function adjustCardSize(data) {
   document.documentElement.style.setProperty("--card-width", `${cardWidth}${scaleUnit}`);
   document.documentElement.style.setProperty("--card-height", `${cardHeight}${scaleUnit}`);
 
+  //Set a timeout for drawing to reduce flicker
+  if (timeToRedraw) {
+    for (i = 0; i <= currentTable.numPlayers; i++) {
+      redrawPlayerHand(i);
+    }
+    timeToRedraw = false;
+    setTimeout(() => timeToRedraw = true, 250);
+  }
 }
 
 //set volume for a playing sound
@@ -66,7 +74,7 @@ function beginInteraction() {
   saveSoundValues(false);
   playSound("backgroundMusic", true, 0, musicVolume);
   playSound("backgroundNoise", true, 0, noiseVolume);
-  
+
   //Immediately start game:
   startButton.click();
 }
@@ -192,13 +200,12 @@ async function drawNewCard(cardImage, targetId, animateIt = true) {
 
     if (animateIt) {
       newCard.setAttribute("class", `${DEFAULT_CARD_CLASS}  flip-over`);
+      playSound("flipSound", false, .35, effectsVolume);
     } else {
       newCard.setAttribute("class", DEFAULT_CARD_CLASS);
     }
-    //console.log(newCard);
     drawTarget.appendChild(newCard);
     positionCard(targetId, drawTarget.childNodes.length - 1);
-    playSound("flipSound", false, .35, effectsVolume);
   }
   catch (e) {
     console.log(`Error drawing card:\nTarget: ${targetId}\n\n ${e}`)
@@ -241,7 +248,7 @@ function generatePlayerRows(numPlayers) {
   for (let i = 1; i <= numPlayers; i++) {
     insertText += `
     <!--Player ${i} -->
-    <div class="col">
+    <div class="col mx-auto playerHand">
 
       <div class="row">
         <div class="col">
@@ -334,7 +341,6 @@ async function hitMe() {
 
   let yourScore = calculateScore(currentPlayer[1]);
   currentPlayer[1].score = yourScore;
-  console.log(`Your score: ${yourScore}`);
 
   if (yourScore > DEFAULT_MAX_SCORE) {
     //disableButtons()  //Add code to disable buttons here...
@@ -344,8 +350,8 @@ async function hitMe() {
 }
 
 //User attempts to leave the game:
-function leaveGame(){
-  showMessage("Are you sure you want to quit?",returnToHomeScreen,doNothing,60,-1,"YesNo");
+function leaveGame() {
+  showMessage("Are you sure you want to quit?", returnToHomeScreen, doNothing, 60, -1, "YesNo");
 }
 //Load any given image into the DOM and wait for response
 async function loadImage(src) {
@@ -421,9 +427,34 @@ function playSound(itemId = "sound", loop = false, seekPoint = 0, vol = 1) {
 }
 
 //Using absolute positions, slightly offsets positions of cards
+//Note: This gets weird in mobile display with more than 2 players.
+//Need better math or wrap each individual card in a flex-element
 function positionCard(targetId, cardNumber) {
-  const playerBox = document.getElementById(targetId)
-  playerBox.childNodes[cardNumber].style.left = (((6.25*cardScale) * cardNumber) + (20 / currentTable.numPlayers)) + "vw"
+  const playerBox = document.getElementById(targetId);
+  const screenWidth = document.body.clientWidth;
+  const screenHeight = document.body.clientHeight;
+  const cardWidth = playerBox.childNodes[cardNumber].clientWidth
+
+  let cardSpacer = 5;
+
+  //In order to keep the card center we divide it's width by screen with
+  let displayRatio = (cardWidth / 2) / screenWidth;
+  let cardOffset = displayRatio * cardScale * 100;
+
+  //so it doesn't space dealer according to num players:
+  if (targetId !== "player0") {
+    cardOffset *= currentTable.numPlayers;
+    cardSpacer *= currentTable.numPlayers;
+  }
+  cardOffset = 50 - cardOffset;
+
+  const numberOfCards = playerBox.childNodes.length;
+  //recalculate card position based on number of cards
+  for (i = 0; i < numberOfCards; i++) {
+    let xPosMath = ((cardSpacer * i) + cardOffset);
+    xPosMath -= ((numberOfCards - 1) * (cardSpacer / 2));
+    playerBox.childNodes[i].style.left = xPosMath + "%"
+  }
 
 }
 
@@ -443,8 +474,8 @@ async function redrawPlayerHand(playerIndex, numToAnimate = 0) {
 }
 
 //go back to main page
-function returnToHomeScreen(){
-  showMessage("Thank you for playing Blackjack!",() =>window.location.href = "./index.html",doNothing,60);
+function returnToHomeScreen() {
+  showMessage("Thank you for playing Blackjack!", () => window.location.href = "./index.html", doNothing, 60);
 }
 
 function reset() {
@@ -456,7 +487,6 @@ function reset() {
 //Fetch all player cards from pile and place in hand face up
 async function revealPlayerHand(playerIndex = 0) {
   const numToAnimate = await showPlayerCards(currentPlayer[playerIndex], 22);
-  console.log(numToAnimate);
   await redrawPlayerHand(playerIndex, numToAnimate);
 }
 
