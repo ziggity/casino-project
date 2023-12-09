@@ -88,6 +88,11 @@ function showMessage(message, yesFunc = doNothing, noFunc = doNothing, msgWidth 
             OkCancelType(false);
             hideNoButton(false);
             break;
+        case "chooseOne":
+            msgYesButton.innerText = "#1";
+            msgNoButton.innerText = "#2";
+            hideNoButton(false);
+            break;
         default:
             OkCancelType();
             hideNoButton();

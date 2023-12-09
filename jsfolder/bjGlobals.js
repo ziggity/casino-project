@@ -46,51 +46,86 @@ let audioOn = true;
 let musicVolume = 1;
 let noiseVolume = 1;
 let effectsVolume = 1;
+let dealerIdentity = "Male-Dealer";
 
-const welcomeMessageHTML =
-  `<div class="row">
+let welcomeMessageHTML = "";
+let dealerWinsMessageHTML = "";
+let dealerLossMessageHTML = "";
+let dealerPushMessageHTML = "";
+let chooseDealerHTML = `
+<div class="row">
+  <div class = "col">
+  <h2>Welcome to Nucamp Casino BlackJack!!</h2>
+  Choose your dealer:
+  <div class = "row">
+
+    <div class = "col">
+      Dealer 1
+      <img src="./imgs/Male-Dealer/Conceited2.png" class = "img-fluid"/>
+      <br>
+      I'd like to see you try...
+    </div>
+    
+    <div class = "col">
+      Dealer 2
+      <img src="./imgs/Female-Dealer/Conceited2.png" class = "img-fluid"/>
+      <br>
+      I'm the dealer here... Just try and beat me!
+    <div>
+
+  </div>
+</div>
+</div>
+`;
+
+function setDisplayMessages() {
+  welcomeMessageHTML =
+    `<div class="row">
     <div class = "col">
       <h2>Welcome to Nucamp Casino BlackJack!!</h2>
       <br>
-      <img src="./imgs/Male-Dealer/Conceited2.png" class = "img-fluid"/>
+      <img src="./imgs/${dealerIdentity}-Dealer/Conceited2.png" class = "img-fluid"/>
       <br>
       I'm the dealer here... Just try and beat me!
     </div>
   </div>
   `
 
-const dealerWinsMessageHTML = `
+  dealerWinsMessageHTML = `
   <div class="row">
     <div class = "col">
       <h2>Looks like I take this round!!</h2>
       <br>
-      <img src="./imgs/Male-Dealer/Conceited4.png" class = "img-fluid"/>
+      <img src="./imgs/${dealerIdentity}/Conceited1.png" class = "img-fluid"/>
       <br>
       Better luck next round!
     </div>
   </div>
   `
 
-const dealerLossMessageHTML = `
+  dealerLossMessageHTML = `
   <div class="row">
     <div class = "col">
       <h2>What? How did you beat me? Impossible!!</h2>
       <br>
-      <img src="./imgs/Male-Dealer/Angry1.png" class = "img-fluid"/>
+      <img src="./imgs/${dealerIdentity}/Angry1.png" class = "img-fluid"/>
       <br>
       I'll get you next time!</span>
     </div>
   </div>
   `
 
-const dealerPushMessageHTML = `
+  dealerPushMessageHTML = `
   <div class="row">
     <div class = "col">
       Hmmm... Lucky!
       <br>
-      <img src="./imgs/Male-Dealer/Angry2.png" class = "img-fluid"/>
+      <img src="./imgs/${dealerIdentity}/Angry2.png" class = "img-fluid"/>
       <br>
       How bout another round?
     </div>
   </div>
   `
+
+
+}
