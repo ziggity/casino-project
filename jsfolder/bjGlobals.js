@@ -59,18 +59,20 @@ let chooseDealerHTML = `
   Choose your dealer:
   <div class = "row">
 
-    <div class = "col choose-dealer">
+    <div class = "col-sm-6 choose-dealer">
       Dealer 1
+      <br>
       <img src="./imgs/Male-Dealer/Conceited2.png" onclick="msgYesButton.click()" class = "img-fluid"/>
       <br>
-      I'd like to see you try...
+      <span class = "d-none d-md-inline">I'd like to see you try...</span>
     </div>
     
     <div class = "col choose-dealer">
       Dealer 2
+      <br>
       <img src="./imgs/Female-Dealer/Conceited2.png" onclick="msgNoButton.click()" class = "img-fluid"/>
       <br>
-      I'm the dealer here... Just try and beat me!
+      <span class = "d-none d-md-inline">I'm the dealer here... Just try and beat me!</span>
     <div>
 
   </div>
